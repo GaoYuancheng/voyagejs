@@ -1,8 +1,8 @@
-import React from 'react';
-import cls from 'classnames';
-import { Typography, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Typography } from 'antd';
 import { ParagraphProps as AParagraphProps } from 'antd/lib/typography/Paragraph';
+import cls from 'classnames';
+import React from 'react';
 import { usePrefixCls } from '../../../../context';
 
 import './index.less';
@@ -20,7 +20,16 @@ export interface TextProps extends Omit<AParagraphProps, 'type'> {
 }
 
 export const Text: React.FC<TextProps> = (props) => {
-  const { children, type, className, rows, loading, style, ellipsis, ...restProps } = props;
+  const {
+    children,
+    type = 'text',
+    className,
+    rows = 1,
+    loading = false,
+    style = {},
+    ellipsis = {},
+    ...restProps
+  } = props;
   const prefix = usePrefixCls('text');
 
   return (
@@ -43,12 +52,4 @@ export const Text: React.FC<TextProps> = (props) => {
       </Paragraph>
     </Spin>
   );
-};
-
-Text.defaultProps = {
-  loading: false,
-  type: 'text',
-  rows: 1,
-  style: {},
-  ellipsis: {},
 };

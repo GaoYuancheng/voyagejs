@@ -5,6 +5,7 @@ import { omit } from 'radash';
 import React, { PropsWithChildren, useEffect, useMemo } from 'react';
 import type { PluginsType } from '../../interfaces';
 import { commonKeys } from '../Base';
+import { FormGroup } from '../FormGroup';
 import { FormContext } from './context';
 import type { FormProps } from './interface';
 
@@ -13,7 +14,7 @@ const { useForm: useAForm } = AForm;
 export { useAForm };
 
 export const Form = observer(<Values, P extends PluginsType = any>(props: PropsWithChildren<FormProps<Values, P>>) => {
-  const { children, form: formStore, onValuesChange, spinProps } = props;
+  const { children, form: formStore, onValuesChange, spinProps, items } = props;
 
   const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps']);
 
@@ -29,6 +30,13 @@ export const Form = observer(<Values, P extends PluginsType = any>(props: PropsW
     return formStore;
   }, [formStore]);
 
+  const renderChildren = () => {
+    if (items) {
+      return <FormGroup items={items} />;
+    }
+    return children;
+  };
+
   return (
     <FormContext.Provider value={formContextValue}>
       <Spin spinning={formStore.loading} {...spinProps}>
@@ -41,7 +49,7 @@ export const Form = observer(<Values, P extends PluginsType = any>(props: PropsW
             onValuesChange?.(changeValues, values);
           }}
         >
-          {children}
+          {renderChildren()}
         </AForm>
       </Spin>
     </FormContext.Provider>

@@ -11,7 +11,7 @@ export type TimePickerProps = Omit<ATimePickerProps, 'value' | 'onChange'> & {
 };
 
 export const TimePicker: React.FC<TimePickerProps> = (props) => {
-  const { onChange, value, valueFormat, format, ...restProps } = props;
+  const { onChange, value, valueFormat = true, format, ...restProps } = props;
 
   const onFormatChange: ATimePickerProps['onChange'] = (time) => {
     let finalTime: TimePickerProps['value'] = time;
@@ -32,8 +32,4 @@ export const TimePicker: React.FC<TimePickerProps> = (props) => {
   }
 
   return <ATimePicker {...restProps} format={format} onChange={onFormatChange} value={finalValue as Moment} />;
-};
-
-TimePicker.defaultProps = {
-  valueFormat: true,
 };

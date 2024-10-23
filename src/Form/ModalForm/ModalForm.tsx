@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import type { PluginsType } from '../../interfaces';
 import type { FormOptionProps, FormProps, FormStore } from '../Form';
 import { Form, useForm } from '../Form';
+import { FormGroup } from '../FormGroup';
 import type { ModalProps } from './Modal';
 import { useModal } from './Modal';
 
@@ -29,6 +30,7 @@ export interface ModalFormProps<Values = any, P = PluginsType> extends Omit<Moda
 
   children?: ReactElement;
 
+  items?: FormProps<Values, P>['items'];
   /** 表单初始值 */
   initialValues?: FormProps<Values, P>['initialValues'];
   /** 远程表单值 */
@@ -73,7 +75,7 @@ export const useModalForm = <P extends PluginsType = any>(
       open: (params: ModalFormProps) => {
         propsRef.current = params;
 
-        const { initialValues, onOk, onCancel, modalProps, formProps, ...restParams } = params;
+        const { initialValues, onOk, onCancel, modalProps, formProps, items, children, ...restParams } = params;
 
         const { footerRender, footer, ...restModalProps } = modalProps || {};
 
@@ -89,6 +91,7 @@ export const useModalForm = <P extends PluginsType = any>(
         return open({
           ...restParams,
           ...restModalProps,
+          children: items ? <FormGroup items={items} /> : children,
           modalProps: {
             footer: renderFooter(),
             ...modalProps,
