@@ -26,6 +26,7 @@ export const Text: React.FC<TextProps> = (props) => {
     className,
     rows = 1,
     loading = false,
+    disabled = false,
     style = {},
     ellipsis = {},
     ...restProps
@@ -41,6 +42,7 @@ export const Text: React.FC<TextProps> = (props) => {
           [prefix + '-type-text']: type === 'text',
           [prefix + '-type-description']: type === 'description',
           [prefix + '-type-primary']: type === 'primary',
+          [prefix + '-type-disabled']: disabled,
         })}
         ellipsis={typeof ellipsis === 'boolean' ? { rows } : { rows, ...ellipsis }}
         title={children}

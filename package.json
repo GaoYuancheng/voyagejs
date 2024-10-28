@@ -45,8 +45,10 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.0",
     "ahooks": "^3.8.1",
     "antd": "^4.24.15",
+    "classnames": "^2.5.1",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.0.7",
     "moment": "^2.30.1",

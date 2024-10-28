@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ant-design/icons': ^4.0.0
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
   '@types/react': ^18.0.0
@@ -8,6 +9,7 @@ specifiers:
   '@umijs/lint': ^4.0.0
   ahooks: ^3.8.1
   antd: ^4.24.15
+  classnames: ^2.5.1
   dumi: ^2.3.0
   eslint: ^8.23.0
   father: ^4.1.0
@@ -25,8 +27,10 @@ specifiers:
   stylelint: ^14.9.1
 
 dependencies:
+  '@ant-design/icons': 4.8.3_react-dom@18.3.1+react@18.3.1
   ahooks: 3.8.1_react@18.3.1
   antd: 4.24.16_react-dom@18.3.1+react@18.3.1
+  classnames: 2.5.1
   mobx: 6.13.5
   mobx-react-lite: 4.0.7_e0e9e3b0fd704829351370249760a954
   moment: 2.30.1

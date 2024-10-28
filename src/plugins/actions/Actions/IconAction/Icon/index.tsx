@@ -1,7 +1,7 @@
-import React from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import cls from 'classnames';
-import { LoadingOutlined } from '@ant-design/icons';
+import React from 'react';
 import { usePrefixCls } from '../../../../context';
 
 import './index.less';
@@ -20,7 +20,7 @@ export interface BaseIconProps {
   style?: React.CSSProperties;
 }
 
-export const BaseIcon: React.FC<BaseIconProps> = (props) => {
+export const Icon: React.FC<BaseIconProps> = (props) => {
   const {
     icon: Icon,
     disabled,
@@ -38,9 +38,7 @@ export const BaseIcon: React.FC<BaseIconProps> = (props) => {
 
   const prefix = usePrefixCls('base-icon');
 
-  const loadingCls = cls({
-    [`${prefix}-icon-loading`]: loading,
-  });
+  const loadingCls = cls({ [`${prefix}-icon-loading`]: loading });
 
   let icon;
   if (!Icon) {
@@ -54,11 +52,18 @@ export const BaseIcon: React.FC<BaseIconProps> = (props) => {
     icon = <Icon className={loadingCls} {...restProps} />;
   }
 
+  icon = (
+    <span>
+      {icon}
+      <LoadingOutlined className={cls({ [`${prefix}-loading-placeholder`]: !loading })} />
+    </span>
+  );
+
   const textEle = text ? (
     <span className={cls(textClassName, prefix + '-text')} style={textStyle}>
       {text}
     </span>
-  ) : null;
+  ) : undefined;
 
   return (
     <span
@@ -74,11 +79,6 @@ export const BaseIcon: React.FC<BaseIconProps> = (props) => {
         {textEle}
         {icon}
       </Space>
-      <LoadingOutlined
-        className={cls({
-          [`${prefix}-loading-placeholder`]: !loading,
-        })}
-      />
     </span>
   );
 };

@@ -1,21 +1,23 @@
-import React from 'react';
-import { BaseAction, BaseActions } from '../BaseAction';
 import type { SpaceProps } from 'antd/lib/space';
+import React from 'react';
 import type { BaseActionProps } from '../BaseAction';
-import { BaseIcon, type BaseIconProps } from './BaseIcon';
+import { BaseAction, BaseActions } from '../BaseAction';
+import { Icon, type BaseIconProps } from './Icon';
 
-export * from './BaseIcon';
+export * from './Icon';
 
 export interface IconActionProps
   extends Omit<BaseActionProps, 'children'>,
-    Omit<BaseIconProps, 'disabled' | 'onClick'> {}
+    Omit<BaseIconProps, 'disabled' | 'onClick'> {
+  children?: any;
+}
 
 export const IconAction: React.FC<IconActionProps> = (props) => {
   const { children, icon, ...rest } = props;
 
   return (
-    <BaseAction {...rest}>
-      <BaseIcon icon={icon} />
+    <BaseAction type="primary" {...rest}>
+      <Icon icon={icon} />
     </BaseAction>
   );
 };

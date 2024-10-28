@@ -6,7 +6,7 @@ nav:
   order: 1
   second:
     title: 表单插件
-    order: 1
+    order: 2
 ---
 
 # DatePicker

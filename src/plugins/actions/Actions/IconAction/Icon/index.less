@@ -8,12 +8,16 @@
   transition: all 0.3s;
 
   &:hover {
-    color: @primary-color !important;
+    color: @primary-color;
   }
 
   &-disabled {
     color: @icon-disabled-color !important;
     cursor: not-allowed;
+
+    &:hover {
+      color: @icon-disabled-color !important;
+    }
   }
 
   &-icon-loading {
@@ -26,34 +30,34 @@
   }
 
   &-primary {
-    color: @primary-color !important;
+    color: @primary-color;
 
     &:hover {
-      color: @primary-color !important;
+      color: @primary-color;
     }
   }
 
   &-error {
-    color: @error-color !important;
+    color: @error-color;
 
     &:hover {
-      color: @error-color !important;
+      color: @error-color;
     }
   }
 
   &-success {
-    color: @success-color !important;
+    color: @success-color;
 
     &:hover {
-      color: @success-color !important;
+      color: @success-color;
     }
   }
 
   &-warning {
-    color: @warning-color !important;
+    color: @warning-color;
 
     &:hover {
-      color: @warning-color !important;
+      color: @warning-color;
     }
   }
 }

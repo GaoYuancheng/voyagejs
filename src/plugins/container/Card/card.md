@@ -6,7 +6,7 @@ nav:
   order: 1
   second:
     title: 容器插件
-    order: 1
+    order: 3
 ---
 
 # Card
