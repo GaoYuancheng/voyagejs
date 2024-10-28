@@ -1,0 +1,12 @@
+@import '../../../styles/index.less';
+
+@toggle-open-button-prefix-cls: ~'@{ant-prefix}-toggle-open-button';
+
+.@{toggle-open-button-prefix-cls} {
+  transition: all 0.3s;
+  transform: rotate(0);
+
+  &-rotate {
+    transform: rotate(180deg);
+  }
+}

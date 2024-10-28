@@ -1,4 +1,4 @@
-import { useDebounceEffect } from 'ahooks';
+import { useDebounceEffect, useDeepCompareEffect } from 'ahooks';
 import { Col, Form } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -72,6 +72,11 @@ export const FormItem = observer(
         formStore.removeField(fieldName);
       };
     }, []);
+
+    useDeepCompareEffect(() => {
+      console.log('属性更新', props.name);
+      field.updateProps(props);
+    }, [props]);
 
     if (field.mode === FieldMode.NODE) {
       return null;

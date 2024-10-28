@@ -79,6 +79,8 @@ export class FieldStore<Values = any, P = any>
   /** 子节点的值的属性 */
   valuePropName?: FormItemProps['valuePropName'];
 
+  _props: FormItemProps<Values>;
+
   constructor(
     props: FormItemProps<Values>,
     form: FormInstance<Values>,
@@ -93,10 +95,9 @@ export class FieldStore<Values = any, P = any>
     this.getFormStore = getFormStore;
     this.getGroupStore = getGroupStore;
 
-    Object.keys(props).forEach((key) => {
-      // @ts-expect-error
-      this[key] = props[key];
-    });
+    this._props = props;
+
+    this.updateProps(props);
 
     super.makeObservable();
     this.makeObservable();
@@ -128,6 +129,13 @@ export class FieldStore<Values = any, P = any>
 
       component: observable.ref,
       componentProps: observable,
+    });
+  }
+
+  updateProps(props: FormItemProps<Values>) {
+    Object.keys(this._props).forEach((key) => {
+      // @ts-expect-error
+      this[key] = props[key];
     });
   }
 

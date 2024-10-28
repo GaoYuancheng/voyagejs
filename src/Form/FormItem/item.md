@@ -35,3 +35,4 @@ nav:
 
 <code src="./demos/empty.tsx" debug >空 Item 标记</code>
 <code src="./demos/destroy.tsx" debug >销毁</code>
+<code src="./demos/propchange.tsx" >属性变化</code>

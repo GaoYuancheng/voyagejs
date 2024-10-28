@@ -117,7 +117,7 @@ export class BaseStore<Values = any> implements BaseProps {
   makeObservable() {
     makeObservable(this, {
       _parent: computed,
-      commonProps: observable,
+      commonProps: observable.deep,
       bordered: computed,
       hidden: computed,
       colon: computed,

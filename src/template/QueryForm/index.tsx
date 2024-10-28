@@ -1,61 +1,58 @@
-import React, { useState, useCallback } from 'react';
-import { Form, Row, Col } from 'antd';
+import { Col, Row } from 'antd';
+import type { FormProps } from 'antd/lib/form';
 import cls from 'classnames';
-import type { FormInstance, FormProps } from 'antd/lib/form';
-import { type FormItemProps, FormItem } from '../FormItem';
-import { ButtonActions, type ButtonActionProps } from '../Actions';
-import { ToggleOpenButton } from '../ToggleOpenButton';
-import { usePrefix } from '../_hooks';
-import { getFormKey } from '../_util';
+import React, { useCallback, useState } from 'react';
+import { usePrefixCls } from '../../context';
+import { FieldMode, Form, FormStore, toCompareName, type FormItemProps } from '../../form';
+import { ButtonActions, ToggleOpenButton, type ButtonActionProps } from '../../plugins';
 
 import './index.less';
 
+const { Item: FormItem } = Form;
+
 export interface QueryFormProps<Values = any> extends Omit<FormProps<Values>, 'fields'> {
   /** 表单搜索字段配置，同FormItem */
-  fields: FormItemProps[];
+  items: FormItemProps[];
   /** 表单实例 */
-  form?: FormInstance<Values>;
+  form: FormStore<Values>;
   /** 显示字段长度，2/3/4 默认3 */
   showFieldsLength?: number;
-  /** 默认展开，默认false */
-  defaultExpand?: boolean;
+  /** 默认折叠，默认true */
+  defaultCollapse?: boolean;
   /** 点击查询时的回调函数 */
   onSubmit?: (values: any) => Promise<void> | undefined;
   /** 点击重置时的回调函数 */
   onReset?: () => void;
-  /** 是否显示分割线， 默认true */
-  showDivider?: boolean;
-
   /** 只有一个字段时，单一展示 */
   allowSingleSearch?: boolean;
-
+  /** 重置按钮属性 */
   resetActionProps?: Omit<ButtonActionProps, 'onClick'>;
+  /** 查询按钮属性 */
   queryActionProps?: Omit<ButtonActionProps, 'onClick'>;
 }
 
 export const QueryForm: <Values = any>(props: React.PropsWithChildren<QueryFormProps<Values>>) => React.ReactElement = (
-  props
+  props,
 ) => {
-  const prefix = usePrefix('queryform');
+  const prefix = usePrefixCls('queryform');
 
   const {
-    fields: allFields,
-    form = Form.useForm()[0],
+    items,
+    form,
     onReset,
     onSubmit,
     allowSingleSearch = true,
-    showFieldsLength = 3,
-    defaultExpand = false,
-    showDivider = false,
+    showFieldsLength = 2,
+    defaultCollapse = true,
     resetActionProps,
     queryActionProps,
     ...formProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(defaultExpand);
+  const [isOpen, setIsOpen] = useState(!defaultCollapse);
 
   const colLen = showFieldsLength + 1;
-  const fields = allFields.filter((i) => i.render !== false);
+  const fields = items.filter((i) => i.mode !== FieldMode.HIDDEN && i.hidden !== true && i.mode !== FieldMode.NODE);
 
   const needCollapse = fields.length > showFieldsLength;
   const isSingleSearch = allowSingleSearch && fields.length === 1;
@@ -95,18 +92,18 @@ export const QueryForm: <Values = any>(props: React.PropsWithChildren<QueryFormP
           })
         : fieldChild;
 
-      const className = cls({
-        [prefix + '-field-open']: isOpen,
-        [prefix + '-field-over']: !isOpen && index > colLen - 2,
-      });
-
       return (
         <FormItem
-          key={getFormKey(field)}
+          key={toCompareName(field.name)}
           {...field}
           label={finalLabel}
+          colProps={{
+            className: cls({
+              [prefix + '-field-over']: !isOpen && index > colLen - 2,
+            }),
+          }}
           span={finalSpan}
-          colClassName={className}
+          mode={!isOpen && index > colLen - 2 ? FieldMode.HIDDEN : FieldMode.EDIT}
           children={children}
         />
       );
@@ -146,12 +143,7 @@ export const QueryForm: <Values = any>(props: React.PropsWithChildren<QueryFormP
   if (!fields?.length) return <div />;
 
   return (
-    <div
-      className={cls({
-        [prefix]: true,
-        [prefix + '-divider']: showDivider,
-      })}
-    >
+    <div className={prefix}>
       <Form form={form} {...formProps}>
         <Row gutter={24}>
           {renderFields(fields)}

@@ -54,7 +54,7 @@ export class BaseRootStore implements BaseProps {
       colon: observable.ref,
       mode: observable.ref,
 
-      colProps: observable,
+      colProps: observable.deep,
       span: observable.ref,
 
       labelAlign: observable.ref,

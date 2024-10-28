@@ -2,7 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import cls from 'classnames';
 import React from 'react';
-import { usePrefixCls } from '../../context';
+import { usePrefixCls } from '../../../context';
 
 import './index.less';
 
@@ -75,7 +75,10 @@ export const Icon: React.FC<BaseIconProps> = (props) => {
       onClick={onClick}
       style={style}
     >
-      <Space size={4} style={{ display: 'flex', flexDirection: textPosition === 'start' ? 'row-reverse' : 'row' }}>
+      <Space
+        size={4}
+        style={{ display: 'inline-flex', flexDirection: textPosition === 'start' ? 'row-reverse' : 'row' }}
+      >
         {textEle}
         {icon}
       </Space>

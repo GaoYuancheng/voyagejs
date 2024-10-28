@@ -4,7 +4,7 @@ nav:
   order: 1
   second:
     title: 行为插件
-title: 图标
+title: Icon 基础图标
 order: 1
 ---
 
