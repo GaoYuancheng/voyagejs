@@ -1,7 +1,11 @@
-import { Card, Space, Row, Collapse } from 'antd';
+import { Collapse, Row, Space } from 'antd';
+import React from 'react';
+import { Card } from './Card';
 // import { Collapse } from './Collapse';
 // import type { CardProps, SpaceProps, RowProps } from 'antd';
 // import type { CollapseProps } from './Collapse';
+
+export * from './Card';
 
 export const DEFAULT_CONTAINER_PLUGINS = {
   card: {

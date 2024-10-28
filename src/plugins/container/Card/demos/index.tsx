@@ -1,58 +1,72 @@
-import React from 'react';
-import { Form, useForm, FormGroup } from '@voyagejs/form';
-import { DEFAULT_COMPONENT_PLUGINS, DEFAULT_CONTAINER_PLUGINS } from '@voyagejs/plugins';
+import { Button } from 'antd';
+import { sleep } from 'radash';
+import React, { Fragment } from 'react';
+import { Form, FormGroup, useForm } from 'voyagejs';
 
-export function CardPlugin() {
-  const [form] = useForm({ plugins: Object.assign({}, DEFAULT_COMPONENT_PLUGINS, DEFAULT_CONTAINER_PLUGINS) });
+function CardDemo() {
+  const [form] = useForm();
 
   return (
-    <Form
-      form={form}
-      onValuesChange={(_, values) => {
-        console.log('values', values);
-      }}
-    >
-      <FormGroup
-        container="card"
-        containerProps={{
-          title: '卡片面板',
+    <Fragment>
+      <Button onClick={() => form.refresh()}>刷新</Button>
+      <Form
+        form={form}
+        onValuesChange={(_, values) => {
+          console.log('values', values);
         }}
-        items={[
-          {
-            name: 'a',
-            label: 'a',
-            component: 'input',
-          },
-        ]}
-      />
-
-      <FormGroup
-        container="card"
-        containerProps={{
-          title: '嵌套卡片',
+        remoteValues={async () => {
+          await sleep(3000);
+          return {
+            a: '1',
+            b: '2',
+            c: '3',
+          };
         }}
-        items={[
-          {
-            name: 'b',
-            label: 'b',
-            component: 'input',
-          },
-          {
-            name: 'g-1',
-            container: 'card',
-            containerProps: {
-              title: '嵌套卡片-1',
+      >
+        <FormGroup
+          container="card"
+          containerProps={{
+            title: '卡片面板',
+          }}
+          items={[
+            {
+              name: 'a',
+              label: 'a',
+              component: 'input',
             },
-            items: [
-              {
-                name: 'c',
-                label: 'c',
-                component: 'input',
+          ]}
+        />
+
+        <FormGroup
+          container="card"
+          containerProps={{
+            title: '嵌套卡片',
+          }}
+          items={[
+            {
+              name: 'b',
+              label: 'b',
+              component: 'input',
+            },
+            {
+              name: 'g-1',
+              container: 'card',
+              containerProps: {
+                title: '嵌套卡片-1',
               },
-            ],
-          },
-        ]}
-      />
-    </Form>
+              items: [
+                {
+                  name: 'c',
+                  label: 'c',
+                  component: 'input',
+                },
+              ],
+            },
+          ]}
+        />
+      </Form>
+    </Fragment>
   );
 }
+
+export default CardDemo;

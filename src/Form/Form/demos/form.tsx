@@ -1,7 +1,6 @@
-import { Input } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
-import { Form, FormItem, useForm } from 'voyagejs';
+import { Form, useForm } from 'voyagejs';
 
 function RemoteValues() {
   const [form] = useForm();
@@ -23,20 +22,41 @@ function RemoteValues() {
             d: '4',
           };
         }}
-      >
-        <FormItem name="a" label="a">
-          <Input data-testid="inputA" />
-        </FormItem>
-        <FormItem name="b" label="b">
-          <Input data-testid="inputB" />
-        </FormItem>
-        <FormItem name="c" label="c">
-          <Input data-testid="inputC" />
-        </FormItem>
-        <FormItem name="d" label="d">
-          <Input data-testid="inputD" />
-        </FormItem>
-      </Form>
+        items={[
+          {
+            name: 'a',
+            label: 'a',
+            component: 'input',
+            componentProps: {
+              placeholder: '请输入',
+            },
+          },
+          {
+            name: 'b',
+            label: 'b',
+            component: 'input',
+            componentProps: {
+              placeholder: '请输入',
+            },
+          },
+          {
+            name: 'c',
+            label: 'c',
+            component: 'input',
+            componentProps: {
+              placeholder: '请输入',
+            },
+          },
+          {
+            name: 'd',
+            label: 'd',
+            component: 'input',
+            componentProps: {
+              placeholder: '请输入',
+            },
+          },
+        ]}
+      />
     </div>
   );
 }

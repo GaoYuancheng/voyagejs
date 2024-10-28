@@ -2,6 +2,7 @@ import type { FormInstance } from 'antd/lib/form';
 import type { NamePath } from 'antd/lib/form/interface';
 import { configure, makeObservable, observable, runInAction } from 'mobx';
 import { isEmpty, isEqual, isFunction, pick } from 'radash';
+import { DEFAULT_PLUGINS } from '../../plugins';
 import { pluginStore } from '../../utils';
 import { BaseProps, BaseRootStore } from '../Base';
 import type { GroupStore } from '../FormGroup/store';
@@ -96,6 +97,10 @@ export class FormStore<Values = any, PluginsType = any>
   setFieldsValue: FormInstance<Values>['setFieldsValue'] = this.form!.setFieldsValue;
   submit: FormInstance<Values>['submit'] = this.form!.submit;
   validateFields: FormInstance<Values>['validateFields'] = this.form!.validateFields;
+
+  // ===== 表单联动控制 =====
+  /** 是否开启loading状态，如果有子容器，loading状态由子容器控制 */
+  enableLoading: boolean = true;
 
   constructor(props?: FormOptionProps<any>) {
     const { plugins } = props || {};
@@ -289,6 +294,10 @@ export class FormStore<Values = any, PluginsType = any>
       this[key] = props[key];
     });
 
+    this.refresh();
+  }
+
+  refresh() {
     if (this.remoteValues) {
       this.loading = true;
       this.remoteValues()
@@ -323,8 +332,8 @@ export class FormStore<Values = any, PluginsType = any>
   pluginStore: PluginsType;
 
   registerPlugins = () => {
-    if (!this.pluginStore) return;
-    pluginStore.registerPlugins(this.pluginStore);
+    // if (!this.pluginStore) return;
+    pluginStore.registerPlugins(Object.assign({}, this.pluginStore, DEFAULT_PLUGINS));
   };
 
   get plugins(): typeof this.pluginStore {

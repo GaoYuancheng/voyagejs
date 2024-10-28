@@ -7,4 +7,4 @@ export const useFormContext = <Values = any, P = any>() => {
   return useContext<FormStore<Values, P>>(FormContext);
 };
 
-export const useFormIntance = useFormContext;
+export const useFormInstance = useFormContext;

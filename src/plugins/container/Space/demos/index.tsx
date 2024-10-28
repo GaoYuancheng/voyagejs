@@ -1,8 +1,8 @@
-import { Form, useForm, FormGroup } from '@voyagejs/form';
-import { DEFAULT_COMPONENT_PLUGINS, DEFAULT_CONTAINER_PLUGINS } from '@voyagejs/plugins';
+import React from 'react';
+import { Form, FormGroup, useForm } from 'voyagejs';
 
-export function SpacePlugin() {
-  const [form] = useForm({ plugins: Object.assign({}, DEFAULT_COMPONENT_PLUGINS, DEFAULT_CONTAINER_PLUGINS) });
+function SpaceDemo() {
+  const [form] = useForm();
 
   return (
     <Form
@@ -56,3 +56,5 @@ export function SpacePlugin() {
     </Form>
   );
 }
+
+export default SpaceDemo;

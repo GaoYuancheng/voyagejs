@@ -1,8 +1,8 @@
 import { FormGroup } from '../FormGroup';
 import { FormItem } from '../FormItem';
 import { FormList } from '../FormList';
-import { Form as IForm } from './Form';
-import { useFormIntance } from './context';
+import { ErrorList, Form as IForm, Provider } from './Form';
+import { useFormInstance } from './context';
 import { useForm } from './useForm';
 
 export * from './context';
@@ -17,7 +17,9 @@ export interface FormType extends InternalFormType {
   List: typeof FormList;
   Group: typeof FormGroup;
   useForm: typeof useForm;
-  useFormIntance: typeof useFormIntance;
+  useFormInstance: typeof useFormInstance;
+  ErrorList: typeof ErrorList;
+  Provider: typeof Provider;
 }
 
 const Form: FormType = IForm as FormType;
@@ -26,6 +28,8 @@ Form.Item = FormItem;
 Form.List = FormList;
 Form.Group = FormGroup;
 Form.useForm = useForm;
-Form.useFormIntance = useFormIntance;
+Form.useFormInstance = useFormInstance;
+Form.ErrorList = ErrorList;
+Form.Provider = Provider;
 
 export { Form };

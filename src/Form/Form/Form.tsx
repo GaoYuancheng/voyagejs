@@ -9,9 +9,9 @@ import { FormGroup } from '../FormGroup';
 import { FormContext } from './context';
 import type { FormProps } from './interface';
 
-const { useForm: useAForm } = AForm;
+const { useForm: useAForm, ErrorList, Provider } = AForm;
 
-export { useAForm };
+export { ErrorList, Provider, useAForm };
 
 export const Form = observer(<Values, P extends PluginsType = any>(props: PropsWithChildren<FormProps<Values, P>>) => {
   const { children, form: formStore, onValuesChange, spinProps, items } = props;
@@ -32,14 +32,14 @@ export const Form = observer(<Values, P extends PluginsType = any>(props: PropsW
 
   const renderChildren = () => {
     if (items) {
-      return <FormGroup items={items} />;
+      return <FormGroup<Values, P> items={items} />;
     }
     return children;
   };
 
   return (
     <FormContext.Provider value={formContextValue}>
-      <Spin spinning={formStore.loading} {...spinProps}>
+      <Spin spinning={formStore.enableLoading ? formStore.loading : false} {...spinProps}>
         <AForm<Values>
           {...restProps}
           {...toJS(formStore.formProps)}
