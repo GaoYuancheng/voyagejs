@@ -2,7 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import cls from 'classnames';
 import React from 'react';
-import { usePrefixCls } from '../../../../context';
+import { usePrefixCls } from '../../context';
 
 import './index.less';
 

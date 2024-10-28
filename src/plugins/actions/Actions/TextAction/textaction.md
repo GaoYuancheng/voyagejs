@@ -4,12 +4,8 @@ nav:
   second:
     title: 行为插件
 title: 文本按钮
-order: 2
+order: 5
 ---
-
-## Text
-
-<code src="./demos/text.tsx" ></code>
 
 ## TextAction
 

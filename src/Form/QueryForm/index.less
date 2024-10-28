@@ -1,0 +1,26 @@
+@import '../../style/index.less';
+
+@queryform-prefix-cls: ~'@{ant-prefix}-queryform';
+
+.@{queryform-prefix-cls} {
+  &-divider {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  &-actions {
+    display: flex !important;
+    align-items: start;
+    justify-content: end;
+    padding-bottom: 16px;
+  }
+
+  &-field {
+    &-open {
+      display: unset !important;
+    }
+
+    &-over {
+      display: none !important;
+    }
+  }
+}

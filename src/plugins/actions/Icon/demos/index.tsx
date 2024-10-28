@@ -1,7 +1,7 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { Col, Divider, Row, Space } from 'antd';
 import React from 'react';
-import { Icon } from '../Icon';
+import { Icon } from 'voyagejs';
 
 const BaseIcon = () => {
   return (

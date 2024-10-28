@@ -3,7 +3,7 @@ import { Spin, Typography } from 'antd';
 import { ParagraphProps as AParagraphProps } from 'antd/lib/typography/Paragraph';
 import cls from 'classnames';
 import React from 'react';
-import { usePrefixCls } from '../../../../context';
+import { usePrefixCls } from '../../context';
 
 import './index.less';
 

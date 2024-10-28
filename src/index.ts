@@ -1,4 +1,4 @@
-export * from './Form';
-export * from './Table';
+export * from './form';
 export * from './plugins';
+export * from './table';
 export * from './utils';

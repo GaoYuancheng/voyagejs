@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { FormStore } from '../Form';
+import type { FormStore } from '.';
 
 export const FormContext = createContext(null as unknown as FormStore<any, any>);
 

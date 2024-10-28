@@ -1,7 +1,7 @@
 import type { ColumnType as AColumnType, TableProps as ATableProps } from 'antd/lib/table';
 import type { Key, SorterResult, TableRowSelection } from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
-import type { ModalFormInstance } from '../Form';
+import type { ModalFormInstance } from '../form';
 
 /**
  * 额外的初始请求参数，注意：参数变化时，表格不会刷新

@@ -6,7 +6,7 @@ nav:
     title: 行为插件
     order: 1
 title: 按钮
-order: 1
+order: 3
 ---
 
 ## ButtonAction

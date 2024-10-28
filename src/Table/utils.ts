@@ -1,5 +1,5 @@
 import type { ColumnType as AColumnType } from 'antd/lib/table';
-import type { ModalFormInstance } from '../Form';
+import type { ModalFormInstance } from '../form';
 import type { ColumnType } from './interface';
 import type { TableStore } from './store';
 
