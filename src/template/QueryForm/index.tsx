@@ -12,7 +12,7 @@ const { Item: FormItem } = Form;
 
 export interface QueryFormProps<Values = any> extends Omit<FormProps<Values>, 'fields'> {
   /** 表单搜索字段配置，同FormItem */
-  items: FormItemProps[];
+  items?: FormItemProps[];
   /** 表单实例 */
   form: FormStore<Values>;
   /** 显示字段长度，2/3/4 默认3 */
@@ -20,7 +20,7 @@ export interface QueryFormProps<Values = any> extends Omit<FormProps<Values>, 'f
   /** 默认折叠，默认true */
   defaultCollapse?: boolean;
   /** 点击查询时的回调函数 */
-  onSubmit?: (values: any) => Promise<void> | undefined;
+  onSearch?: (values: any) => Promise<void> | undefined;
   /** 点击重置时的回调函数 */
   onReset?: () => void;
   /** 只有一个字段时，单一展示 */
@@ -31,16 +31,14 @@ export interface QueryFormProps<Values = any> extends Omit<FormProps<Values>, 'f
   queryActionProps?: Omit<ButtonActionProps, 'onClick'>;
 }
 
-export const QueryForm: <Values = any>(props: React.PropsWithChildren<QueryFormProps<Values>>) => React.ReactElement = (
-  props,
-) => {
+export const QueryForm: <Values = any>(props: QueryFormProps<Values>) => React.ReactElement = (props) => {
   const prefix = usePrefixCls('queryform');
 
   const {
-    items,
+    items = [],
     form,
     onReset,
-    onSubmit,
+    onSearch,
     allowSingleSearch = true,
     showFieldsLength = 2,
     defaultCollapse = true,
@@ -67,7 +65,7 @@ export const QueryForm: <Values = any>(props: React.PropsWithChildren<QueryFormP
   const handleSearch = async () => {
     try {
       const values = await form.validateFields();
-      return await onSubmit?.(values);
+      return await onSearch?.(values);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);

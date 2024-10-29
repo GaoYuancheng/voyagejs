@@ -3,7 +3,7 @@ nav:
   title: 模板
   order: 4
   second:
-    title: 表单
+    title: 查询表单
     order: 1
 title: QueryForm
 order: 1

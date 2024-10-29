@@ -10,7 +10,7 @@ const Demo = () => {
   return (
     <QueryForm
       form={form}
-      onSubmit={(values) => {
+      onSearch={(values) => {
         return new Promise((resolve) => {
           setTimeout(() => {
             console.log('values', values);

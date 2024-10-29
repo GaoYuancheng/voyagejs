@@ -1,8 +1,8 @@
-import { isObject } from 'radash';
-import { makeObservable, observable, computed, toJS, runInAction } from 'mobx';
 import type { TableProps as ATableProps, TablePaginationConfig } from 'antd';
-import type { TableProps, SorterParams } from './interface';
 import type { TableRowSelection } from 'antd/lib/table/interface';
+import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
+import { isObject } from 'radash';
+import type { SorterParams, TableProps } from './interface';
 
 export class TableStore<RecordType extends Object = any> implements TableProps<RecordType> {
   loading = false;
@@ -22,6 +22,8 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
   sorter?: SorterParams<RecordType>;
 
   filter = {};
+
+  params = {};
 
   onChange?: TableProps<RecordType>['onChange'];
 
@@ -50,6 +52,7 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
       selectedRowKeys: computed,
       rowSelection: observable,
       noPagination: computed,
+      params: observable,
     });
   }
 
@@ -72,10 +75,10 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
     };
   }
 
-  refresh(params?: Record<string, any>): Promise<void> | undefined {
+  refresh(params?: any): Promise<void> | undefined {
     if (!this.remoteDataSource) return;
 
-    const requestParams = { ...toJS(this.filter), sorter: toJS(this.sorter), ...params };
+    const requestParams = { ...toJS(this.filter), sorter: toJS(this.sorter), ...this.params, ...params };
 
     this.loading = true;
 
@@ -100,6 +103,7 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
     this.setInitialPagination({ pagination: this.initialPagination });
     this.filter = {};
     this.sorter = undefined;
+    this.params = {};
     this.refresh();
   }
 
@@ -114,7 +118,7 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
   onRowSelectionChange: TableRowSelection<RecordType>['onChange'] = (
     currentSelectedRowKeys,
     currentSelectedRows,
-    info
+    info,
   ) => {
     this.selectedRows = currentSelectedRows;
     if (!isObject(this.rowSelection)) return;
