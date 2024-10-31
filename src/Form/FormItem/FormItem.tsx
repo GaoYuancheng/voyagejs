@@ -3,7 +3,7 @@ import { Col, Form } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { omit } from 'radash';
-import { PropsWithChildren, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
+import React, { PropsWithChildren, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import type { PluginsType } from '../../interfaces';
 import { toArray } from '../../utils';
 import { FieldMode, commonKeys } from '../Base';
@@ -82,19 +82,17 @@ export const FormItem = observer(
       return null;
     }
 
-    const { defaultComponentProps, component: Com } = field.plugin || {};
+    const { defaultComponentProps, component: Com, defaultFormItemProps = {} } = field.plugin || {};
 
     const element = (
-      <Item<Values> {...restProps} {...field.fieldProps} name={name}>
-        {Com
-          ? cloneElement(Com, {
-              ...defaultComponentProps,
-              ...toJS(field.componentProps),
-              ...toJS(field.childProps),
-            })
-          : isValidElement(children)
-          ? cloneElement(children, { ...toJS(field.childProps) })
-          : children}
+      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldProps} name={name}>
+        {Com ? (
+          <Com {...defaultComponentProps} {...toJS(field.componentProps)} {...toJS(field.childProps)} />
+        ) : isValidElement(children) ? (
+          cloneElement(children, { ...toJS(field.childProps) })
+        ) : (
+          children
+        )}
       </Item>
     );
 

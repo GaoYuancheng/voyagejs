@@ -10,13 +10,14 @@ import { useModal } from './Modal';
 
 export type ExcludeModalType = 'onOk' | 'onCancel' | 'modalProps' | 'children' | 'confirmLoading';
 
-export interface ModalFormContext<Values = any, P = PluginsType> {
+export interface ModalFormContext<Values = any, P extends PluginsType = PluginsType> {
   form: FormStore<Values, P>;
   open: boolean;
   values: Record<string, any>;
 }
 
-export interface ModalFormProps<Values = any, P = PluginsType> extends Omit<ModalProps, ExcludeModalType> {
+export interface ModalFormProps<Values = any, P extends PluginsType = PluginsType>
+  extends Omit<ModalProps, ExcludeModalType> {
   /** 点击确定回调 */
   onOk?: (e: MouseEvent<HTMLElement>, ctx: ModalFormContext<Values, P>) => void;
   /** 点击遮罩层或右上角叉或取消按钮的回调 */
@@ -37,12 +38,12 @@ export interface ModalFormProps<Values = any, P = PluginsType> extends Omit<Moda
   remoteValues?: FormProps<Values, P>['remoteValues'];
 }
 
-export interface ModalFormProps<Values = any, P = PluginsType> {
+export interface ModalFormProps<Values = any, P extends PluginsType = PluginsType> {
   form?: FormStore<Values, P>;
   open?: boolean;
 }
 
-export interface ModalFormInstance<Values = any, P = PluginsType> {
+export interface ModalFormInstance<Values = any, P extends PluginsType = PluginsType> {
   open: (props: ModalFormProps<Values, P>) => void;
   close: (e?: MouseEvent<HTMLElement, MouseEvent>) => void;
   isOpen: boolean;

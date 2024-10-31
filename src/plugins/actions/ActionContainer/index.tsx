@@ -1,9 +1,9 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { Tooltip, Popconfirm } from 'antd';
-import { ModalConfirm, type ModalConfirmProps } from '../ModalConfirm';
-import { isString, isPromise, isObject } from 'radash';
-import type { TooltipProps } from 'antd/es/tooltip';
+import { Popconfirm, Tooltip } from 'antd';
 import type { PopconfirmProps } from 'antd/es/popconfirm';
+import type { TooltipProps } from 'antd/es/tooltip';
+import { isObject, isPromise, isString } from 'radash';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ModalConfirm, type ModalConfirmProps } from '../ModalConfirm';
 
 export interface ActionContainerProps {
   /** Tooltip的title，推荐string类型 */
@@ -85,19 +85,19 @@ export const ActionContainer: React.FC<ActionContainerProps> = (props) => {
   };
 
   const onToolVisibleChange = useCallback(
-    (visible) => {
-      setTooltipOpen(popconfirmOpen ? false : visible);
+    (open: boolean) => {
+      setTooltipOpen(popconfirmOpen ? false : open);
     },
-    [popconfirmOpen]
+    [popconfirmOpen],
   );
 
   const onPopconfirmVisibleChange = useCallback(
-    (visible) => {
+    (open: boolean) => {
       if (loading) return;
       setTooltipOpen(false);
-      setPopconfirmOpen(visible);
+      setPopconfirmOpen(open);
     },
-    [loading]
+    [loading],
   );
 
   if (typeof render === 'function' && !render()) return null;
@@ -107,12 +107,12 @@ export const ActionContainer: React.FC<ActionContainerProps> = (props) => {
     return React.createElement(
       Tooltip,
       {
-        title: tooltip,
+        title: tooltip as string,
         ...(isObject(tooltip) ? tooltip : {}),
         open: tooltipOpen,
         onOpenChange: onToolVisibleChange,
       },
-      element
+      element,
     );
   };
 
@@ -122,13 +122,13 @@ export const ActionContainer: React.FC<ActionContainerProps> = (props) => {
     return React.createElement(
       Popconfirm,
       {
-        title: confirm,
+        title: confirm as string,
         ...(isObject(confirm) ? confirm : {}),
         onConfirm: onClickInternal,
         open: popconfirmOpen,
         onOpenChange: onPopconfirmVisibleChange,
       },
-      element
+      element,
     );
   };
 
@@ -141,7 +141,7 @@ export const ActionContainer: React.FC<ActionContainerProps> = (props) => {
         ...(isString(modalConfirm) ? { content: modalConfirm } : modalConfirm),
         onOk: onClickInternal,
       },
-      element
+      element,
     );
   };
 

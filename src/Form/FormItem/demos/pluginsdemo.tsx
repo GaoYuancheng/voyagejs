@@ -1,20 +1,20 @@
 import { Divider } from 'antd';
 import React from 'react';
-import { Form, FormGroup, FormItem, DEFAULT_PLUGINS as plugins, useForm, type DefaultPluginsType } from 'voyagejs';
+import { DefaultComponentPluginsType, Form, FormGroup, FormItem, DEFAULT_PLUGINS as plugins, useForm } from 'voyagejs';
 
 function Plugins() {
   const [form] = useForm({ plugins });
 
   return (
-    <Form<any, DefaultPluginsType>
+    <Form<any, DefaultComponentPluginsType>
       form={form}
       labelCol={{ style: { width: 50 } }}
       onValuesChange={(_, values) => {
         console.log('values', values);
       }}
     >
-      <FormItem<any, DefaultPluginsType> name={'a1'} label="a1" component="inputnumber" componentProps={{}} />
-      <FormItem<any, DefaultPluginsType>
+      <FormItem<any, DefaultComponentPluginsType> name={'a1'} label="a1" component="inputnumber" componentProps={{}} />
+      <FormItem<any, DefaultComponentPluginsType>
         name={'a2'}
         label="a2"
         component="input"
@@ -23,7 +23,7 @@ function Plugins() {
         }}
       />
 
-      <FormItem<any, DefaultPluginsType>
+      <FormItem<any, DefaultComponentPluginsType>
         name={'b'}
         label="b"
         component="select"
@@ -38,7 +38,7 @@ function Plugins() {
       />
 
       <Divider />
-      <FormGroup<any, DefaultPluginsType>
+      <FormGroup<any, DefaultComponentPluginsType>
         span={24}
         labelCol={{ style: { width: 60 } }}
         name="group1"

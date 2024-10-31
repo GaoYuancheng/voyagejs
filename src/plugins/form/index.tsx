@@ -1,89 +1,90 @@
-import type {
-  CascaderProps,
-  CheckboxProps,
-  InputNumberProps,
-  InputProps,
-  RadioGroupProps,
-  RadioProps,
-  SelectProps,
-  TreeSelectProps,
-} from 'antd';
 import { Cascader, Checkbox, Input, InputNumber, Radio, Select, TreeSelect } from 'antd';
-import type { CheckboxGroupProps } from 'antd/es/checkbox';
-import React from 'react';
-import type { DatePickerProps, RangePickerProps, SwitchProps, TimePickerProps } from './all';
-import { DatePicker, OSwitch, RangePicker, TimePicker } from './all';
+import type { PluginType } from '../../interfaces';
+import { DatePicker } from './DatePicker';
+import { OSwitch as Switch } from './OSwitch';
+import { RangePicker } from './RangePicker';
+import { TimePicker } from './TimePicker';
 
 export * from './all';
 
 export const DEFAULT_COMPONENT_PLUGINS = {
   cascader: {
-    component: <Cascader />,
-    defaultComponentProps: {} as CascaderProps,
+    component: Cascader,
+    defaultComponentProps: {
+      placeholder: '请选择',
+    },
   },
   checkbox: {
-    component: <Checkbox />,
-    defaultComponentProps: {} as CheckboxProps,
+    component: Checkbox,
+    defaultComponentProps: {},
     defaultFormItemProps: {
       valuePropName: 'checked',
     },
   },
   'checkbox.group': {
-    component: <Checkbox.Group />,
-    defaultComponentProps: {} as CheckboxGroupProps,
+    component: Checkbox.Group,
+    defaultComponentProps: {},
   },
   datepicker: {
-    component: <DatePicker />,
-    defaultComponentProps: {} as DatePickerProps,
+    component: DatePicker,
+    defaultComponentProps: {},
   },
   input: {
-    component: <Input />,
+    component: Input,
     defaultComponentProps: {
       allowClear: true,
       placeholder: '请输入',
-    } as InputProps,
+    },
   },
   inputnumber: {
-    component: <InputNumber />,
-    defaultComponentProps: {} as InputNumberProps,
+    component: InputNumber as typeof InputNumber,
+    defaultComponentProps: {
+      placeholder: '请输入',
+    },
   },
   radio: {
-    component: <Radio />,
-    defaultComponentProps: {} as RadioProps,
+    component: Radio,
+    defaultComponentProps: {},
   },
   'radio.group': {
-    component: <Radio.Group />,
-    defaultComponentProps: {} as RadioGroupProps,
+    component: Radio.Group,
+    defaultComponentProps: {},
   },
   rangepicker: {
-    component: <RangePicker />,
-    defaultComponentProps: {} as RangePickerProps,
+    component: RangePicker,
+    defaultComponentProps: {},
   },
   select: {
-    component: <Select />,
-    defaultComponentProps: {
-      allowClear: true,
-      placeholder: '请选择',
-    } as SelectProps,
+    component: Select as typeof Select,
+    defaultComponentProps: {},
   },
   switch: {
-    component: <OSwitch />,
-    defaultComponentProps: {} as SwitchProps,
+    component: Switch,
+    defaultComponentProps: {},
     defaultFormItemProps: {
       valuePropName: 'checked',
     },
   },
   timepicker: {
-    component: <TimePicker />,
-    defaultComponentProps: {} as TimePickerProps,
+    component: TimePicker,
+    defaultComponentProps: {},
   },
   treeselect: {
-    component: <TreeSelect />,
-    defaultComponentProps: {} as TreeSelectProps,
+    // TODO: 类型推断不出来，断言指定
+    component: TreeSelect as typeof TreeSelect,
+    defaultComponentProps: {},
     defaultFormItemProps: {
-      optionsPropsName: 'treeData',
+      optionsPropName: 'treeData',
     },
   },
 };
 
 export type DefaultComponentPluginsType = typeof DEFAULT_COMPONENT_PLUGINS;
+
+const a: PluginType<DefaultComponentPluginsType> = {
+  component: 'input',
+  componentProps: {
+    allowClear: true,
+    placeholder: 'a',
+  },
+};

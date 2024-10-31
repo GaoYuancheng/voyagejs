@@ -28,7 +28,7 @@ function RemoteValues() {
             label: 'a',
             component: 'input',
             componentProps: {
-              placeholder: '请输入',
+              placeholder: '请输入A',
             },
           },
           {

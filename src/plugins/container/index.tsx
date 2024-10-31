@@ -1,36 +1,27 @@
 import { Collapse, Row, Space } from 'antd';
-import React from 'react';
 import { Card } from './Card';
-// import { Collapse } from './Collapse';
-// import type { CardProps, SpaceProps, RowProps } from 'antd';
-// import type { CollapseProps } from './Collapse';
 
 export * from './Card';
 
 export const DEFAULT_CONTAINER_PLUGINS = {
   card: {
-    component: <Card />,
+    component: Card,
     defaultComponentProps: {},
   },
   collapse: {
-    component: <Collapse />,
+    component: Collapse,
     defaultComponentProps: {},
   },
   'collapse.panel': {
-    // @ts-ignore
-    component: <Collapse.Panel />,
+    component: Collapse.Panel,
     defaultComponentProps: {},
   },
   space: {
-    component: <Space />,
+    component: Space,
     defaultComponentProps: {},
   },
-  // flex: {
-  //   component: Flex,
-  //   defaultComponentProps: {} as FlexProps,
-  // },
   row: {
-    component: <Row />,
+    component: Row,
     defaultComponentProps: {},
   },
 };

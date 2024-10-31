@@ -1,6 +1,6 @@
 import type { NamePath } from 'antd/es/form/interface';
 import type { FormItemProps as AFormItemProps } from 'antd/lib/form/FormItem';
-import type { PluginsType } from '../../interfaces';
+import type { PluginPropsType, PluginsType } from '../../interfaces';
 import type { BaseProps } from '../Base';
 
 export type ReactionResultKeyType = keyof Omit<FormItemProps, 'reactions' | 'dependencies'> & 'value';
@@ -9,30 +9,55 @@ export type ReactionResultFunctionType<Key extends keyof FormItemProps> = (targe
 
 export type ReactionResultType<Key extends keyof FormItemProps> = ReactionResultFunctionType<Key> | string;
 
-export interface FormItemProps<Values = any, P extends PluginsType = any, CN extends keyof P = keyof P>
-  extends Omit<AFormItemProps<Values>, keyof BaseProps>,
-    BaseProps {
-  /** 数据源类型 */
-  options?: any[];
-  /** 数据源属性名 */
-  optionsPropName?: string;
-  /** 远程数据源 */
-  remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
-  /** 联动关系 */
-  reactions?: ReactionType[];
+// export interface FormItemProps<Values = any, P extends PluginsType = any>
+//   extends Omit<AFormItemProps<Values>, keyof BaseProps>,
+//     BaseProps {
+//   /** 数据源类型 */
+//   options?: any[];
+//   /** 数据源属性名 */
+//   optionsPropName?: string;
+//   /** 远程数据源 */
+//   remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
+//   /** 联动关系 */
+//   reactions?: ReactionType[];
+// }
 
-  /** 插件类型 */
-  component?: CN;
-  /** 插件属性 */
-  componentProps?: P[CN]['defaultComponentProps'];
-}
+export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = Omit<
+  AFormItemProps<Values>,
+  keyof BaseProps
+> &
+  BaseProps &
+  {
+    [CN in keyof P]: {
+      /** 数据源类型 */
+      options?: any[];
+      /** 数据源属性名 */
+      optionsPropName?: string;
+      /** 远程数据源 */
+      remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
+      /** 联动关系 */
+      reactions?: ReactionType[];
+      /** 插件名称 */
+      component?: CN;
+      /** 插件属性 */
+      componentProps?: PluginPropsType<P, CN extends string ? CN : never>;
+    };
+  }[keyof P];
 
-export type ReactionType = {
-  /** 被动关联 */
-  dependencies?: NamePath[];
-  /** 主动关联 */
-  effects?: NamePath[];
-  result: {
-    [Key in ReactionResultKeyType]: ReactionResultType<Key>;
-  };
-};
+export type ReactionType =
+  | {
+      /** 被动关联 */
+      dependencies: NamePath[];
+      effects?: never;
+      result: {
+        [Key in ReactionResultKeyType]: ReactionResultType<Key>;
+      };
+    }
+  | {
+      /** 主动关联 */
+      effects: NamePath[];
+      dependencies?: never;
+      result: {
+        [Key in ReactionResultKeyType]: ReactionResultType<Key>;
+      };
+    };
