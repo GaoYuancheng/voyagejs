@@ -18,3 +18,8 @@ nav:
 
 <code src="./demos/modalform.tsx" >useModalForm</code>
 <code src="./demos/modal.tsx" >useModal</code>
+
+
+## 自定义页脚
+
+<code src="./demos/customfooter.tsx" ></code>

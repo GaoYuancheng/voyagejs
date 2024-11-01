@@ -67,8 +67,8 @@ export const useModal = (): [React.ReactNode, ModalInstance] => {
   );
 
   return [
+    // eslint-disable-next-line react/jsx-key
     <AModal
-      key={'modal'}
       {...modalProps}
       onCancel={onClose}
       open={visible}

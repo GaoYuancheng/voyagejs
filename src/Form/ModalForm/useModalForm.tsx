@@ -3,17 +3,24 @@ import type { MouseEvent, ReactElement, ReactNode } from 'react';
 import React, { useRef } from 'react';
 import type { PluginsType } from '../../interfaces';
 import type { FormOptionProps, FormProps, FormStore } from '../Form';
-import { Form, useForm } from '../Form';
-import { FormGroup } from '../FormGroup';
-import type { ModalProps } from './Modal';
-import { useModal } from './Modal';
+import { Form } from '../Form';
+import type { ModalProps } from './useModal';
+import { useModal } from './useModal';
+
+const { useForm, Group: FormGroup } = Form;
 
 export type ExcludeModalType = 'onOk' | 'onCancel' | 'modalProps' | 'children' | 'confirmLoading';
 
 export interface ModalFormContext<Values = any, P extends PluginsType = PluginsType> {
   form: FormStore<Values, P>;
-  open: boolean;
-  values: Record<string, any>;
+  isOpen: boolean;
+  values: Values;
+  close: () => void;
+}
+
+export interface ModalFormInstance<Values = any, P extends PluginsType = PluginsType>
+  extends ModalFormContext<Values, P> {
+  open: (props: ModalFormProps<Values, P>) => void;
 }
 
 export interface ModalFormProps<Values = any, P extends PluginsType = PluginsType>
@@ -38,17 +45,6 @@ export interface ModalFormProps<Values = any, P extends PluginsType = PluginsTyp
   remoteValues?: FormProps<Values, P>['remoteValues'];
 }
 
-export interface ModalFormProps<Values = any, P extends PluginsType = PluginsType> {
-  form?: FormStore<Values, P>;
-  open?: boolean;
-}
-
-export interface ModalFormInstance<Values = any, P extends PluginsType = PluginsType> {
-  open: (props: ModalFormProps<Values, P>) => void;
-  close: (e?: MouseEvent<HTMLElement, MouseEvent>) => void;
-  isOpen: boolean;
-}
-
 export const useModalForm = <P extends PluginsType = any>(
   props?: FormOptionProps<P>,
 ): [ReactElement, ModalFormInstance] => {
@@ -61,7 +57,8 @@ export const useModalForm = <P extends PluginsType = any>(
   const getModalFormContext = () => {
     return {
       form,
-      open: isOpen,
+      isOpen,
+      close,
       values: form.getFieldsValue(),
     };
   };
@@ -69,7 +66,8 @@ export const useModalForm = <P extends PluginsType = any>(
   const { formProps, remoteValues } = propsRef.current || {};
 
   return [
-    <Form key={'form'} remoteValues={remoteValues} {...formProps} form={form}>
+    // eslint-disable-next-line react/jsx-key
+    <Form remoteValues={remoteValues} {...formProps} form={form}>
       {modal}
     </Form>,
     {
@@ -110,6 +108,8 @@ export const useModalForm = <P extends PluginsType = any>(
       },
       close,
       isOpen,
+      form,
+      values: form.getFieldsValue?.(),
     },
   ];
 };
