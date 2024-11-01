@@ -2,7 +2,7 @@ import { isString } from 'radash';
 import type { PluginsType } from '../../interfaces';
 
 // 使用插件
-export const parsePlugin = (plugins: PluginsType, pluginName: string) => {
+export const parsePlugin = (plugins: PluginsType, pluginName?: any) => {
   if (!isString(pluginName)) {
     return pluginName;
   }

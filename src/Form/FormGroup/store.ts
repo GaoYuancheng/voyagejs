@@ -1,24 +1,28 @@
 import { computed, makeObservable, observable } from 'mobx';
-import { isString } from 'radash';
+import type { PluginsType } from '../../interfaces';
+import { parsePlugin } from '../../plugins';
 import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';
 import type { FormGroupProps } from './interface';
 
-export class GroupStore<Values = any, P = any> extends BaseStore implements Omit<FormGroupProps, 'form'>, BaseProps {
-  name?: FormGroupProps['name'];
+export class GroupStore<Values = any, P extends PluginsType = any>
+  extends BaseStore<Values, P>
+  implements Omit<FormGroupProps, 'form'>, BaseProps
+{
+  name?: FormGroupProps<Values, P>['name'];
 
-  items?: FormGroupProps['items'];
+  items?: FormGroupProps<Values, P>['items'];
 
-  rowProps?: FormGroupProps['rowProps'];
+  rowProps?: FormGroupProps<Values, P>['rowProps'];
 
   /** 容器 */
-  container?: FormGroupProps['container'];
+  container?: FormGroupProps<Values, P>['container'];
   /** 容器属性 */
-  containerProps?: FormGroupProps['containerProps'];
+  containerProps?: FormGroupProps<Values, P>['containerProps'];
 
   constructor(
-    props: FormGroupProps,
-    getFormStore: () => FormStore<Values>,
+    props: FormGroupProps<Values, P>,
+    getFormStore: () => FormStore<Values, P>,
     getGroupStore: () => GroupStore<Values, P>,
   ) {
     super(getFormStore, getGroupStore);
@@ -49,10 +53,6 @@ export class GroupStore<Values = any, P = any> extends BaseStore implements Omit
 
   // 插件
   get containerPlugin() {
-    if (isString(this.container)) {
-      return this.getFormStore().plugins[this.container];
-    }
-
-    return null;
+    return parsePlugin(this.getFormStore().plugins, this.container);
   }
 }

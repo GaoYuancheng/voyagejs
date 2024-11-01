@@ -13,7 +13,10 @@ function Plugins() {
         console.log('values', values);
       }}
     >
-      <FormItem<any, DefaultComponentPluginsType> name={'a1'} label="a1" component="inputnumber" componentProps={{}} />
+      <FormItem<any, DefaultComponentPluginsType> name={'a1'} label="a1" component="switch" componentProps={{
+        checkedChildren: 'aa',
+        unCheckedChildren: 'aa',
+      }} />
       <FormItem<any, DefaultComponentPluginsType>
         name={'a2'}
         label="a2"

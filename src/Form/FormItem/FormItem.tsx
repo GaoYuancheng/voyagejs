@@ -74,8 +74,7 @@ export const FormItem = observer(
     }, []);
 
     useDeepCompareEffect(() => {
-      console.log('属性更新', props.name);
-      field.updateProps(props);
+      field.updateProps(props as FormItemProps<any>);
     }, [props]);
 
     if (field.mode === FieldMode.NODE) {

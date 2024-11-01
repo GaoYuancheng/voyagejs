@@ -3,8 +3,8 @@ import React from 'react';
 export type PluginsType = {
   [key: string]: {
     component: React.ComponentType<any>;
-    defaultComponentProps: any;
-    defaultFormItemProps?: any;
+    defaultComponentProps: unknown;
+    defaultFormItemProps?: unknown;
   };
 };
 
@@ -19,11 +19,3 @@ export type PluginType<P extends PluginsType = PluginsType> = {
     componentProps: PluginPropsType<P, CN extends string ? CN : never>;
   };
 }[keyof P];
-
-// const a: PluginType<DefaultComponentPluginsType> = {
-//   component: 'input',
-//   componentProps: {
-//     allowClear: true,
-//     placeholder: 'a'
-//   },
-// };

@@ -1,30 +1,31 @@
 import { computed, makeObservable, observable } from 'mobx';
+import type { PluginsType } from '../../interfaces';
 import { FormStore } from '../Form';
 import { GroupStore } from '../FormGroup/store';
 import { BaseProps } from './interface';
 
-export class BaseStore<Values = any> implements BaseProps {
-  commonProps: BaseProps = {};
+export class BaseStore<Values = any, P extends PluginsType = PluginsType> implements BaseProps<Values> {
+  commonProps: BaseProps<Values> = {};
 
   /** 获取form */
-  getFormStore: () => FormStore<Values>;
+  getFormStore: () => FormStore<Values, P>;
   /** 获取group */
-  getGroupStore: () => GroupStore<Values>;
+  getGroupStore: () => GroupStore<Values, P>;
 
-  constructor(getFormStore: () => FormStore<Values>, getGroupStore: () => GroupStore<Values>) {
+  constructor(getFormStore: () => FormStore<Values, P>, getGroupStore: () => GroupStore<Values, P>) {
     this.getFormStore = getFormStore;
     this.getGroupStore = getGroupStore;
   }
 
-  get _parent(): BaseProps {
+  get _parent(): BaseProps<Values> {
     return this.getGroupStore() ?? this.getFormStore() ?? {};
   }
 
-  private getVal<K extends keyof BaseProps>(key: K) {
+  private getVal<K extends keyof BaseProps<Values>>(key: K): BaseProps<Values>[K] {
     return this.commonProps[key] ?? this._parent[key];
   }
 
-  private setVal<K extends keyof BaseProps>(key: K, val: BaseProps[K]) {
+  private setVal<K extends keyof BaseProps<Values>>(key: K, val: BaseProps<Values>[K]) {
     this.commonProps[key] = val;
   }
 

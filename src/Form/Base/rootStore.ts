@@ -22,26 +22,26 @@ export const commonKeys = [
   'remoteOptionsDebounceProps',
 ] as const;
 
-export class BaseRootStore implements BaseProps {
-  id: BaseProps['id'];
-  className?: BaseProps['className'];
-  style?: BaseProps['style'];
+export class BaseRootStore<Values = any> implements BaseProps<Values> {
+  id: BaseProps<Values>['id'];
+  className?: BaseProps<Values>['className'];
+  style?: BaseProps<Values>['style'];
 
   // ===== 状态属性 =====
-  bordered?: BaseProps['bordered'];
-  hidden?: BaseProps['hidden'];
-  colon?: BaseProps['colon'];
-  mode?: BaseProps['mode'];
-  colProps?: BaseProps['colProps'];
-  span?: BaseProps['span'] = 24;
-  labelAlign?: BaseProps['labelAlign'];
-  labelCol?: BaseProps['labelCol'];
-  wrapperCol?: BaseProps['wrapperCol'];
-  messageVariables?: BaseProps['messageVariables'];
-  validateFirst?: BaseProps['validateFirst'];
-  validateDebounce?: BaseProps['validateDebounce'];
-  validateTrigger?: BaseProps['validateTrigger'];
-  remoteOptionsDebounceProps?: BaseProps['remoteOptionsDebounceProps'];
+  bordered?: BaseProps<Values>['bordered'];
+  hidden?: BaseProps<Values>['hidden'];
+  colon?: BaseProps<Values>['colon'];
+  mode?: BaseProps<Values>['mode'];
+  colProps?: BaseProps<Values>['colProps'];
+  span?: BaseProps<Values>['span'] = 24;
+  labelAlign?: BaseProps<Values>['labelAlign'];
+  labelCol?: BaseProps<Values>['labelCol'];
+  wrapperCol?: BaseProps<Values>['wrapperCol'];
+  messageVariables?: BaseProps<Values>['messageVariables'];
+  validateFirst?: BaseProps<Values>['validateFirst'];
+  validateDebounce?: BaseProps<Values>['validateDebounce'];
+  validateTrigger?: BaseProps<Values>['validateTrigger'];
+  remoteOptionsDebounceProps?: BaseProps<Values>['remoteOptionsDebounceProps'];
 
   makeObservable() {
     makeObservable(this, {
