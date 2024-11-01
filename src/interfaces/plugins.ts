@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type PluginsType = {
+export type PluginType = {
   [key: string]: {
     component: React.ComponentType<any>;
     defaultComponentProps: unknown;
@@ -8,14 +8,21 @@ export type PluginsType = {
   };
 };
 
+export type PluginsType = {
+  container: PluginType;
+  field: PluginType;
+  action: PluginType;
+};
+
 export type PluginPropsType<
   P extends PluginsType,
-  CN extends keyof PluginsType,
-> = P[CN]['component'] extends React.ComponentType<infer E> ? E : never;
+  T extends keyof PluginsType,
+  CN extends keyof PluginsType[T],
+> = P[T][CN]['component'] extends React.ComponentType<infer E> ? E : never;
 
-export type PluginType<P extends PluginsType = PluginsType> = {
-  [CN in keyof P]: {
-    component: CN;
-    componentProps: PluginPropsType<P, CN extends string ? CN : never>;
-  };
-}[keyof P];
+// export type PluginType<P extends PluginsType = PluginsType> = {
+//   [CN in keyof P]: {
+//     component: CN;
+//     componentProps: PluginPropsType<P, CN extends string ? CN : never>;
+//   };
+// }[keyof P];

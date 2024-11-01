@@ -1,18 +1,12 @@
 import type { NamePath } from 'antd/es/form/interface';
-import type { RowProps } from 'antd/lib/row';
-import type { PluginsType } from '../../interfaces';
+import type { RowProps } from 'antd/es/grid';
+import React from 'react';
+import type { PluginPropsType, PluginsType } from '../../interfaces';
 import type { BaseProps } from '../Base';
 import type { FormItemProps } from '../FormItem';
 
-export interface FormGroupProps<Values = any, P extends PluginsType = any, PN extends keyof P = keyof P>
-  extends Pick<FormItemProps<Values, P>, keyof BaseProps | 'reactions'> {
-  /** 唯一标识 */
+type FormGroupPropsType<Values = any, P extends PluginsType = PluginsType> = {
   name?: NamePath;
-
-  /** 容器 */
-  container?: React.ReactNode | PN;
-  /** 容器属性 */
-  containerProps?: P[PN]['defaultComponentProps'];
 
   rowProps?: RowProps;
 
@@ -20,4 +14,22 @@ export interface FormGroupProps<Values = any, P extends PluginsType = any, PN ex
   items?: (FormItemProps<Values, P> | FormGroupProps<Values, P>)[];
 
   children?: React.ReactNode;
-}
+};
+
+export type FormGroupProps<Values = any, P extends PluginsType = PluginsType> = Pick<
+  FormItemProps<Values, P>,
+  keyof BaseProps<Values> | 'reactions'
+> &
+  (
+    | (FormGroupPropsType<Values, P> & {
+        container: React.ReactElement;
+        containerProps?: never;
+      })
+    | ({
+        [CN in keyof P['container']]: {
+          container?: CN;
+          containerProps?: PluginPropsType<P, 'container', CN extends string ? CN : never>;
+        };
+      }[keyof P['container']] &
+        FormGroupPropsType<Values, P>)
+  );

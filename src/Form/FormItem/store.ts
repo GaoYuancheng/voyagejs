@@ -9,7 +9,7 @@ import type { FormStore } from '../Form';
 import type { GroupStore } from '../FormGroup/store';
 import type { FormItemProps, ReactionType } from './interface';
 
-export class FieldStore<Values = any, P extends PluginsType = any>
+export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   extends BaseStore<Values>
   implements Omit<FormItemProps, 'validateStatus'>, BaseProps<Values>
 {
@@ -33,6 +33,7 @@ export class FieldStore<Values = any, P extends PluginsType = any>
   /** 获取formstore */
   getFormStore: () => FormStore<Values, P>;
   /** 获取groupstore */
+  // @ts-expect-error
   getGroupStore: () => GroupStore<Values, P>;
 
   // ===== 内置 =====
@@ -90,6 +91,7 @@ export class FieldStore<Values = any, P extends PluginsType = any>
     getGroupStore: () => GroupStore<Values, P>,
     forceUpdate: () => void,
   ) {
+    // @ts-expect-error
     super(getFormStore, getGroupStore);
     // this.mode = props.mode || FieldMode.EDIT;
     this.form = form;
@@ -234,6 +236,6 @@ export class FieldStore<Values = any, P extends PluginsType = any>
   componentProps?: any;
 
   get plugin() {
-    return parsePlugin(this.getFormStore().plugins, this.component);
+    return parsePlugin(this.getFormStore().plugins.field, this.component);
   }
 }

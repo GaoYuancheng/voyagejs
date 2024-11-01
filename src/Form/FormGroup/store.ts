@@ -5,9 +5,15 @@ import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';
 import type { FormGroupProps } from './interface';
 
-export class GroupStore<Values = any, P extends PluginsType = any>
+interface GroupProps<Values = any, P extends PluginsType = PluginsType> {
+  container: FormGroupProps<Values, P>['container'];
+  containerProps: FormGroupProps<Values, P>['containerProps'];
+}
+
+export class GroupStore<Values = any, P extends PluginsType = PluginsType>
   extends BaseStore<Values, P>
-  implements Omit<FormGroupProps, 'form'>, BaseProps
+  // Omit<FormGroupProps<Values, P>, 'form'>,
+  implements BaseProps<Values>
 {
   name?: FormGroupProps<Values, P>['name'];
 
@@ -53,6 +59,6 @@ export class GroupStore<Values = any, P extends PluginsType = any>
 
   // 插件
   get containerPlugin() {
-    return parsePlugin(this.getFormStore().plugins, this.container);
+    return parsePlugin(this.getFormStore().plugins.container, this.container);
   }
 }

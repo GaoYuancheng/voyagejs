@@ -1,13 +1,13 @@
 import { sleep } from 'radash';
 import React from 'react';
-import { Form, useForm } from 'voyagejs';
+import { DEFAULT_PLUGINS, Form, useForm } from 'voyagejs';
 
 function RemoteValues() {
   const [form] = useForm();
 
   return (
     <div data-testid="container">
-      <Form
+      <Form<any, typeof DEFAULT_PLUGINS>
         form={form}
         onValuesChange={(_, values) => {
           console.log('values', values);
@@ -28,7 +28,7 @@ function RemoteValues() {
             label: 'a',
             component: 'input',
             componentProps: {
-              placeholder: '请输入A',
+              allowClear: true,
             },
           },
           {

@@ -4,7 +4,7 @@ import type { PluginsType } from '../../interfaces';
 
 export const FormContext = createContext<FormStore<any, any>>(null as unknown as FormStore<any, any>);
 
-export const useFormContext = <Values = any, P extends PluginsType = any>() => {
+export const useFormContext = <Values = any, P extends PluginsType = PluginsType>() => {
   return useContext<FormStore<Values, P>>(FormContext);
 };
 

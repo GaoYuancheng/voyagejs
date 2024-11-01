@@ -13,7 +13,7 @@ const { useForm: useAForm, ErrorList, Provider } = AForm;
 
 export { ErrorList, Provider, useAForm };
 
-export const Form = observer(<Values, P extends PluginsType = any>(props: PropsWithChildren<FormProps<Values, P>>) => {
+export const Form = observer(<Values, P extends PluginsType = PluginsType>(props: PropsWithChildren<FormProps<Values, P>>) => {
   const { children, form: formStore, onValuesChange, spinProps, items } = props;
 
   const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps']);

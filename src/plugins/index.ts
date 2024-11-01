@@ -3,9 +3,12 @@ export * from './container';
 export * from './form';
 export * from './utils';
 
-import { DEFAULT_CONTAINER_PLUGINS, DefaultContainerPluginsType } from './container';
+import { DEFAULT_CONTAINER_PLUGINS } from './container';
 import { DEFAULT_COMPONENT_PLUGINS, DefaultComponentPluginsType } from './form';
 
-export const DEFAULT_PLUGINS = Object.assign({}, DEFAULT_COMPONENT_PLUGINS, DEFAULT_CONTAINER_PLUGINS);
-
-export type DefaultPluginsType = DefaultComponentPluginsType & DefaultContainerPluginsType;
+export const DEFAULT_PLUGINS = {
+  container: DEFAULT_CONTAINER_PLUGINS,
+  // TODO: 类型推断错误
+  field: DEFAULT_COMPONENT_PLUGINS as DefaultComponentPluginsType,
+  action: {},
+};

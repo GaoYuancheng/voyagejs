@@ -1,5 +1,4 @@
 import { Cascader, Checkbox, Input, InputNumber, Radio, Select, TreeSelect } from 'antd';
-import type { PluginType } from '../../interfaces';
 import { DatePicker } from './DatePicker';
 import { OSwitch as Switch } from './OSwitch';
 import { RangePicker } from './RangePicker';
@@ -80,11 +79,3 @@ export const DEFAULT_COMPONENT_PLUGINS = {
 };
 
 export type DefaultComponentPluginsType = typeof DEFAULT_COMPONENT_PLUGINS;
-
-const a: PluginType<DefaultComponentPluginsType> = {
-  component: 'input',
-  componentProps: {
-    allowClear: true,
-    placeholder: 'a',
-  },
-};

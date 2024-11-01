@@ -16,7 +16,7 @@ import { FieldStore } from './store';
 const { Item, useFormInstance } = Form;
 
 export const FormItem = observer(
-  <Values, P extends PluginsType = any>(props: PropsWithChildren<FormItemProps<Values, P>>) => {
+  <Values, P extends PluginsType = PluginsType>(props: PropsWithChildren<FormItemProps<Values, P>>) => {
     const { name, children } = props;
 
     const restProps = omit(props, [
@@ -44,6 +44,7 @@ export const FormItem = observer(
     const field = useMemo(() => {
       return formStore.createField(
         fieldName as string,
+        // @ts-expect-error
         new FieldStore<Values, P>(
           // @ts-expect-error
           { ...props, name: fieldName },

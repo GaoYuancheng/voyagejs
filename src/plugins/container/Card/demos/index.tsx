@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { sleep } from 'radash';
 import React, { Fragment } from 'react';
-import { Form, FormGroup, useForm } from 'voyagejs';
+import { DEFAULT_PLUGINS, Form, FormGroup, useForm } from 'voyagejs';
 
 function CardDemo() {
   const [form] = useForm();
@@ -23,7 +23,7 @@ function CardDemo() {
           };
         }}
       >
-        <FormGroup
+        <FormGroup<any, typeof DEFAULT_PLUGINS>
           container="card"
           containerProps={{
             title: '卡片面板',
@@ -33,6 +33,7 @@ function CardDemo() {
               name: 'a',
               label: 'a',
               component: 'input',
+              componentProps: {},
             },
           ]}
         />

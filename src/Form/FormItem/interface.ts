@@ -9,26 +9,13 @@ export type ReactionResultFunctionType<Key extends keyof FormItemProps> = (targe
 
 export type ReactionResultType<Key extends keyof FormItemProps> = ReactionResultFunctionType<Key> | string;
 
-// export interface FormItemProps<Values = any, P extends PluginsType = any>
-//   extends Omit<AFormItemProps<Values>, keyof BaseProps>,
-//     BaseProps {
-//   /** 数据源类型 */
-//   options?: any[];
-//   /** 数据源属性名 */
-//   optionsPropName?: string;
-//   /** 远程数据源 */
-//   remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
-//   /** 联动关系 */
-//   reactions?: ReactionType[];
-// }
-
 export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = Omit<
   AFormItemProps<Values>,
   keyof BaseProps
 > &
   BaseProps &
   {
-    [CN in keyof P]: {
+    [CN in keyof P['field']]: {
       /** 数据源类型 */
       options?: any[];
       /** 数据源属性名 */
@@ -40,9 +27,9 @@ export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = O
       /** 插件名称 */
       component?: CN;
       /** 插件属性 */
-      componentProps?: PluginPropsType<P, CN extends string ? CN : never>;
+      componentProps?: PluginPropsType<P, 'field', CN extends string ? CN : never>;
     };
-  }[keyof P];
+  }[keyof P['field']];
 
 export type ReactionType =
   | {

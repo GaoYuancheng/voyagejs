@@ -11,15 +11,16 @@ import { FormGroupContext, useFormGroupContext } from './context';
 import type { FormGroupProps } from './interface';
 import { GroupStore } from './store';
 
-export const FormGroup = observer(<Values, P extends PluginsType = any>(props: FormGroupProps<Values, P>) => {
+export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(props: FormGroupProps<Values, P>) => {
   const { name } = props;
 
-  const formStore = useFormContext();
-  const groupStore = useFormGroupContext();
+  const formStore = useFormContext<Values, P>();
+  const groupStore = useFormGroupContext<Values, P>();
 
   const group = useMemo(() => {
     return formStore!.createGroup(
       name,
+      // @ts-expect-error  GroupStore中container、containerProps 类型错误
       new GroupStore<Values, P>(
         props,
         () => formStore,

@@ -23,7 +23,7 @@ export type InnerDependencyType = {
   _source: NamePath;
 };
 
-export class FormStore<Values = any, P extends PluginsType = any>
+export class FormStore<Values = any, P extends PluginsType = PluginsType>
   extends BaseRootStore<Values>
   implements Omit<FormProps<Values, P>, 'form'>, BaseProps<Values>
 {
@@ -337,8 +337,8 @@ export class FormStore<Values = any, P extends PluginsType = any>
     pluginStore.registerPlugins(Object.assign({}, this.pluginStore, DEFAULT_PLUGINS));
   };
 
-  get plugins(): typeof this.pluginStore {
-    return pluginStore.getPlugins() as typeof this.pluginStore;
+  get plugins(): P {
+    return pluginStore.getPlugins() as P;
   }
 
   // ===== 获取属性 =====
