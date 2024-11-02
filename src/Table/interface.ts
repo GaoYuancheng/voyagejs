@@ -12,7 +12,7 @@ export type ExtraRequestParams = Record<string, unknown>;
 /**
  * 排序配置
  */
-export type SorterParams<RecordType extends Object = any> = SorterResult<RecordType> | SorterResult<RecordType>[];
+export type SorterParams<RecordType = any> = SorterResult<RecordType> | SorterResult<RecordType>[];
 
 /**
  * 过滤配置
@@ -33,13 +33,13 @@ export type Pagination = {
 
 export type BaseRequestParams = Pick<Pagination, 'current' | 'pageSize'>;
 
-export type RequestParams<RecordType extends Object = any> = BaseRequestParams &
+export type RequestParams<RecordType = any> = BaseRequestParams &
   ExtraRequestParams &
   FilterParams & {
     sorter?: SorterParams<RecordType>;
   };
 
-export type RequestResult<RecordType extends Object = any> = {
+export type RequestResult<RecordType = any> = {
   /** 数据源 **/
   data: RecordType[];
   /** 当前页 **/
@@ -50,7 +50,7 @@ export type RequestResult<RecordType extends Object = any> = {
   pageSize: number;
 };
 
-export interface TableInstance<RecordType extends Object = any> {
+export interface TableInstance<RecordType = any> {
   /** 刷新表格 */
   refresh: (extraRefreshParams?: Record<string, unknown>) => Promise<void> | undefined;
   /** 重置表格到初始状态 */
@@ -94,7 +94,7 @@ export interface ColumnType<RecordType> extends Omit<AColumnType<RecordType>, 'r
   tooltip?: string;
 }
 
-export interface TableProps<RecordType extends Object = any>
+export interface TableProps<RecordType = any>
   extends Omit<ATableProps<RecordType>, 'dataSource' | 'loading' | 'rowSelection' | 'columns'> {
   /** 远程数据源 */
   remoteDataSource?: (params: RequestParams) => Promise<RequestResult<RecordType>>;

@@ -6,6 +6,7 @@ export * from './utils';
 import { DEFAULT_CONTAINER_PLUGINS } from './container';
 import { DEFAULT_COMPONENT_PLUGINS, DefaultComponentPluginsType } from './form';
 
+// @ts-ignore
 export const DEFAULT_PLUGINS = {
   container: DEFAULT_CONTAINER_PLUGINS,
   // TODO: 类型推断错误

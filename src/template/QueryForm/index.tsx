@@ -103,7 +103,6 @@ export const QueryForm: <Values = any>(props: QueryFormProps<Values>) => React.R
           span={finalSpan}
           mode={!isOpen && index > colLen - 2 ? FieldMode.HIDDEN : FieldMode.EDIT}
         >
-          {/* @ts-expect-error 类型错误 */}
           {children}
         </FormItem>
       );

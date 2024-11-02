@@ -5,16 +5,14 @@ import { QueryForm, QueryFormProps } from '../QueryForm';
 
 const { useForm } = Form;
 
-export interface QueryTableProps<RecordType extends Object = any, Values = any>
+export interface QueryTableProps<RecordType = any, Values = any>
   extends Pick<QueryFormProps<Values>, 'items'>,
     Pick<TableProps<RecordType>, 'columns' | 'remoteDataSource'> {
   formProps?: Omit<QueryFormProps<Values>, 'form' | 'items'>;
   tableProps?: Omit<TableProps, 'columns' | 'remoteDataSource'>;
 }
 
-export const QueryTable = <RecordType extends Object = any, Values = any>(
-  props: QueryTableProps<RecordType, Values>,
-) => {
+export const QueryTable = <RecordType, Values = any>(props: QueryTableProps<RecordType, Values>) => {
   const [form] = useForm();
 
   const tableRef = useRef<TableRef>();
