@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import { toJS } from 'mobx';
 import React, { useEffect, useRef } from 'react';
-import { QueryFormInstance, QueryTable } from 'voyagejs';
+import { DEFAULT_PLUGINS, QueryFormInstance, QueryTable } from 'voyagejs';
 import { columns, remoteDataSource } from 'voyagejs/table/demos/config';
 
 const Demo = () => {
@@ -12,7 +12,7 @@ const Demo = () => {
   }, []);
 
   return (
-    <QueryTable
+    <QueryTable<any, any, typeof DEFAULT_PLUGINS>
       ref={ref}
       remoteDataSource={remoteDataSource}
       rowSelection
@@ -53,8 +53,11 @@ const Demo = () => {
       fields={[
         {
           name: 'name',
-          label: '名称',
+          label: '姓名',
           component: 'input',
+          componentProps: {
+            allowClear: true,
+          },
         },
         {
           name: 'age',

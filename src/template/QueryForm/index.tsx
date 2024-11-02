@@ -9,10 +9,7 @@ import './index.less';
 
 const { Item: FormItem } = Form;
 
-export interface QueryFormProps<Values = any, P extends PluginsType = PluginsType>
-  extends Omit<FormProps<Values, P>, 'fields'> {
-  /** 表单搜索字段配置，同FormItem */
-  items?: FormItemProps[];
+export interface QueryFormProps<Values = any, P extends PluginsType = PluginsType> extends FormProps<Values, P> {
   /** 表单实例 */
   form: FormStore<Values, P>;
   /** 显示字段长度，2/3/4 默认3 */
@@ -31,7 +28,9 @@ export interface QueryFormProps<Values = any, P extends PluginsType = PluginsTyp
   queryActionProps?: Omit<ButtonActionProps, 'onClick'>;
 }
 
-export const QueryForm: <Values = any>(props: QueryFormProps<Values>) => React.ReactElement = (props) => {
+export const QueryForm: <Values = any, P extends PluginsType = PluginsType>(
+  props: QueryFormProps<Values, P>,
+) => React.ReactElement = (props) => {
   const prefix = usePrefixCls('queryform');
 
   const {

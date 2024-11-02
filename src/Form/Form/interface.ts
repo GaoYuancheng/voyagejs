@@ -11,7 +11,7 @@ export interface FormProps<Values = any, P extends PluginsType = PluginsType>
   /** 表单实例 */
   form: FormStore<Values, P>;
   /** 表单项 */
-  items?: FormGroupProps['items'];
+  items?: FormGroupProps<Values, P>['items'];
   /** 远程表单值 */
   remoteValues?: () => Promise<Values>;
   /** Spin属性 */

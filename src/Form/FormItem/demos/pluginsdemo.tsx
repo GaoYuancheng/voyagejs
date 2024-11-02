@@ -1,23 +1,28 @@
 import { Divider } from 'antd';
 import React from 'react';
-import { DefaultComponentPluginsType, Form, FormGroup, FormItem, DEFAULT_PLUGINS as plugins, useForm } from 'voyagejs';
+import { DEFAULT_PLUGINS, Form, FormGroup, FormItem, DEFAULT_PLUGINS as plugins, useForm } from 'voyagejs';
 
 function Plugins() {
   const [form] = useForm({ plugins });
 
   return (
-    <Form<any, DefaultComponentPluginsType>
+    <Form<any, typeof DEFAULT_PLUGINS>
       form={form}
       labelCol={{ style: { width: 50 } }}
       onValuesChange={(_, values) => {
         console.log('values', values);
       }}
     >
-      <FormItem<any, DefaultComponentPluginsType> name={'a1'} label="a1" component="switch" componentProps={{
-        checkedChildren: 'aa',
-        unCheckedChildren: 'aa',
-      }} />
-      <FormItem<any, DefaultComponentPluginsType>
+      <FormItem<any, typeof DEFAULT_PLUGINS>
+        name={'a1'}
+        label="a1"
+        component="switch"
+        componentProps={{
+          checkedChildren: 'aa',
+          unCheckedChildren: 'aa',
+        }}
+      />
+      <FormItem<any, typeof DEFAULT_PLUGINS>
         name={'a2'}
         label="a2"
         component="input"
@@ -26,7 +31,7 @@ function Plugins() {
         }}
       />
 
-      <FormItem<any, DefaultComponentPluginsType>
+      <FormItem<any, typeof DEFAULT_PLUGINS>
         name={'b'}
         label="b"
         component="select"
@@ -41,7 +46,7 @@ function Plugins() {
       />
 
       <Divider />
-      <FormGroup<any, DefaultComponentPluginsType>
+      <FormGroup<any, typeof DEFAULT_PLUGINS>
         span={24}
         labelCol={{ style: { width: 60 } }}
         name="group1"

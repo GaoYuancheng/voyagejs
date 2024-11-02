@@ -26,87 +26,85 @@ export interface QueryFormInstance<RecordType = any, Values = any, P extends Plu
   form: FormStore<Values, P>;
 }
 
-export const QueryTable = forwardRef(
-  <RecordType, Values = any, P extends PluginsType = PluginsType>(
-    props: QueryTableProps<RecordType, Values, P>,
-    ref: React.Ref<QueryFormInstance<RecordType, Values, P>>,
-  ) => {
-    const [form] = useForm();
+const IQueryTable = <RecordType, Values = any, P extends PluginsType = PluginsType>(
+  props: QueryTableProps<RecordType, Values, P>,
+  ref: React.Ref<QueryFormInstance<RecordType, Values, P>>,
+) => {
+  const [form] = useForm();
 
-    const tableRef = useRef<TableInstance>();
+  const tableRef = useRef<TableInstance>();
 
-    const [, update] = useState({});
+  const [, update] = useState({});
 
-    const forceUpdate = useCallback(() => {
-      return update({});
-    }, []);
+  const forceUpdate = useCallback(() => {
+    return update({});
+  }, []);
 
-    useEffect(() => {
-      // QueryActions在没加载完成时，无法拿到table实例
-      forceUpdate();
-    }, []);
+  useEffect(() => {
+    // QueryActions在没加载完成时，无法拿到table实例
+    forceUpdate();
+  }, []);
 
-    const {
-      fields = [],
-      columns = [],
-      remoteDataSource,
-      formProps,
-      tableProps,
-      actions,
-      style,
-      className,
-      actionsProps,
-      rowSelection,
-      initialValues,
-    } = props;
-    const { onReset: onResetForm, onSearch: onSearchForm } = formProps || {};
+  const {
+    fields = [],
+    columns = [],
+    remoteDataSource,
+    formProps,
+    tableProps,
+    actions,
+    style,
+    className,
+    actionsProps,
+    rowSelection,
+    initialValues,
+  } = props;
+  const { onReset: onResetForm, onSearch: onSearchForm } = formProps || {};
 
-    const onSearch = async (values: Values) => {
-      const { table } = tableRef.current!;
-      if (table?.pagination) {
-        table.pagination.current = 1;
-      }
-      // @ts-expect-error
-      table.params = values;
-      onSearchForm?.(values);
-      await tableRef.current?.table.refresh(values);
+  const onSearch = async (values: Values) => {
+    const { table } = tableRef.current!;
+    if (table?.pagination) {
+      table.pagination.current = 1;
+    }
+    // @ts-expect-error
+    table.params = values;
+    onSearchForm?.(values);
+    await tableRef.current?.table.refresh(values);
+  };
+
+  const onReset = () => {
+    onResetForm?.();
+    tableRef.current?.table.reset();
+  };
+
+  useImperativeHandle(ref, () => {
+    return {
+      table: tableRef.current!.table,
+      modal: tableRef.current!.modal,
+      form: form,
     };
+  });
 
-    const onReset = () => {
-      onResetForm?.();
-      tableRef.current?.table.reset();
-    };
+  return (
+    <div style={style} className={className}>
+      <QueryForm<Values, P>
+        {...formProps}
+        initialValues={initialValues}
+        items={fields}
+        form={form}
+        onSearch={onSearch}
+        onReset={onReset}
+      />
+      <QueryActions<TableInstance> {...actionsProps} items={actions} getCtx={() => tableRef.current!} />
+      <Table<RecordType>
+        {...tableProps}
+        columns={columns}
+        remoteDataSource={remoteDataSource}
+        initialParams={initialValues}
+        ref={tableRef}
+        rowSelection={rowSelection}
+      />
+    </div>
+  );
+};
 
-    useImperativeHandle(ref, () => {
-      return {
-        table: tableRef.current!.table,
-        modal: tableRef.current!.modal,
-        form: form,
-      };
-    });
-
-    return (
-      <div style={style} className={className}>
-        <QueryForm<Values>
-          {...formProps}
-          // @ts-expect-error
-          initialValues={initialValues}
-          items={fields}
-          form={form}
-          onSearch={onSearch}
-          onReset={onReset}
-        />
-        <QueryActions<TableInstance> {...actionsProps} items={actions} getCtx={() => tableRef.current!} />
-        <Table
-          {...tableProps}
-          columns={columns}
-          remoteDataSource={remoteDataSource}
-          initialParams={initialValues}
-          // @ts-expect-error
-          ref={tableRef}
-          rowSelection={rowSelection}
-        />
-      </div>
-    );
-  },
-);
+export const QueryTable = forwardRef(IQueryTable) as typeof IQueryTable;
