@@ -4,7 +4,7 @@ import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
 import { isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
 
-export class TableStore<RecordType extends Object = any> implements TableProps<RecordType> {
+export class TableStore<RecordType = any> implements TableProps<RecordType> {
   loading = false;
 
   rowKey = 'id';
@@ -25,6 +25,8 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
 
   params = {};
 
+  initialParams?: TableProps<RecordType>['initialParams'];
+
   onChange?: TableProps<RecordType>['onChange'];
 
   remoteDataSource?: TableProps<RecordType>['remoteDataSource'];
@@ -33,6 +35,10 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
     Object.keys(props).forEach((key) => {
       // @ts-ignore
       this[key] = props[key];
+
+      if (key === 'initialParams') {
+        this.params = props[key];
+      }
     });
 
     this.makeObservable();
@@ -99,11 +105,14 @@ export class TableStore<RecordType extends Object = any> implements TableProps<R
       });
   }
 
+  // TODO: 初始排序、分页、筛选、搜索
   reset() {
     this.setInitialPagination({ pagination: this.initialPagination });
     this.filter = {};
     this.sorter = undefined;
-    this.params = {};
+    this.params = this.initialParams;
+    // TODO: 重置是否清空选中行？
+    this.selectedRows = [];
     this.refresh();
   }
 

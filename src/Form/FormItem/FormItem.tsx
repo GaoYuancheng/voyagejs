@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { omit } from 'radash';
 import React, { PropsWithChildren, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { toArray } from '../../utils';
 import { FieldMode, commonKeys } from '../Base';
 import { useFormContext } from '../Form/context';

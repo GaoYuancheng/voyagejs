@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { GroupStore } from './store';
 
 export const FormGroupContext = createContext<GroupStore<any, any>>(null as unknown as GroupStore<any, any>);

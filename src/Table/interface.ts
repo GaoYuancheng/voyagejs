@@ -1,5 +1,5 @@
 import type { ColumnType as AColumnType, TableProps as ATableProps } from 'antd/lib/table';
-import type { Key, SorterResult, TableRowSelection } from 'antd/lib/table/interface';
+import type { SorterResult, TableRowSelection } from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
 import type { ModalFormInstance } from '../form';
 
@@ -50,40 +50,40 @@ export type RequestResult<RecordType = any> = {
   pageSize: number;
 };
 
-export interface TableInstance<RecordType = any> {
-  /** 刷新表格 */
-  refresh: (extraRefreshParams?: Record<string, unknown>) => Promise<void> | undefined;
-  /** 重置表格到初始状态 */
-  reset: (initialValues?: Record<string, unknown>) => void;
-  /** 获取表格选中行数据 */
-  getSelectedRowKeys: () => Key[];
-  /** 设置表格选中行数据 */
-  // setSelectedRowKeys: (rows: Key[]) => void;
-  /** 获取表格选中行数据 */
-  getSelectedRows: () => RecordType[];
-  /** 设置表格选中行数据 */
-  setSelectedRows: (rows: RecordType[]) => void;
-  /** 获取数据源 */
-  getDataSource: () => RecordType[];
-  /** 设置数据源 */
-  setDataSource: (dataSource: RecordType[]) => void;
-  /** 获取分页配置 */
-  getPagination: () => Pagination;
-  /** 设置分页配置 */
-  setPagination: (pagination: Pagination) => void;
-  /** 获取表格loading状态 */
-  getLoading: () => boolean;
-  /** 设置表格loading状态 */
-  setLoading: (loading: boolean) => void;
-  /** 强制刷新表格 */
-  forceUpdate: () => void;
-}
+// export interface TableInstance<RecordType = any> {
+//   /** 刷新表格 */
+//   refresh: (extraRefreshParams?: Record<string, unknown>) => Promise<void> | undefined;
+//   /** 重置表格到初始状态 */
+//   reset: (initialValues?: Record<string, unknown>) => void;
+//   /** 获取表格选中行数据 */
+//   getSelectedRowKeys: () => Key[];
+//   /** 设置表格选中行数据 */
+//   // setSelectedRowKeys: (rows: Key[]) => void;
+//   /** 获取表格选中行数据 */
+//   getSelectedRows: () => RecordType[];
+//   /** 设置表格选中行数据 */
+//   setSelectedRows: (rows: RecordType[]) => void;
+//   /** 获取数据源 */
+//   getDataSource: () => RecordType[];
+//   /** 设置数据源 */
+//   setDataSource: (dataSource: RecordType[]) => void;
+//   /** 获取分页配置 */
+//   getPagination: () => Pagination;
+//   /** 设置分页配置 */
+//   setPagination: (pagination: Pagination) => void;
+//   /** 获取表格loading状态 */
+//   getLoading: () => boolean;
+//   /** 设置表格loading状态 */
+//   setLoading: (loading: boolean) => void;
+//   /** 强制刷新表格 */
+//   forceUpdate: () => void;
+// }
 
 export interface ColumnType<RecordType> extends Omit<AColumnType<RecordType>, 'render' | 'key'> {
   render?: (ctx: {
     value: RecordType;
     index: number;
-    table: TableInstance;
+    table: any;
     record: RecordType;
     modal: ModalFormInstance;
   }) => ReactElement;
@@ -106,4 +106,6 @@ export interface TableProps<RecordType = any>
   requestOnMount?: boolean;
   /** 列配置 */
   columns?: ColumnType<RecordType>[];
+  /** 初始化请求参数 */
+  initialParams?: any;
 }

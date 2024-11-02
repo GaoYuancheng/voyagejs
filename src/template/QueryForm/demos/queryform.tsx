@@ -10,6 +10,7 @@ const Demo = () => {
   return (
     <QueryForm
       form={form}
+      initialValues={{ name: '张三', age: 18 }}
       onSearch={(values) => {
         return new Promise((resolve) => {
           setTimeout(() => {

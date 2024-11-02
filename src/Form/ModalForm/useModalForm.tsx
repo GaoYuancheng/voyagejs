@@ -1,7 +1,7 @@
 import type { ModalProps as AModalProps } from 'antd';
 import type { MouseEvent, ReactElement, ReactNode } from 'react';
 import React, { useRef } from 'react';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import type { FormOptionProps, FormProps, FormStore } from '../Form';
 import { Form } from '../Form';
 import type { ModalProps } from './useModal';

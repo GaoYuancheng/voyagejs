@@ -19,10 +19,3 @@ export type PluginPropsType<
   T extends keyof PluginsType,
   CN extends keyof PluginsType[T],
 > = P[T][CN]['component'] extends React.ComponentType<infer E> ? E : never;
-
-// export type PluginType<P extends PluginsType = PluginsType> = {
-//   [CN in keyof P]: {
-//     component: CN;
-//     componentProps: PluginPropsType<P, CN extends string ? CN : never>;
-//   };
-// }[keyof P];

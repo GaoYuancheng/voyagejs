@@ -1,7 +1,7 @@
 import type { NamePath } from 'antd/es/form/interface';
 import type { RowProps } from 'antd/es/grid';
 import React from 'react';
-import type { PluginPropsType, PluginsType } from '../../interfaces';
+import type { PluginPropsType, PluginsType } from '../../plugins';
 import type { BaseProps } from '../Base';
 import type { FormItemProps } from '../FormItem';
 

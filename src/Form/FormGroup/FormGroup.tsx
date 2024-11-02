@@ -2,7 +2,7 @@ import { Row } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, cloneElement, useEffect, useMemo } from 'react';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { FieldMode } from '../Base';
 import { useFormContext } from '../Form/context';
 import { FormItem } from '../FormItem';

@@ -1,20 +1,20 @@
 import { Col, Row } from 'antd';
-import type { FormProps } from 'antd/lib/form';
 import cls from 'classnames';
 import React, { useCallback, useState } from 'react';
 import { usePrefixCls } from '../../context';
-import { FieldMode, Form, FormStore, toCompareName, type FormItemProps } from '../../form';
-import { ButtonActions, ToggleOpenButton, type ButtonActionProps } from '../../plugins';
+import { FieldMode, Form, FormStore, toCompareName, type FormItemProps, type FormProps } from '../../form';
+import { ButtonActions, PluginsType, ToggleOpenButton, type ButtonActionProps } from '../../plugins';
 
 import './index.less';
 
 const { Item: FormItem } = Form;
 
-export interface QueryFormProps<Values = any> extends Omit<FormProps<Values>, 'fields'> {
+export interface QueryFormProps<Values = any, P extends PluginsType = PluginsType>
+  extends Omit<FormProps<Values, P>, 'fields'> {
   /** 表单搜索字段配置，同FormItem */
   items?: FormItemProps[];
   /** 表单实例 */
-  form: FormStore<Values>;
+  form: FormStore<Values, P>;
   /** 显示字段长度，2/3/4 默认3 */
   showFieldsLength?: number;
   /** 默认折叠，默认true */
@@ -44,6 +44,7 @@ export const QueryForm: <Values = any>(props: QueryFormProps<Values>) => React.R
     defaultCollapse = true,
     resetActionProps,
     queryActionProps,
+    initialValues,
     ...formProps
   } = props;
 
@@ -143,7 +144,7 @@ export const QueryForm: <Values = any>(props: QueryFormProps<Values>) => React.R
 
   return (
     <div className={prefix}>
-      <Form form={form} {...formProps}>
+      <Form form={form} {...formProps} initialValues={initialValues}>
         <Row gutter={24}>
           {renderFields(fields)}
           <div>{isSingleSearch && <ButtonActions actions={actions} />}</div>

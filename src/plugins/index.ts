@@ -3,6 +3,8 @@ export * from './container';
 export * from './form';
 export * from './utils';
 
+export * from './interfaces';
+
 import { DEFAULT_CONTAINER_PLUGINS } from './container';
 import { DEFAULT_COMPONENT_PLUGINS, DefaultComponentPluginsType } from './form';
 

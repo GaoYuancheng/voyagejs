@@ -1,4 +1,3 @@
-import { sleep } from 'radash';
 import React from 'react';
 import { DEFAULT_PLUGINS, Form, useForm } from 'voyagejs';
 
@@ -13,15 +12,7 @@ function RemoteValues() {
           console.log('values', values);
         }}
         spinProps={{ size: 'large' }}
-        remoteValues={async () => {
-          await sleep(2000);
-          return {
-            a: '1',
-            b: '2',
-            c: '3',
-            d: '4',
-          };
-        }}
+        initialValues={{ a: 1, b: 2, c: 3, d: 4 }}
         items={[
           {
             name: 'a',

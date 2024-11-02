@@ -1,5 +1,5 @@
 import { isString } from 'radash';
-import type { PluginType } from '../../interfaces';
+import type { PluginType } from '..';
 
 // 使用插件
 export const parsePlugin = (plugins: PluginType, pluginName?: any) => {

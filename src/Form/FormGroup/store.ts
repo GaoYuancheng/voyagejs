@@ -1,5 +1,5 @@
 import { computed, makeObservable, observable } from 'mobx';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { parsePlugin } from '../../plugins';
 import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';

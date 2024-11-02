@@ -1,11 +1,11 @@
 import { Button, Input, Space } from 'antd';
 import { toJS } from 'mobx';
 import React, { useRef } from 'react';
-import { Table, TableRef, type FormProps } from 'voyagejs';
+import { Table, TableInstance, type FormProps } from 'voyagejs';
 import { columns, remoteDataSource } from './config';
 
 const TableDemo = () => {
-  const ref = useRef<TableRef>(null);
+  const ref = useRef<TableInstance>(null);
 
   const items: FormProps['items'] = [
     {

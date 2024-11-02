@@ -1,6 +1,6 @@
 import type { SpinProps } from 'antd';
 import type { FormProps as AFormProps } from 'antd/lib/form';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import type { BaseProps, BaseRootStore } from '../Base';
 import { FormGroupProps } from '../FormGroup';
 import type { FormStore } from './store';

@@ -2,7 +2,7 @@ import type { FormInstance } from 'antd/lib/form';
 import type { NamePath } from 'antd/lib/form/interface';
 import { configure, makeObservable, observable, runInAction } from 'mobx';
 import { isEmpty, isEqual, isFunction, pick } from 'radash';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { DEFAULT_PLUGINS } from '../../plugins';
 import { pluginStore } from '../../utils';
 import { BaseProps, BaseRootStore } from '../Base';
@@ -351,7 +351,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       'component',
       'fields',
       // 'feedbackIcons',
-      'initialValues',
+      // 'initialValues',
       'labelAlign',
       'labelWrap',
       'labelCol',

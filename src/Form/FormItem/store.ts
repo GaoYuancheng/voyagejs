@@ -2,7 +2,7 @@ import type { FormInstance } from 'antd/lib/form';
 import type { FormItemProps as AFormItemProps } from 'antd/lib/form/FormItem';
 import type { NamePath } from 'antd/lib/form/interface';
 import { makeObservable, observable, runInAction } from 'mobx';
-import type { PluginsType } from '../../interfaces';
+import type { PluginsType } from '../../plugins';
 import { parsePlugin } from '../../plugins';
 import { BaseProps, BaseStore, FieldMode } from '../Base';
 import type { FormStore } from '../Form';

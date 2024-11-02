@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { PluginsType } from '../../interfaces';
+import { PluginsType } from '../../plugins';
 import type { FormOptionProps } from './interface';
 import { FormStore } from './store';
 
