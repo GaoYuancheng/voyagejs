@@ -4,7 +4,7 @@ import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
 import { isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
 
-export class TableStore<RecordType = any> implements TableProps<RecordType> {
+export class TableStore<RecordType extends object = any> implements TableProps<RecordType> {
   loading = false;
 
   rowKey = 'id';

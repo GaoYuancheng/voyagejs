@@ -54,6 +54,8 @@ export interface FilterDropdownProps<RecordType> extends React.PropsWithChildren
   table: TableStore<RecordType>;
   dataIndex: string;
   component: string;
+  componentProps?: Record<string, any>;
+  ctx?: any;
 }
 
 export const FilterDropdown = <RecordType,>(props: FilterDropdownProps<RecordType>) => {
@@ -69,11 +71,13 @@ export const FilterDropdown = <RecordType,>(props: FilterDropdownProps<RecordTyp
     dataIndex,
     children,
     component,
+    componentProps,
   } = props;
 
   const plugins = pluginStore.getPlugins()['field'];
 
   const { element } = parsePlugin(plugins, component, {
+    ...componentProps,
     onChange: (e) => setSelectedKeys(e.target.value ? [e.target.value] : []),
     value: selectedKeys[0],
   });

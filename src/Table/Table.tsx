@@ -14,34 +14,39 @@ export type TableInstance<RecordType = any, Values = any, P extends PluginsType 
   modal: ModalFormInstance;
 };
 
-export const Table = observer(
-  forwardRef((props: TableProps, ref: React.Ref<TableInstance>) => {
-    const table = useMemo(() => new TableStore(props), [props]);
+const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
+  props: TableProps<RecordType, P>,
+  ref: React.Ref<TableInstance<RecordType, P>>,
+) => {
+  // @ts-expect-error
+  const table = useMemo(() => new TableStore<RecordType>(props), [props]);
 
-    const [modalForm, modalCtx] = useModalForm();
+  const [modalForm, modalCtx] = useModalForm();
 
-    const { columns } = props;
+  const { columns } = props;
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        table,
-        modal: modalCtx,
-      }),
-      [table, modalCtx],
-    );
+  useImperativeHandle(
+    ref,
+    () => ({
+      table,
+      modal: modalCtx,
+    }),
+    [table, modalCtx],
+  );
 
-    return (
-      <Fragment>
-        {modalForm}
-        <ATable
-          rowKey={'id'}
-          bordered={false}
-          onChange={table.onTableChange}
-          {...toJS(table.tableProps)}
-          columns={renderColumns(columns!, { table, modal: modalCtx })}
-        />
-      </Fragment>
-    );
-  }),
-);
+  return (
+    <Fragment>
+      {modalForm}
+      <ATable<RecordType>
+        rowKey={'id'}
+        bordered={false}
+        onChange={table.onTableChange}
+        {...toJS(table.tableProps)}
+        // @ts-expect-error
+        columns={renderColumns<RecordType>(columns!, { table, modal: modalCtx })}
+      />
+    </Fragment>
+  );
+};
+
+export const Table = observer(forwardRef(ITable)) as typeof ITable;

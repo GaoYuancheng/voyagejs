@@ -2,6 +2,7 @@ import type { ColumnType as AColumnType, TableProps as ATableProps } from 'antd/
 import type { SorterResult, TableRowSelection } from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
 import type { ModalFormInstance } from '../form';
+import type { PluginPropsType, PluginsType } from '../plugins';
 
 /**
  * 额外的初始请求参数，注意：参数变化时，表格不会刷新
@@ -50,51 +51,26 @@ export type RequestResult<RecordType = any> = {
   pageSize: number;
 };
 
-// export interface TableInstance<RecordType = any> {
-//   /** 刷新表格 */
-//   refresh: (extraRefreshParams?: Record<string, unknown>) => Promise<void> | undefined;
-//   /** 重置表格到初始状态 */
-//   reset: (initialValues?: Record<string, unknown>) => void;
-//   /** 获取表格选中行数据 */
-//   getSelectedRowKeys: () => Key[];
-//   /** 设置表格选中行数据 */
-//   // setSelectedRowKeys: (rows: Key[]) => void;
-//   /** 获取表格选中行数据 */
-//   getSelectedRows: () => RecordType[];
-//   /** 设置表格选中行数据 */
-//   setSelectedRows: (rows: RecordType[]) => void;
-//   /** 获取数据源 */
-//   getDataSource: () => RecordType[];
-//   /** 设置数据源 */
-//   setDataSource: (dataSource: RecordType[]) => void;
-//   /** 获取分页配置 */
-//   getPagination: () => Pagination;
-//   /** 设置分页配置 */
-//   setPagination: (pagination: Pagination) => void;
-//   /** 获取表格loading状态 */
-//   getLoading: () => boolean;
-//   /** 设置表格loading状态 */
-//   setLoading: (loading: boolean) => void;
-//   /** 强制刷新表格 */
-//   forceUpdate: () => void;
-// }
+export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
+  [PN in keyof P['field']]: {
+    render?: (ctx: {
+      value: RecordType;
+      index: number;
+      table: any;
+      record: RecordType;
+      modal: ModalFormInstance<any, PluginsType>;
+    }) => ReactElement;
+    key?: string;
+    /** 列显示状态，为false时隐藏列 */
+    visible?: boolean;
+    children?: ColumnType<RecordType>[];
+    tooltip?: string;
+    filterField?: PN;
+    filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
+  } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
+}[keyof P['field']];
 
-export interface ColumnType<RecordType> extends Omit<AColumnType<RecordType>, 'render' | 'key'> {
-  render?: (ctx: {
-    value: RecordType;
-    index: number;
-    table: any;
-    record: RecordType;
-    modal: ModalFormInstance;
-  }) => ReactElement;
-  key?: string;
-  /** 列显示状态，为false时隐藏列 */
-  visible?: boolean;
-  children?: ColumnType<RecordType>[];
-  tooltip?: string;
-}
-
-export interface TableProps<RecordType = any>
+export interface TableProps<RecordType = any, P extends PluginsType = PluginsType>
   extends Omit<ATableProps<RecordType>, 'dataSource' | 'loading' | 'rowSelection' | 'columns'> {
   /** 远程数据源 */
   remoteDataSource?: (params: RequestParams) => Promise<RequestResult<RecordType>>;
@@ -105,7 +81,7 @@ export interface TableProps<RecordType = any>
   /** 初始是否发起一次请求，默认发起请求 */
   requestOnMount?: boolean;
   /** 列配置 */
-  columns?: ColumnType<RecordType>[];
+  columns?: ColumnType<RecordType, P>[];
   /** 初始化请求参数 */
   initialParams?: any;
 }

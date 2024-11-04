@@ -1,8 +1,8 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import React, { useRef } from 'react';
-import { Table, TableInstance, type FormProps } from 'voyagejs';
-import { FilterDropdown } from '../filterDropdown';
+import { DEFAULT_PLUGINS, Table, TableInstance, type FormProps } from 'voyagejs';
+import { FilterDropdown } from '../FilterDropdown';
 import { recipientName, remoteDataSource, status } from './config';
 
 const TableFilterDemo = () => {
@@ -23,19 +23,25 @@ const TableFilterDemo = () => {
 
   return (
     <div>
-      <Table
+      <Table<any, typeof DEFAULT_PLUGINS>
         columns={[
           {
             key: 'id',
             title: 'ID',
             sorter: true,
+            filterField: 'input',
+            filterFieldProps: {
+              allowClear: true,
+            },
           },
           {
             key: 'senderName',
             title: '发送人',
             tooltip: '提示',
             filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-            filterDropdown: (props) => <FilterDropdown {...props} table={{}} dataIndex="senderName" component="input" />,
+            filterDropdown: (props) => (
+              <FilterDropdown {...props} table={{}} dataIndex="senderName" component="input" />
+            ),
           },
           {
             key: 'recipientName',
