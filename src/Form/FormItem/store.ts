@@ -4,6 +4,7 @@ import type { NamePath } from 'antd/lib/form/interface';
 import { makeObservable, observable, runInAction } from 'mobx';
 import type { PluginsType } from '../../plugins';
 import { parsePlugin } from '../../plugins';
+import { filterUndefinedProps } from '../../utils';
 import { BaseProps, BaseStore, FieldMode } from '../Base';
 import type { FormStore } from '../Form';
 import type { GroupStore } from '../FormGroup/store';
@@ -192,16 +193,16 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       displayOptions.readOnly = true;
     }
 
-    return {
+    return filterUndefinedProps({
       disabled: this.mode === FieldMode.DISABLED,
       [this.optionsPropName]: this.options,
       ...displayOptions,
       loading: this.optionsLoading,
-    };
+    });
   }
 
   public get fieldProps(): AFormItemProps<Values> {
-    return {
+    return filterUndefinedProps({
       colon: this.colon,
       dependencies: this.dependencies,
       extra: this.extra,
@@ -227,7 +228,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       validateTrigger: this.validateTrigger,
       valuePropName: this.valuePropName,
       wrapperCol: this.wrapperCol,
-    };
+    });
   }
 
   // ===== 插件 =====

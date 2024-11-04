@@ -3,8 +3,9 @@ import { Col, Form } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { omit } from 'radash';
-import React, { PropsWithChildren, cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import type { PluginsType } from '../../plugins';
+import { parsePlugin } from '../../plugins';
 import { toArray } from '../../utils';
 import { FieldMode, commonKeys } from '../Base';
 import { useFormContext } from '../Form/context';
@@ -82,17 +83,14 @@ export const FormItem = observer(
       return null;
     }
 
-    const { defaultComponentProps, component: Com, defaultFormItemProps = {} } = field.plugin || {};
+    const { element: ele, defaultFormItemProps } = parsePlugin(formStore.plugins.field, field.component, {
+      ...toJS(field.componentProps),
+      ...toJS(field.childProps),
+    });
 
     const element = (
       <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldProps} name={name}>
-        {Com ? (
-          <Com {...defaultComponentProps} {...toJS(field.componentProps)} {...toJS(field.childProps)} />
-        ) : isValidElement(children) ? (
-          cloneElement(children, { ...toJS(field.childProps) })
-        ) : (
-          children
-        )}
+        {ele || children}
       </Item>
     );
 

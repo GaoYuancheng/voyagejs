@@ -1,11 +1,11 @@
 import { draw, random } from 'radash';
 import type { ColumnType, TableProps } from 'voyagejs';
 
-const status = ['dispatching', 'success', 'warning'];
+export const status = ['dispatching', 'success', 'warning'];
 
 const level = ['High', 'Medium', 'Low'];
 
-const recipientName = ['Lucy', 'Lily', 'Jack', 'Mocy'];
+export const recipientName = ['Lucy', 'Lily', 'Jack', 'Mocy'];
 
 const recipientTime = ['morning', 'afternoon', 'night'];
 

@@ -4,7 +4,7 @@ import { configure, makeObservable, observable, runInAction } from 'mobx';
 import { isEmpty, isEqual, isFunction, pick } from 'radash';
 import type { PluginsType } from '../../plugins';
 import { DEFAULT_PLUGINS } from '../../plugins';
-import { pluginStore } from '../../utils';
+import { filterUndefinedProps, pluginStore } from '../../utils';
 import { BaseProps, BaseRootStore } from '../Base';
 import type { GroupStore } from '../FormGroup/store';
 import type { FieldStore, ReactionResultFunctionType, ReactionResultType } from '../FormItem';
@@ -344,32 +344,34 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   // ===== 获取属性 =====
 
   get formProps() {
-    return pick(this, [
-      'autoComplete',
-      'colon',
-      'disabled',
-      'component',
-      'fields',
-      // 'feedbackIcons',
-      // 'initialValues',
-      'labelAlign',
-      'labelWrap',
-      'labelCol',
-      // 'layout',
-      'name',
-      'preserve',
-      'requiredMark',
-      'scrollToFirstError',
-      'size',
-      'validateMessages',
-      'validateTrigger',
-      'bordered',
-      'wrapperCol',
-      'onFieldsChange',
-      'onFinish',
-      'onFinishFailed',
-      // 'clearOnDestroy',
-    ]);
+    return filterUndefinedProps(
+      pick(this, [
+        'autoComplete',
+        'colon',
+        'disabled',
+        'component',
+        'fields',
+        // 'feedbackIcons',
+        // 'initialValues',
+        'labelAlign',
+        'labelWrap',
+        'labelCol',
+        // 'layout',
+        'name',
+        'preserve',
+        'requiredMark',
+        'scrollToFirstError',
+        'size',
+        'validateMessages',
+        'validateTrigger',
+        'bordered',
+        'wrapperCol',
+        'onFieldsChange',
+        'onFinish',
+        'onFinishFailed',
+        // 'clearOnDestroy',
+      ]),
+    );
   }
 
   get formInstance() {

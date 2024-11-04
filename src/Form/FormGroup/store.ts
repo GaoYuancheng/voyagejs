@@ -1,14 +1,9 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
+import { filterUndefinedProps } from 'voyagejs/utils';
 import type { PluginsType } from '../../plugins';
-import { parsePlugin } from '../../plugins';
 import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';
 import type { FormGroupProps } from './interface';
-
-interface GroupProps<Values = any, P extends PluginsType = PluginsType> {
-  container: FormGroupProps<Values, P>['container'];
-  containerProps: FormGroupProps<Values, P>['containerProps'];
-}
 
 export class GroupStore<Values = any, P extends PluginsType = PluginsType>
   extends BaseStore<Values, P>
@@ -47,18 +42,13 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
       items: observable.shallow,
       container: observable,
       containerProps: observable.deep,
-      containerPlugin: computed,
+      // containerPlugin: computed,
     });
   }
 
   get groupProps() {
-    return {
+    return filterUndefinedProps({
       items: this.items,
-    };
-  }
-
-  // 插件
-  get containerPlugin() {
-    return parsePlugin(this.getFormStore().plugins.container, this.container);
+    });
   }
 }

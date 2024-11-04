@@ -3,6 +3,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, cloneElement, useEffect, useMemo } from 'react';
 import type { PluginsType } from '../../plugins';
+import { parsePlugin } from '../../plugins';
 import { FieldMode } from '../Base';
 import { useFormContext } from '../Form/context';
 import { FormItem } from '../FormItem';
@@ -70,13 +71,12 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
     ? renderFields(group.groupProps.items as FormGroupProps<Values, P>['items'])
     : props.children;
 
+  const { element: ele } = parsePlugin(formStore.plugins.container, group.container, toJS(group.containerProps));
+
   // ===== 容器  ======
   let container;
-  if (group.containerPlugin) {
-    const { component: Com, defaultComponentProps } = group.containerPlugin;
-    container = <Com {...defaultComponentProps} {...toJS(group.containerProps)} />;
-  } else if (group.container) {
-    container = group.container;
+  if (group.container) {
+    container = ele;
   } else {
     container = <Row {...toJS(group.rowProps)}></Row>;
   }
