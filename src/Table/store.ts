@@ -21,10 +21,10 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   sorter?: SorterParams<RecordType>;
 
-  filter = {};
+  filter = {} as Record<string, any>;
 
   /** antd的filter中，setSelectedKeys使用是React.Keys[]格式的值，数组转回期望的值类型 */
-  filterConvert: any = {};
+  filterConvert: Record<string, (val?: any) => any> = {};
 
   params = {};
 

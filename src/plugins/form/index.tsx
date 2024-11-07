@@ -98,7 +98,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (e) => setSelectedKeys([e.target.value]),
+        onChange: (e: any) => setSelectedKeys([e.target.value]),
         value: selectedKeys[0],
       };
     },
