@@ -23,6 +23,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       valuePropName: 'checked',
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: CheckboxChangeEvent) => setSelectedKeys([e.target.checked as unknown as React.Key]),
@@ -34,6 +35,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Checkbox.Group,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: CheckboxValueType[]) => setSelectedKeys(checkedValues as unknown as React.Key[]),
@@ -45,6 +47,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: DatePicker,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
@@ -59,6 +62,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       placeholder: '请输入',
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys(e.target.value ? [e.target.value] : []),
@@ -72,6 +76,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       placeholder: '请输入',
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => {
@@ -90,6 +95,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Radio.Group,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e) => setSelectedKeys([e.target.value]),
@@ -101,6 +107,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: RangePicker,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys(checkedValues ? [checkedValues] : []),
@@ -112,6 +119,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Select as any,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys([e]),
@@ -131,6 +139,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: TimePicker,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
@@ -146,6 +155,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       optionsPropName: 'treeData',
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
+      if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys([e]),

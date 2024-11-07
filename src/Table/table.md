@@ -13,5 +13,8 @@ order: 1
 
 ## 示例
 
-<!-- <code src="./demos/index.tsx" ></code> -->
+<code src="./demos/index.tsx" ></code>
+
+## 表头筛选
+
 <code src="./demos/filter.tsx" ></code>

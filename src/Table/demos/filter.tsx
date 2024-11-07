@@ -74,14 +74,6 @@ const TableFilterDemo = () => {
             key: 'status',
             title: '状态',
             filters: status.map((i) => ({ text: i, value: i })),
-            // filterField: 'c',
-            // filterFieldProps: {
-            //   format: 'YYYY-MM-DD',
-            //   allowClear: true,
-            //   // mode: 'multiple',
-            //   placeholder: '请选择',
-            //   options: status,
-            // },
           },
           {
             key: 'operator',

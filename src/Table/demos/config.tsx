@@ -1,4 +1,6 @@
-import { draw, random } from 'radash';
+import React from 'react';
+import { notification } from 'antd';
+import { draw, isEmpty, random, shake } from 'radash';
 import type { ColumnType, TableProps } from 'voyagejs';
 
 export const status = ['dispatching', 'success', 'warning'];
@@ -42,6 +44,20 @@ export const columns: ColumnType<RecordType>[] = [
 
 export const remoteDataSource: TableProps['remoteDataSource'] = (params) => {
   console.log('params', params);
+
+  notification.open({
+    message: '请求参数',
+    description: (
+      <pre>
+        {JSON.stringify(
+          shake(params, (value) => isEmpty(value)),
+          null,
+          2,
+        )}
+      </pre>
+    ),
+  });
+
   const { current, pageSize } = params;
   return new Promise((resolve) => {
     setTimeout(() => {
