@@ -29,10 +29,17 @@ const TableFilterDemo = () => {
             key: 'id',
             title: 'ID',
             sorter: true,
-            filterField: 'input',
+            filterField: 'select',
             filterFieldProps: {
+              format: 'YYYY-MM-DD',
               allowClear: true,
+              // mode: 'multiple',
               placeholder: '请选择',
+              options: [
+                { label: '1', value: 1 },
+                { label: '2', value: 2 },
+                { label: '3', value: 3 },
+              ],
             },
           },
           {

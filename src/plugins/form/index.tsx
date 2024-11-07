@@ -37,7 +37,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: CheckboxValueType[]) => setSelectedKeys(checkedValues as unknown as React.Key[]),
-        value: selectedKeys[0],
+        value: selectedKeys,
       };
     },
   },
@@ -47,8 +47,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (checkedValues: any) => setSelectedKeys(checkedValues),
-        value: Array.isArray(selectedKeys) ? undefined : selectedKeys,
+        onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
+        value: selectedKeys[0],
       };
     },
   },
@@ -61,8 +61,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (e: any) => setSelectedKeys(e.target.value),
-        value: selectedKeys,
+        onChange: (e: any) => setSelectedKeys(e.target.value ? [e.target.value] : []),
+        value: selectedKeys[0],
       };
     },
   },
@@ -89,6 +89,13 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   'radio.group': {
     component: Radio.Group,
     defaultComponentProps: {},
+    defaultFilterProps: (ctx: FilterDropdownProps) => {
+      const { setSelectedKeys, selectedKeys } = ctx;
+      return {
+        onChange: (e) => setSelectedKeys([e.target.value]),
+        value: selectedKeys[0],
+      };
+    },
   },
   rangepicker: {
     component: RangePicker,
@@ -96,8 +103,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (checkedValues: any) => setSelectedKeys(checkedValues),
-        value: selectedKeys,
+        onChange: (checkedValues: any) => setSelectedKeys(checkedValues ? [checkedValues] : []),
+        value: selectedKeys[0],
       };
     },
   },
@@ -107,8 +114,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (e: any) => setSelectedKeys(Array.isArray(e) ? e : [e]),
-        value: selectedKeys,
+        onChange: (e: any) => setSelectedKeys([e]),
+        value: selectedKeys[0],
         style: { width: '100%' },
       };
     },
@@ -126,8 +133,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (checkedValues: any) => setSelectedKeys(checkedValues),
-        value: Array.isArray(selectedKeys) ? undefined : selectedKeys,
+        onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
+        value: selectedKeys[0],
       };
     },
   },
@@ -141,8 +148,8 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
-        onChange: (e: any) => setSelectedKeys(e),
-        value: selectedKeys,
+        onChange: (e: any) => setSelectedKeys([e]),
+        value: selectedKeys[0],
         style: { width: '100%' },
       };
     },

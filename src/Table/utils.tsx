@@ -23,27 +23,35 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         ? (value: any, record: RecordType, index: number) => column.render!({ value, record, index, ...getCtx() })
         : undefined;
 
+      const table = getCtx().table;
+
       //  ===== filterDropdown支持插件 =====
-      const getFilterDropDown = () => {
+      const getFilterDropDownProps = () => {
         if (isString(filterField)) {
-          return (props: FilterDropdownProps) => (
-            <FilterDropdown<RecordType, P>
-              {...props}
-              ctx={{ column }}
-              dataIndex={column.key!}
-              component={filterField}
-              componentProps={filterFieldProps}
-            />
-          );
+          table.filterConvert[column.key || column.dataIndex] = (value: any[]) => {
+            return Array.isArray(value) ? value[0] : value;
+          };
+
+          return {
+            filterDropdown: (props: FilterDropdownProps) => (
+              <FilterDropdown<RecordType, P>
+                {...props}
+                ctx={{ column }}
+                dataIndex={column.key!}
+                component={filterField}
+                componentProps={filterFieldProps}
+              />
+            ),
+          };
         }
 
-        return filterDropdown;
+        return { filterDropdown };
       };
 
       return {
         dataIndex: column.key,
         ...column,
-        filterDropdown: getFilterDropDown(),
+        ...getFilterDropDownProps(),
         children: children ? renderColumns(children, ctx, callback) : undefined,
         render: finalRender,
         ...(callback ? callback(column) : {}),

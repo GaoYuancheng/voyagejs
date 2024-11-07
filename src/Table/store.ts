@@ -23,6 +23,9 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   filter = {};
 
+  /** antd的filter中，setSelectedKeys使用是React.Keys[]格式的值，数组转回期望的值类型 */
+  filterConvert: any = {};
+
   params = {};
 
   initialParams?: TableProps<RecordType>['initialParams'];
@@ -118,7 +121,17 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   onTableChange: TableProps<RecordType>['onChange'] = (pagination, filters, sorter, ...args) => {
     this.pagination = pagination;
-    this.filter = filters;
+
+    const {} = this.filterConvert;
+
+    this.filter = Object.keys(filters).reduce((memo, cur) => {
+      if (this.filterConvert[cur]) {
+        memo[cur] = this.filterConvert[cur](filters[cur]);
+      } else {
+        memo[cur] = filters[cur];
+      }
+      return memo;
+    }, {} as any);
     this.sorter = sorter;
     this.onChange?.(pagination, filters, sorter, ...args);
     this.refresh();
