@@ -1,4 +1,5 @@
 import { Col, Row } from 'antd';
+import { NamePath } from 'antd/lib/form/interface';
 import cls from 'classnames';
 import React, { useCallback, useState } from 'react';
 import { usePrefixCls } from '../../context';
@@ -28,9 +29,7 @@ export interface QueryFormProps<Values = any, P extends PluginsType = PluginsTyp
   queryActionProps?: Omit<ButtonActionProps, 'onClick'>;
 }
 
-export const QueryForm: <Values = any, P extends PluginsType = PluginsType>(
-  props: QueryFormProps<Values, P>,
-) => React.ReactElement = (props) => {
+export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values, P>): React.ReactElement => {
   const prefix = usePrefixCls('queryform');
 
   const {
@@ -77,7 +76,7 @@ export const QueryForm: <Values = any, P extends PluginsType = PluginsType>(
   const finalSpan = isSingleSearch ? 8 : 24 / colLen;
 
   // ===== 字段渲染，超出隐藏 =====
-  const renderFields = (fields: FormItemProps[]) => {
+  const renderFields = (fields: FormItemProps<Values, P>[]) => {
     return fields.map((field, index) => {
       const finalLabel = isSingleSearch ? undefined : field.label;
       const fieldChild = field.children;
@@ -92,7 +91,7 @@ export const QueryForm: <Values = any, P extends PluginsType = PluginsType>(
 
       return (
         <FormItem
-          key={toCompareName(field.name)}
+          key={toCompareName(field.name as NamePath)}
           {...field}
           label={finalLabel}
           colProps={{

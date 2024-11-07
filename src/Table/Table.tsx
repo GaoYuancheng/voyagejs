@@ -43,7 +43,7 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
         onChange={table.onTableChange}
         {...toJS(table.tableProps)}
         // @ts-expect-error
-        columns={renderColumns<RecordType>(columns!, { table, modal: modalCtx })}
+        columns={renderColumns<RecordType, P>(columns!, () => ({ table, modal: modalCtx }))}
       />
     </Fragment>
   );

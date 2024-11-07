@@ -33,6 +33,5 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     finalValue = moment(value, valueFormat === true ? !!format : undefined);
   }
 
-  // @ts-expect-error
   return <ADatePicker picker="date" {...restProps} onChange={onFormatChange} value={finalValue as Moment} />;
 };

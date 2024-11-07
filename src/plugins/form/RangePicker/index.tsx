@@ -35,6 +35,5 @@ export const RangePicker: React.FC<RangePickerProps> = (props) => {
     finalValue = value.map((t) => moment(t, valueFormat === true ? !!format : undefined));
   }
 
-  // @ts-expect-error
   return <ARangePicker picker="date" {...restProps} onChange={onFormatChange} value={finalValue as [Moment, Moment]} />;
 };

@@ -12,5 +12,6 @@
       "voyagejs/*": ["src/*", "*"]
     }
   },
-  "include": [".dumirc.ts", "src/**/*"]
+  "include": [".dumirc.ts", "src/**/*"],
+  "exclude": ["node_modules"]
 }

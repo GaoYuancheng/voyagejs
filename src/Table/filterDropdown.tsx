@@ -1,20 +1,22 @@
 import { Divider } from 'antd';
 import type { FilterDropdownProps as AFilterDropdownProps } from 'antd/lib/table/interface';
 import React from 'react';
-import { ButtonActions, parsePlugin } from '../plugins';
+import { ButtonActions, parsePlugin, PluginsType } from '../plugins';
 import { pluginStore } from '../utils';
 import type { TableStore } from './store';
 
 export interface FilterDropdownProps<RecordType extends object = any>
   extends React.PropsWithChildren<AFilterDropdownProps> {
-  table: TableStore<RecordType>;
+  table?: TableStore<RecordType>;
   dataIndex: string;
   component: string;
   componentProps?: Record<string, any>;
   ctx?: any;
 }
 
-export const FilterDropdown = <RecordType extends object = any>(props: FilterDropdownProps<RecordType>) => {
+export const FilterDropdown = <RecordType extends object = any, P extends PluginsType = PluginsType>(
+  props: FilterDropdownProps<RecordType>,
+) => {
   const {
     clearFilters,
     close,
@@ -30,13 +32,9 @@ export const FilterDropdown = <RecordType extends object = any>(props: FilterDro
     componentProps,
   } = props;
 
-  const plugins = pluginStore.getPlugins()['field'];
+  const plugins = (pluginStore.getPlugins() as P)['field'];
 
-  const { element } = parsePlugin(plugins, component, {
-    ...componentProps,
-    onChange: (e) => setSelectedKeys(e.target.value ? [e.target.value] : []),
-    value: selectedKeys[0],
-  });
+  const { element } = parsePlugin(plugins, component, componentProps, props);
 
   return (
     <div>
