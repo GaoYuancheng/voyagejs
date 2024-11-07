@@ -4,7 +4,7 @@ import cls from 'classnames';
 import React, { useCallback, useState } from 'react';
 import { usePrefixCls } from '../../context';
 import { FieldMode, Form, FormStore, toCompareName, type FormItemProps, type FormProps } from '../../form';
-import { ButtonActions, PluginsType, ToggleOpenButton, type ButtonActionProps } from '../../plugins';
+import { ButtonActions, PluginsType, ToggleOpenButton, parsePlugin, type ButtonActionProps } from '../../plugins';
 
 import './index.less';
 
@@ -79,7 +79,7 @@ export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<V
   const renderFields = (fields: FormItemProps<Values, P>[]) => {
     return fields.map((field, index) => {
       const finalLabel = isSingleSearch ? undefined : field.label;
-      const fieldChild = field.children;
+      const fieldChild = field.children || parsePlugin(form.plugins['field'], field.component, field.componentProps);
       const children = isSingleSearch
         ? React.cloneElement(fieldChild as React.ReactElement, {
             allowClear: true,

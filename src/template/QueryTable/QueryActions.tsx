@@ -13,7 +13,7 @@ export interface QueryActionsProps<Ctx = any>
 }
 
 const isObjectItems = (items: QueryActionsProps<any>['items']): items is LayoutActions<any> => {
-  return !Array.isArray(items);
+  return !!items && !Array.isArray(items);
 };
 
 export const QueryActions = observer(<Ctx extends any = any>(props: QueryActionsProps<Ctx>) => {
