@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { Form, FormStore } from '../../form';
+import { Form, FormStore, type FormProps } from '../../form';
 import type { PluginsType } from '../../plugins';
 import { Table, TableInstance, type TableProps } from '../../table';
 import { type ActionsProps } from '../Actions';
@@ -11,14 +11,14 @@ const { useForm } = Form;
 export interface QueryTableProps<RecordType = any, Values = any, P extends PluginsType = PluginsType>
   extends Pick<TableProps<RecordType>, 'columns' | 'remoteDataSource'> {
   fields: QueryFormProps<Values, P>['items'];
-  formProps?: Omit<QueryFormProps<Values>, 'form' | 'items' | 'initialValues'>;
-  tableProps?: Omit<TableProps, 'columns' | 'remoteDataSource'>;
+  formProps?: Omit<QueryFormProps<Values, P>, 'form' | 'items' | 'initialValues'>;
+  tableProps?: Omit<TableProps<RecordType>, 'columns' | 'remoteDataSource'>;
   actions?: QueryActionsProps<TableInstance>['items'];
   style?: React.CSSProperties;
   className?: string;
   actionsProps?: Omit<ActionsProps<TableInstance>, 'items'>;
   rowSelection?: TableProps<RecordType>['rowSelection'];
-  initialValues?: Values;
+  initialValues?: FormProps<Values, P>['initialValues'];
 }
 
 export interface QueryFormInstance<RecordType = any, Values = any, P extends PluginsType = PluginsType>
@@ -26,13 +26,13 @@ export interface QueryFormInstance<RecordType = any, Values = any, P extends Plu
   form: FormStore<Values, P>;
 }
 
-const IQueryTable = <RecordType, Values = any, P extends PluginsType = PluginsType>(
+const IQueryTable = <RecordType extends object, Values = any, P extends PluginsType = PluginsType>(
   props: QueryTableProps<RecordType, Values, P>,
   ref: React.Ref<QueryFormInstance<RecordType, Values, P>>,
 ) => {
-  const [form] = useForm();
+  const [form] = useForm<Values, P>();
 
-  const tableRef = useRef<TableInstance>();
+  const tableRef = useRef<TableInstance<RecordType>>();
 
   const [, update] = useState({});
 
@@ -89,7 +89,7 @@ const IQueryTable = <RecordType, Values = any, P extends PluginsType = PluginsTy
       <QueryForm<Values, P>
         {...formProps}
         initialValues={initialValues}
-        items={fields}
+        items={fields as any}
         form={form}
         onSearch={onSearch}
         onReset={onReset}
@@ -100,6 +100,7 @@ const IQueryTable = <RecordType, Values = any, P extends PluginsType = PluginsTy
         columns={columns}
         remoteDataSource={remoteDataSource}
         initialParams={initialValues}
+        // @ts-expect-error
         ref={tableRef}
         rowSelection={rowSelection}
       />

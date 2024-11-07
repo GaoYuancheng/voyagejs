@@ -1,5 +1,4 @@
 import { makeObservable, observable } from 'mobx';
-import { filterUndefinedProps } from 'voyagejs/utils';
 import type { PluginsType } from '../../plugins';
 import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';
@@ -47,8 +46,8 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
   }
 
   get groupProps() {
-    return filterUndefinedProps({
+    return {
       items: this.items,
-    });
+    };
   }
 }

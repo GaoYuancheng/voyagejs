@@ -32,6 +32,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   /** 主动关联 */
   reactions?: ReactionType[];
   /** 获取formstore */
+  // @ts-expect-error
   getFormStore: () => FormStore<Values, P>;
   /** 获取groupstore */
   // @ts-expect-error

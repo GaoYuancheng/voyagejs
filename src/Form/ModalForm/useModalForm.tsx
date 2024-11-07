@@ -45,14 +45,14 @@ export interface ModalFormProps<Values = any, P extends PluginsType = PluginsTyp
   remoteValues?: FormProps<Values, P>['remoteValues'];
 }
 
-export const useModalForm = <P extends PluginsType = any>(
+export const useModalForm = <Values, P extends PluginsType = any>(
   props?: FormOptionProps<P>,
-): [ReactElement, ModalFormInstance] => {
+): [ReactElement, ModalFormInstance<Values, P>] => {
   const [modal, { open, close, isOpen }] = useModal();
 
   const [form] = useForm(props);
 
-  const propsRef = useRef<ModalFormProps>();
+  const propsRef = useRef<ModalFormProps<Values, P>>();
 
   const getModalFormContext = () => {
     return {
@@ -67,11 +67,11 @@ export const useModalForm = <P extends PluginsType = any>(
 
   return [
     // eslint-disable-next-line react/jsx-key
-    <Form remoteValues={remoteValues} {...formProps} form={form}>
+    <Form<Values, P> remoteValues={remoteValues} {...formProps} form={form}>
       {modal}
     </Form>,
     {
-      open: (params: ModalFormProps) => {
+      open: (params: ModalFormProps<Values, P>) => {
         propsRef.current = params;
 
         const { initialValues, onOk, onCancel, modalProps, formProps, items, children, ...restParams } = params;
