@@ -52,6 +52,10 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         dataIndex: column.key,
         ...column,
         ...getFilterDropDownProps(),
+        filteredValue:
+          table.filter[column.key] && table.filterConvert[column.key]
+            ? [table.filter[column.key]]
+            : table.filter[column.key] || null,
         children: children ? renderColumns(children, ctx, callback) : undefined,
         render: finalRender,
         ...(callback ? callback(column) : {}),

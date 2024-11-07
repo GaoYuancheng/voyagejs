@@ -2,7 +2,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import React, { useRef } from 'react';
 import { DEFAULT_PLUGINS, Table, TableInstance, type FormProps } from 'voyagejs';
-import { FilterDropdown } from '../FilterDropdown';
 import { recipientName, remoteDataSource, status } from './config';
 
 const TableFilterDemo = () => {
@@ -23,23 +22,25 @@ const TableFilterDemo = () => {
 
   return (
     <div>
+      <Button
+        danger
+        onClick={() => {
+          ref.current!.table.filter = {};
+          ref.current!.table.refresh();
+        }}
+      >
+        清空筛选
+      </Button>
       <Table<any, typeof DEFAULT_PLUGINS>
         columns={[
           {
             key: 'id',
             title: 'ID',
             sorter: true,
-            filterField: 'select',
+            filterField: 'input',
             filterFieldProps: {
-              format: 'YYYY-MM-DD',
               allowClear: true,
-              // mode: 'multiple',
-              placeholder: '请选择',
-              options: [
-                { label: '1', value: 1 },
-                { label: '2', value: 2 },
-                { label: '3', value: 3 },
-              ],
+              placeholder: '请输入',
             },
           },
           {
@@ -47,7 +48,12 @@ const TableFilterDemo = () => {
             title: '发送人',
             tooltip: '提示',
             filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-            filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" component="input" />,
+            // filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" component="input" />,
+            filterField: 'input',
+            filterFieldProps: {
+              allowClear: true,
+              placeholder: '请选择',
+            },
           },
           {
             key: 'recipientName',
@@ -55,9 +61,27 @@ const TableFilterDemo = () => {
             filters: recipientName.map((i) => ({ text: i, value: i })),
           },
           {
+            key: 'time',
+            title: '时间',
+            filterField: 'datepicker',
+            filterFieldProps: {
+              allowClear: true,
+              format: 'YYYY-MM-DD',
+              placeholder: '请选择',
+            },
+          },
+          {
             key: 'status',
             title: '状态',
             filters: status.map((i) => ({ text: i, value: i })),
+            // filterField: 'c',
+            // filterFieldProps: {
+            //   format: 'YYYY-MM-DD',
+            //   allowClear: true,
+            //   // mode: 'multiple',
+            //   placeholder: '请选择',
+            //   options: status,
+            // },
           },
           {
             key: 'operator',
