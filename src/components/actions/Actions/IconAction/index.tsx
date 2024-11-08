@@ -1,6 +1,6 @@
 import type { SpaceProps } from 'antd/lib/space';
 import React from 'react';
-import { Icon, type BaseIconProps } from '../../Icon';
+import { Icon, type BaseIconProps } from '../../../Icon';
 import type { BaseActionProps } from '../BaseAction';
 import { BaseAction, BaseActions } from '../BaseAction';
 

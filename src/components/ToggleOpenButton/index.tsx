@@ -2,7 +2,7 @@ import { DownOutlined } from '@ant-design/icons';
 import cls from 'classnames';
 import React from 'react';
 import { usePrefixCls } from '../../context';
-import { IconAction } from '../../plugins';
+import { IconAction } from '../../components';
 
 import './index.less';
 

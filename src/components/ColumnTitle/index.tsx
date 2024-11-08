@@ -2,7 +2,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import type { TooltipProps } from 'antd';
 import { Space } from 'antd';
 import React from 'react';
-import { IconAction } from '../../plugins';
+import { IconAction } from '../actions';
 
 export interface ColumnTitleProps {
   required?: boolean;

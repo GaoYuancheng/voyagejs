@@ -4,7 +4,7 @@ nav:
   order: 5
   second:
     title: ToggleOpenButton
-    order: 1
+    order: 5
 title: ToggleOpenButton
 order: 1
 ---

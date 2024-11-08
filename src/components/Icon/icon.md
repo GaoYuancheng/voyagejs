@@ -1,9 +1,10 @@
 ---
 nav:
-  title: 插件
-  order: 1
+  title: 组件
+  order: 5
   second:
-    title: 行为插件
+    title: 图标
+    order: 1
 title: Icon 基础图标
 order: 1
 ---

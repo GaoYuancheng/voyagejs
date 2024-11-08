@@ -1,7 +1,8 @@
 import { Divider } from 'antd';
 import type { FilterDropdownProps as AFilterDropdownProps } from 'antd/lib/table/interface';
 import React from 'react';
-import { ButtonActions, parsePlugin, PluginsType } from '../plugins';
+import { ButtonActions } from '../components';
+import { parsePlugin, PluginsType } from '../plugins';
 import { pluginStore } from '../utils';
 import type { TableStore } from './store';
 

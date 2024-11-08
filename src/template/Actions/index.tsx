@@ -7,8 +7,8 @@ import type {
   DropdownProps,
   IconActionProps,
   TextActionProps,
-} from '../../plugins';
-import { getAction } from '../../plugins';
+} from '../../components';
+import { getAction } from '../../components';
 
 type CommonAction<Type, Ctx> = {
   actionType?: Type;

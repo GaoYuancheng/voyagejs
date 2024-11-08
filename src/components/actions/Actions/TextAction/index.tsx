@@ -1,7 +1,7 @@
 import type { SpaceProps } from 'antd/lib/space';
 import React from 'react';
-import type { TextProps } from '../../Text';
-import { Text } from '../../Text';
+import type { TextProps } from '../../../Text';
+import { Text } from '../../../Text';
 import type { BaseActionProps } from '../BaseAction';
 import { BaseAction, BaseActions } from '../BaseAction';
 

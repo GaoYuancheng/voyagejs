@@ -4,7 +4,7 @@ nav:
   order: 5
   second:
     title: ColumnTitle
-    order: 1
+    order: 4
 title: ColumnTitle
 order: 1
 cols: 2

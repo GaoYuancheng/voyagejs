@@ -2,10 +2,10 @@ import { Col, Row } from 'antd';
 import { NamePath } from 'antd/lib/form/interface';
 import cls from 'classnames';
 import React, { useCallback, useState } from 'react';
-import { ToggleOpenButton } from '../../components';
+import { ButtonActions, ToggleOpenButton, type ButtonActionProps } from '../../components';
 import { usePrefixCls } from '../../context';
 import { FieldMode, Form, FormStore, toCompareName, type FormItemProps, type FormProps } from '../../form';
-import { ButtonActions, PluginsType, parsePlugin, type ButtonActionProps } from '../../plugins';
+import { PluginsType, parsePlugin } from '../../plugins';
 
 import './index.less';
 

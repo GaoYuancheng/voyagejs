@@ -4,7 +4,7 @@ nav:
   order: 5
   second:
     title: PageFooter
-    order: 1
+    order: 6
 title: PageFooter
 order: 1
 cols: 2

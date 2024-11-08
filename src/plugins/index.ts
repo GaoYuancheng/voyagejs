@@ -1,5 +1,3 @@
-/* tslint:disable */
-export * from './actions';
 export * from './container';
 export * from './form';
 export * from './utils';
