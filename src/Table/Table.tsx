@@ -9,9 +9,9 @@ import type { TableProps } from './interface';
 import { TableStore } from './store';
 import { renderColumns } from './utils';
 
-export type TableInstance<RecordType = any, Values = any, P extends PluginsType = PluginsType> = {
-  table: TableStore;
-  modal: ModalFormInstance;
+export type TableInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType> = {
+  table: TableStore<RecordType>;
+  modal: ModalFormInstance<Values, P>;
 };
 
 const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(

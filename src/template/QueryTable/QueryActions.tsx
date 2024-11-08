@@ -22,10 +22,14 @@ export const QueryActions = observer(<Ctx extends any = any>(props: QueryActions
   const forceUpdate = useUpdate();
 
   useEffect(() => {
+    if (!getCtx) return;
+    // @ts-expect-error
+    if (!getCtx().table) return;
+
     const disposer = reaction(
       // @ts-expect-error
       () => getCtx!().table.selectedRows,
-      (selectedRows) => {
+      () => {
         forceUpdate();
       },
     );

@@ -30,6 +30,18 @@ const Demo = () => {
             console.log('删除~');
           },
         },
+        {
+          actionType: 'dropdown',
+          children: <div>更多</div>,
+          items: [
+            {
+              children: '其他',
+              onClick: (e, ctx) => {
+                ctx.log(e, ctx);
+              },
+            },
+          ],
+        },
       ]}
     />
   );

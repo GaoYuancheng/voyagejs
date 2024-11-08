@@ -6,6 +6,8 @@ import { type ActionsProps } from '../Actions';
 import { QueryForm, type QueryFormProps } from '../QueryForm';
 import { QueryActions, type QueryActionsProps } from './QueryActions';
 
+export * from './QueryActions';
+
 const { useForm } = Form;
 
 export interface QueryTableProps<RecordType = any, Values = any, P extends PluginsType = PluginsType>
@@ -21,7 +23,7 @@ export interface QueryTableProps<RecordType = any, Values = any, P extends Plugi
   initialValues?: FormProps<Values, P>['initialValues'];
 }
 
-export interface QueryFormInstance<RecordType = any, Values = any, P extends PluginsType = PluginsType>
+export interface QueryFormInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
   extends TableInstance<RecordType> {
   form: FormStore<Values, P>;
 }
@@ -94,7 +96,7 @@ const IQueryTable = <RecordType extends object, Values = any, P extends PluginsT
         onSearch={onSearch}
         onReset={onReset}
       />
-      <QueryActions<TableInstance> {...actionsProps} items={actions} getCtx={() => tableRef.current!} />
+      <QueryActions<TableInstance<RecordType>> {...actionsProps} items={actions} getCtx={() => tableRef.current!} />
       <Table<RecordType>
         {...tableProps}
         columns={columns}

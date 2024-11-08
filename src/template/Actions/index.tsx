@@ -1,27 +1,35 @@
 import { Space } from 'antd';
 import { isFunction } from 'radash';
 import React, { Fragment } from 'react';
-import type { ButtonActionProps, IconActionProps, TextActionProps } from '../../plugins';
-import { ButtonAction, IconAction, TextAction } from '../../plugins';
+import type {
+  ButtonActionProps,
+  DropDownItemType,
+  DropdownProps,
+  IconActionProps,
+  TextActionProps,
+} from '../../plugins';
+import { getAction } from '../../plugins';
 
 type CommonAction<Type, Ctx> = {
   actionType?: Type;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>, ctx: Ctx) => void;
 };
 
-type FnActionType<Ctx> = (ctx?: Ctx) => React.ReactNode;
-
-const actionStore = {
-  button: ButtonAction,
-  text: TextAction,
-  icon: IconAction,
+type DropdownActionItemType<Ctx> = Omit<DropDownItemType, 'onClick'> & {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>, ctx: Ctx) => void;
 };
 
 export type ActionItem<Ctx> =
   | (CommonAction<never, Ctx> & Omit<ButtonActionProps, 'onClick'>)
   | (CommonAction<'button', Ctx> & Omit<ButtonActionProps, 'onClick'>)
   | (CommonAction<'text', Ctx> & Omit<TextActionProps, 'onClick'>)
-  | (CommonAction<'icon', Ctx> & Omit<IconActionProps, 'onClick'>);
+  | (CommonAction<'icon', Ctx> & Omit<IconActionProps, 'onClick'>)
+  | ({
+      actionType: 'dropdown';
+      items: DropdownActionItemType<Ctx>[];
+    } & Omit<DropdownProps, 'items' | 'onClick'>);
+
+type FnActionType<Ctx> = (ctx?: Ctx) => React.ReactNode;
 
 export interface ActionsProps<Ctx = any> extends React.HTMLAttributes<HTMLDivElement> {
   items?: ActionItem<Ctx>[] | FnActionType<Ctx>;
@@ -39,17 +47,26 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
 
     // ===== 内置类型 =====
     const element = (actions as ActionItem<Ctx>[]).map((action, idx) => {
-      const { actionType, onClick, ...rest } = action;
-      const Action = actionType ? actionStore[actionType] : ButtonAction;
+      // @ts-expect-error onClick items
+      const { actionType = 'button', onClick, items: actionItems, ...rest } = action;
+
+      let items = actionItems;
+      if (actionType === 'dropdown') {
+        items = (actionItems as DropdownActionItemType<Ctx>[]).map((item) => {
+          return {
+            ...item,
+            onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+              return item.onClick!(e, getCtx());
+            },
+          };
+        });
+      }
+
+      const Action = getAction(actionType);
+
       return (
         // @ts-expect-error
-        <Action
-          {...rest}
-          onClick={(e) => {
-            onClick?.(e, getCtx());
-          }}
-          key={idx}
-        />
+        <Action {...rest} onClick={(e) => onClick?.(e, getCtx())} key={idx} items={items} />
       );
     });
 
