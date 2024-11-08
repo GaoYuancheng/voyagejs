@@ -10,6 +10,7 @@ export interface QueryActionsProps<Ctx = any>
   extends Omit<ActionsProps<Ctx>, 'items'>,
     React.HTMLAttributes<HTMLDivElement> {
   items: LayoutActions<Ctx> | ActionsProps<Ctx>['items'];
+  actionProps?: Omit<ActionsProps<Ctx>, 'items'>;
 }
 
 const isObjectItems = (items: QueryActionsProps<any>['items']): items is LayoutActions<any> => {
@@ -17,7 +18,7 @@ const isObjectItems = (items: QueryActionsProps<any>['items']): items is LayoutA
 };
 
 export const QueryActions = observer(<Ctx extends any = any>(props: QueryActionsProps<Ctx>) => {
-  const { items, getCtx, style, ...rest } = props;
+  const { items, getCtx, style, actionProps, ...rest } = props;
 
   const forceUpdate = useUpdate();
 
@@ -44,7 +45,7 @@ export const QueryActions = observer(<Ctx extends any = any>(props: QueryActions
   const renderActionItem = (items: ActionsProps<Ctx>['items']) => {
     return (
       <div>
-        <Actions<Ctx> style={{ marginBottom: 16 }} getCtx={getCtx} items={items} />
+        <Actions<Ctx> {...actionProps} getCtx={getCtx} items={items} />
       </div>
     );
   };

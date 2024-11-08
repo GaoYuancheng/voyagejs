@@ -96,7 +96,12 @@ const IQueryTable = <RecordType extends object, Values = any, P extends PluginsT
         onSearch={onSearch}
         onReset={onReset}
       />
-      <QueryActions<TableInstance<RecordType>> {...actionsProps} items={actions} getCtx={() => tableRef.current!} />
+      <QueryActions<TableInstance<RecordType>>
+        actionProps={{ style: { marginBottom: 16 } }}
+        {...actionsProps}
+        items={actions}
+        getCtx={() => tableRef.current!}
+      />
       <Table<RecordType>
         {...tableProps}
         columns={columns}
