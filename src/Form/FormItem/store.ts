@@ -183,19 +183,24 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
     const displayOptions: {
       bordered: BaseProps<Values>['bordered'];
       readOnly: boolean;
+      disabled: boolean;
     } = {
       bordered: true,
       readOnly: false,
+      disabled: false,
     };
 
     if (this.mode === FieldMode.VIEW) {
-      // displayOptions.variant = 'borderless';
       displayOptions.bordered = false;
       displayOptions.readOnly = true;
+      displayOptions.disabled = true;
+    }
+
+    if (this.mode === FieldMode.DISABLED) {
+      displayOptions.disabled = true;
     }
 
     return filterUndefinedProps({
-      disabled: this.mode === FieldMode.DISABLED,
       [this.optionsPropName]: this.options,
       ...displayOptions,
       loading: this.optionsLoading,

@@ -117,7 +117,10 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   select: {
     component: Select as any,
-    defaultComponentProps: {},
+    defaultComponentProps: {
+      allowClear: true,
+      placeholder: '请选择',
+    },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;

@@ -1,11 +1,12 @@
 import { Space } from 'antd';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import type { ActionContainerProps } from '../../ActionContainer';
 import { ActionContainer } from '../../ActionContainer';
 
 export type BaseActionProps = ActionContainerProps;
 
-export const BaseAction = (props: React.PropsWithChildren<BaseActionProps>) => {
+export const BaseAction = observer((props: React.PropsWithChildren<BaseActionProps>) => {
   const { tooltip, confirm, modalConfirm, container, disabled, render, onClick, children, onStatusChange, ...rest } =
     props;
 
@@ -23,7 +24,7 @@ export const BaseAction = (props: React.PropsWithChildren<BaseActionProps>) => {
       {React.cloneElement(children, rest)}
     </ActionContainer>
   );
-};
+});
 
 export interface BaseActionsProps<T = any> {
   component: any;

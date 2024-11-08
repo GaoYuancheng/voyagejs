@@ -23,3 +23,7 @@ nav:
 > 使用`items`属性生成表单
 
 <code src="./demos/form.tsx" ></code>
+
+## 示例
+
+<code src="./demos/form2.tsx" ></code>
