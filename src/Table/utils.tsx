@@ -2,6 +2,7 @@ import type { ColumnType as AColumnType } from 'antd/lib/table';
 import type { FilterDropdownProps } from 'antd/lib/table/interface';
 import { isString } from 'radash';
 import React from 'react';
+import { ColumnTitle } from '../components';
 import type { ModalFormInstance } from '../form';
 import type { PluginsType } from '../plugins';
 import { toStringKey } from '../utils';
@@ -17,11 +18,11 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
   return columns
     .filter((column) => column.visible !== false)
     .map((column) => {
-      const { children, filterField, filterFieldProps, filterDropdown } = column;
+      const { children, filterField, filterFieldProps, filterDropdown, title, required, tooltip } = column;
 
       const dataIndex: string = toStringKey(column.dataIndex) || column.key!;
 
-      //  ===== 改写render =====
+      //  ===== 改写render参数类型，增加 table modal实例传参 =====
       const finalRender = column.render
         ? (value: any, record: RecordType, index: number) => column.render!({ value, record, index, ...getCtx() })
         : undefined;
@@ -51,10 +52,18 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         return { filterDropdown };
       };
 
+      // ===== 表头处理 =====
+      const realTitle = (
+        <ColumnTitle required={required} tooltip={tooltip}>
+          {title}
+        </ColumnTitle>
+      );
+
       return {
         dataIndex: column.key,
         ...column,
         ...getFilterDropDownProps(),
+        title: realTitle,
         filteredValue:
           table.filter[dataIndex] && table.filterConvert[dataIndex]
             ? [table.filter[dataIndex]]

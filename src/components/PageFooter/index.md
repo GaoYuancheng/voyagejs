@@ -3,7 +3,7 @@ nav:
   title: 组件
   order: 5
   second:
-    title: 组件
+    title: PageFooter
     order: 1
 title: PageFooter
 order: 1

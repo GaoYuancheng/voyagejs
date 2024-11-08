@@ -1,10 +1,12 @@
 ---
 nav:
-  title: 插件
+  title: 组件
+  order: 5
   second:
-    title: 行为插件
+    title: ToggleOpenButton
+    order: 1
 title: ToggleOpenButton
-order: 6
+order: 1
 ---
 
 # ToggleOpenButton

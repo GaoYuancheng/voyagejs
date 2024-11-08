@@ -1,3 +1,4 @@
+import { TooltipProps } from 'antd';
 import type { ColumnType as AColumnType, TableProps as ATableProps } from 'antd/lib/table';
 import type { SorterResult, TableRowSelection } from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
@@ -64,7 +65,8 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
     /** 列显示状态，为false时隐藏列 */
     visible?: boolean;
     children?: ColumnType<RecordType>[];
-    tooltip?: string;
+    tooltip?: string | TooltipProps;
+    required?: boolean;
     filterField?: PN;
     filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
   } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
