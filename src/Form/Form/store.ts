@@ -1,13 +1,14 @@
 import type { FormInstance } from 'antd/lib/form';
 import type { NamePath } from 'antd/lib/form/interface';
 import { configure, makeObservable, observable, runInAction } from 'mobx';
-import { isEmpty, isEqual, isFunction, pick } from 'radash';
+import { isEmpty, isEqual, isFunction, isString, pick } from 'radash';
 import type { PluginsType } from '../../plugins';
 import { DEFAULT_PLUGINS } from '../../plugins';
 import { filterUndefinedProps, pluginStore } from '../../utils';
 import { BaseProps, BaseRootStore } from '../Base';
 import type { GroupStore } from '../FormGroup/store';
 import type { FieldStore, ReactionResultFunctionType, ReactionResultType } from '../FormItem';
+import { ListStore } from '../FormList';
 import { isFieldChange, toCompareName } from '../utils';
 import type { FormOptionProps, FormProps } from './interface';
 
@@ -156,6 +157,11 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     this.addField(name, group as unknown as any);
   }
 
+  addList<NameType extends keyof Values>(name: NameType, list: ListStore<Values>) {
+    if (!name) return;
+    this.addField(name, list as unknown as any);
+  }
+
   removeGroup(name: NamePath) {
     if (!name) return;
     this.removeField(name);
@@ -258,12 +264,16 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
           const depValues = dependencies ? dependencies.map((depName) => this.getField(depName).value) : [];
           if (isFunction(result![key])) {
             resultValue = (result![key] as ReactionResultFunctionType<any>)(changeValue);
+          } else if (isString(result![key])) {
+            {
+              resultValue = new Function('$root', `with($root) { return (${result![key]}); }`)({
+                $self: changeValue,
+                $deps: depValues,
+                $values: this.values,
+              });
+            }
           } else {
-            resultValue = new Function('$root', `with($root) { return (${result![key]}); }`)({
-              $self: changeValue,
-              $deps: depValues,
-              $values: this.values,
-            });
+            resultValue = result![key];
           }
 
           // @ts-expect-error

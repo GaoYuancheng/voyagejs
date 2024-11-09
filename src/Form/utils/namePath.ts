@@ -23,5 +23,5 @@ export function toCompareName(name: any): any {
 }
 
 export function isFieldChange(value: any, fieldName: string) {
-  return keys(value)[0].startsWith(fieldName);
+  return keys(value)[0]?.startsWith(fieldName);
 }

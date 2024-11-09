@@ -45,7 +45,7 @@ function Demo() {
             },
           ]}
         />
-        <Form.List name="list">
+        <Form.List name="list" reactions={[{ dependencies: ['bdId'], result: { value: [] } }]}>
           {(fields, { add, remove }) => {
             const element = fields.map((item, idx) => {
               const { key, name } = item;
@@ -72,7 +72,7 @@ function Demo() {
                               { label: `标段3-${bdId}`, value: `3-${bdId}` },
                             ];
                           },
-                          reactions: [{ dependencies: ['bdId'], result: { value: undefined } }],
+                          // reactions: [{ dependencies: ['bdId'], result: { value: undefined } }],
                           componentProps: {
                             placeholder: '请选择啥啊？',
                           },
@@ -82,14 +82,14 @@ function Demo() {
                           span: 12,
                           style: { marginBottom: 0 },
                           component: 'input',
-                          reactions: [
-                            {
-                              dependencies: [['bdId']],
-                              result: {
-                                value: undefined,
-                              },
-                            },
-                          ],
+                          // reactions: [
+                          //   {
+                          //     dependencies: [['bdId']],
+                          //     result: {
+                          //       value: undefined,
+                          //     },
+                          //   },
+                          // ],
                         },
                       ]}
                     />
