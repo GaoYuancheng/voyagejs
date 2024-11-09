@@ -139,7 +139,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   }
 
   updateProps(props: FormItemProps<Values, P>) {
-    Object.keys(this._props).forEach((key) => {
+    Object.keys(props).forEach((key) => {
       // @ts-expect-error
       this[key] = props[key];
     });

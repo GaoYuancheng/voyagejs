@@ -81,10 +81,15 @@ function Demo() {
                           name: [name, 'postId'],
                           span: 12,
                           style: { marginBottom: 0 },
-                          component: 'select',
-                          remoteOptions: async () => {
-                            return [{ label: '123', value: 123 }];
-                          },
+                          component: 'input',
+                          reactions: [
+                            {
+                              dependencies: [['bdId']],
+                              result: {
+                                value: undefined,
+                              },
+                            },
+                          ],
                         },
                       ]}
                     />
@@ -129,6 +134,7 @@ function Demo() {
               children: '查看',
               onClick: () => {
                 console.log(form);
+                console.log(form.values);
               },
             },
             {

@@ -256,7 +256,6 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
           const changeValue = this.getField(changeName).value;
           const depValues = dependencies ? dependencies.map((depName) => this.getField(depName).value) : [];
-
           if (isFunction(result![key])) {
             resultValue = (result![key] as ReactionResultFunctionType<any>)(changeValue);
           } else {
@@ -318,7 +317,6 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
   set values(vals: Values) {
     if (isEmpty(vals)) {
-      console.log('isEmpty');
       this.form!.resetFields();
     } else {
       this.form!.setFieldsValue(vals!);
