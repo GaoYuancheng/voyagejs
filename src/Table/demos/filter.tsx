@@ -32,6 +32,9 @@ const TableFilterDemo = () => {
         清空筛选
       </Button>
       <Table<any, typeof DEFAULT_PLUGINS>
+        initialFilters={{
+          id: '123',
+        }}
         columns={[
           {
             key: 'id',

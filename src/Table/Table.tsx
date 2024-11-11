@@ -34,6 +34,13 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
     [table, modalCtx],
   );
 
+  const finalColumns = renderColumns<RecordType, P>(columns!, { initialFilters: props.initialFilters }, () => ({
+    table,
+    modal: modalCtx,
+  }));
+
+  console.log('finalColumns', finalColumns);
+
   return (
     <Fragment>
       {modalForm}
@@ -42,8 +49,7 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
         bordered={false}
         onChange={table.onTableChange}
         {...toJS(table.tableProps)}
-        // @ts-expect-error
-        columns={renderColumns<RecordType, P>(columns!, () => ({ table, modal: modalCtx }))}
+        columns={finalColumns}
       />
     </Fragment>
   );

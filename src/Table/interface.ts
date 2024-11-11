@@ -86,4 +86,6 @@ export interface TableProps<RecordType = any, P extends PluginsType = PluginsTyp
   columns?: ColumnType<RecordType, P>[];
   /** 初始化请求参数 */
   initialParams?: any;
+  /** 初始化筛选参数 */
+  initialFilters?: FilterParams;
 }

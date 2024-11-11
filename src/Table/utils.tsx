@@ -12,6 +12,7 @@ import type { TableStore } from './store';
 
 export function renderColumns<RecordType extends object = any, P extends PluginsType = PluginsType>(
   columns: ColumnType<RecordType>[],
+  props: any,
   getCtx: () => { table: TableStore; modal: ModalFormInstance },
   callback?: (columnData: any) => void,
 ): AColumnType<RecordType>[] {
@@ -19,6 +20,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
     .filter((column) => column.visible !== false)
     .map((column) => {
       const { children, filterField, filterFieldProps, filterDropdown, title, required, tooltip } = column;
+      const { initialFilters } = props;
 
       const dataIndex: string = toStringKey(column.dataIndex) || column.key!;
 
@@ -37,9 +39,9 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
           };
 
           return {
-            filterDropdown: (props: FilterDropdownProps) => (
+            filterDropdown: (p: FilterDropdownProps) => (
               <FilterDropdown<RecordType, P>
-                {...props}
+                {...p}
                 ctx={{ column }}
                 dataIndex={column.key!}
                 component={filterField}
@@ -59,16 +61,23 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         </ColumnTitle>
       );
 
+      const defaultFilteredValue = initialFilters?.[dataIndex] ? [initialFilters[dataIndex]] : [];
+
+      const filteredValue =
+        table.filter[dataIndex] && table.filterConvert[dataIndex]
+          ? [table.filter[dataIndex]]
+          : table.filter[dataIndex] || null;
+
       return {
         dataIndex: column.key,
+        defaultFilteredValue,
+        filterResetToDefaultFilteredValue: true,
         ...column,
         ...getFilterDropDownProps(),
         title: realTitle,
-        filteredValue:
-          table.filter[dataIndex] && table.filterConvert[dataIndex]
-            ? [table.filter[dataIndex]]
-            : table.filter[dataIndex] || null,
-        children: children ? renderColumns(children, getCtx, callback) : undefined,
+        // TODO: Columns should all contain `filteredValue` or not contain `filteredValue`
+        ...(filteredValue ? { filteredValue } : {}),
+        children: children ? renderColumns(children, props, getCtx, callback) : undefined,
         render: finalRender,
         ...(callback ? callback(column) : {}),
       };
