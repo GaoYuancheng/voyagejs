@@ -4,8 +4,8 @@ specifiers:
   '@ant-design/icons': ^4.0.0
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
-  '@types/react': ^16.9.9
-  '@types/react-dom': ^16.9.9
+  '@types/react': ^16.0.0
+  '@types/react-dom': ^16.0.0
   '@umijs/lint': ^4.0.0
   ahooks: ^3.8.1
   antd: ^4.24.15
@@ -15,6 +15,8 @@ specifiers:
   eslint: ^8.23.0
   father: ^4.1.0
   husky: ^8.0.1
+  less: ^4.2.0
+  less-loader: ^12.2.0
   lint-staged: ^13.0.3
   mobx: ^6.13.5
   mobx-react-lite: ^4.0.7
@@ -48,6 +50,8 @@ devDependencies:
   eslint: 8.57.1
   father: 4.5.1
   husky: 8.0.3
+  less: 4.2.0
+  less-loader: 12.2.0_less@4.2.0
   lint-staged: 13.3.0
   prettier: 2.8.8
   prettier-plugin-organize-imports: 3.2.4_prettier@2.8.8
@@ -7774,7 +7778,7 @@ packages:
     dev: true
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -8613,6 +8617,22 @@ packages:
 
   /leac/0.6.0:
     resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
+    dev: true
+
+  /less-loader/12.2.0_less@4.2.0:
+    resolution: {integrity: sha512-MYUxjSQSBUQmowc0l5nPieOYwMzGPUaTzB6inNW/bdPEG9zOL3eAAD1Qw5ZxSPk7we5dMojHwNODYMV1hq4EVg==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      '@rspack/core': 0.x || 1.x
+      less: ^3.5.0 || ^4.0.0
+      webpack: ^5.0.0
+    peerDependenciesMeta:
+      '@rspack/core':
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      less: 4.2.0
     dev: true
 
   /less-plugin-resolve/1.0.2:

@@ -1,0 +1,26 @@
+@import (reference) '../../../styles/index.less';
+
+@statistics-card-prefix-cls: ~'@{ant-prefix}-statistics-card-items';
+
+.@{statistics-card-prefix-cls} {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #fff;
+  padding: 20px;
+
+  &-item {
+    display: flex;
+  }
+
+
+  &-label {
+    text-align: right;
+    flex: 1;
+  }
+
+
+  &-right {
+    flex: 1;
+  }
+}
