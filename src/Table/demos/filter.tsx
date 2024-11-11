@@ -34,6 +34,7 @@ const TableFilterDemo = () => {
       <Table<any, typeof DEFAULT_PLUGINS>
         initialFilters={{
           id: '123',
+          recipientName: ['Lily'],
         }}
         columns={[
           {

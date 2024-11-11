@@ -34,12 +34,11 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
     [table, modalCtx],
   );
 
+  // @ts-expect-error
   const finalColumns = renderColumns<RecordType, P>(columns!, { initialFilters: props.initialFilters }, () => ({
     table,
     modal: modalCtx,
   }));
-
-  console.log('finalColumns', finalColumns);
 
   return (
     <Fragment>
