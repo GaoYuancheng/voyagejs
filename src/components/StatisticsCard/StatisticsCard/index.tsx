@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, CardProps } from 'antd';
 import cls from 'classnames';
 import React from 'react';
 import { usePrefixCls } from '../../../context';
@@ -22,9 +22,7 @@ export type StatisticsCardDataType = {
   items?: StatisticsCardItemType[];
 };
 
-export interface StatisticsCardProps
-  extends StatisticsCardDataType,
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
+export interface StatisticsCardProps extends StatisticsCardDataType, Omit<CardProps, 'onClick'> {
   /** 是否选中 */
   active?: boolean;
 
@@ -46,7 +44,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = (props) => {
     <Card
       bordered={false}
       {...rest}
-      className={cls(prefixCls, {
+      className={cls(prefixCls, className, {
         [`${prefixCls}-active`]: active,
         [`${prefixCls}-hover`]: !!onClick,
       })}

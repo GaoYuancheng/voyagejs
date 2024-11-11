@@ -1,13 +1,17 @@
 import { XOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
+import { Button, Space } from 'antd';
 import React, { useState } from 'react';
 import { StatisticsCard, StatisticsCardGroup, StatisticsCardItem } from 'voyagejs';
 
 const Demo = () => {
   const [value, setValue] = useState<any>();
 
+  const [loading, setLoading] = useState(false);
+
   return (
     <Space direction="vertical" style={{ background: '#f6f7f9', padding: 20, display: 'flex' }}>
+      <Button onClick={() => setLoading((l) => !l)}>切换loading状态</Button>
+
       <StatisticsCardItem
         items={[
           { label: '总共', value: 1 },
@@ -16,11 +20,19 @@ const Demo = () => {
         ]}
       />
 
-      <StatisticsCard icon={<XOutlined />} label="总访问量" value="123456" unit="次" name="total-visit" />
+      <StatisticsCard
+        loading={loading}
+        icon={<XOutlined />}
+        label="总访问量"
+        value="123456"
+        unit="次"
+        name="total-visit"
+      />
 
-      <StatisticsCard label="总访问量" value="123456" unit="次" name="total-visit" />
+      <StatisticsCard loading={loading} label="总访问量" value="123456" unit="次" name="total-visit" />
 
       <StatisticsCard
+        loading={loading}
         label="总访问量"
         value="123456"
         unit="次"
@@ -34,6 +46,7 @@ const Demo = () => {
       />
 
       <StatisticsCard
+        loading={loading}
         label="总访问量"
         value="123456"
         unit="次"
@@ -46,6 +59,7 @@ const Demo = () => {
       />
 
       <StatisticsCardGroup
+        loading={loading}
         labelInValue
         value={value}
         onChange={setValue}
