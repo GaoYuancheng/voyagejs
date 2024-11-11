@@ -120,7 +120,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
   }
 
   onTableChange: TableProps<RecordType>['onChange'] = (pagination, filters, sorter, ...args) => {
-    this.pagination = pagination;
+    this.pagination = { ...this.initialPagination, ...pagination };
 
     const {} = this.filterConvert;
 
