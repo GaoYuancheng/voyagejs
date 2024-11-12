@@ -61,6 +61,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         </ColumnTitle>
       );
 
+      // ===== 过滤值处理 =====
       const defaultFilteredValue = initialFilters?.[dataIndex] ? [initialFilters[dataIndex]] : [];
 
       const filteredValue =

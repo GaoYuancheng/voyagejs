@@ -27,7 +27,8 @@ export type ActionItem<Ctx> =
   | ({
       actionType: 'dropdown';
       items: DropdownActionItemType<Ctx>[];
-    } & Omit<DropdownProps, 'items' | 'onClick'>);
+    } & Omit<DropdownProps, 'items' | 'onClick'>)
+  | ((ctx: Ctx) => React.ReactNode);
 
 type FnActionType<Ctx> = (ctx?: Ctx) => React.ReactNode;
 
@@ -40,13 +41,18 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
   const { items, getCtx = () => ({} as Ctx), ...restProps } = props;
 
   const renderActions = (actions: ActionsProps<Ctx>['items']) => {
-    // ===== action支持函数 =====
+    // ===== actions支持函数 =====
     if (isFunction(actions)) {
       return actions(getCtx());
     }
 
     // ===== 内置类型 =====
     const element = (actions as ActionItem<Ctx>[]).map((action, idx) => {
+      // ===== action支持函数 =====
+      if (isFunction(action)) {
+        return action(getCtx());
+      }
+
       // @ts-expect-error onClick items
       const { actionType = 'button', onClick, items: actionItems, ...rest } = action;
 

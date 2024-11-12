@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message, Tag } from 'antd';
 import React from 'react';
 import { ButtonAction, QueryActions } from 'voyagejs';
 
@@ -26,6 +26,9 @@ const Demo = () => {
             onClick: (e, ctx) => {
               console.log('新增~', ctx);
             },
+          },
+          (ctx) => {
+            return <Tag color="green">自定义</Tag>;
           },
           {
             actionType: 'dropdown',

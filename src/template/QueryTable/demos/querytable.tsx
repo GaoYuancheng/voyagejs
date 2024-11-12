@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message, Tag } from 'antd';
 import { toJS } from 'mobx';
 import React, { useEffect, useRef } from 'react';
 import { DEFAULT_PLUGINS, QueryFormInstance, QueryTable } from 'voyagejs';
@@ -47,6 +47,10 @@ const Demo = () => {
               ctx.table.selectedRows = [];
               console.log('选中行清空~', toJS(ctx.table.selectedRows));
             },
+          },
+          (ctx) => {
+            const { table } = ctx || {};
+            return <Tag color="green">自定义{table?.selectedRows.length}</Tag>;
           },
           {
             actionType: 'dropdown',

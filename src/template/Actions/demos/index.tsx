@@ -1,3 +1,4 @@
+import { Tag } from 'antd';
 import React from 'react';
 import { Actions } from 'voyagejs';
 
@@ -41,6 +42,9 @@ const Demo = () => {
               },
             },
           ],
+        },
+        (ctx) => {
+          return <Tag>自定义</Tag>
         },
       ]}
     />
