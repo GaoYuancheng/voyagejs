@@ -18,6 +18,7 @@ const Demo = () => {
       remoteDataSource={remoteDataSource}
       rowSelection
       initialValues={{ name: '张三', age: '18' }}
+      initialFilters={{ id: '123' }}
       // actions={[]}
       actions={{
         left: [{ actionType: 'text', type: 'title', children: '标题' }],
