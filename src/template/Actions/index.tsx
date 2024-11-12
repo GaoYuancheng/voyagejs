@@ -50,7 +50,7 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
     const element = (actions as ActionItem<Ctx>[]).map((action, idx) => {
       // ===== action支持函数 =====
       if (isFunction(action)) {
-        return action(getCtx());
+        return <Fragment key={idx}>{action(getCtx())}</Fragment>;
       }
 
       // @ts-expect-error onClick items

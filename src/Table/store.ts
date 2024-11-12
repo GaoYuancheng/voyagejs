@@ -1,8 +1,15 @@
 import type { TableProps as ATableProps, TablePaginationConfig } from 'antd';
 import type { TableRowSelection } from 'antd/lib/table/interface';
 import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
-import { isObject } from 'radash';
+import { clone, isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
+
+export enum TableSearchStatus {
+  /** 查询 */
+  SEARCH = 'search',
+  /** 重置 */
+  RESET = 'reset',
+}
 
 export class TableStore<RecordType extends object = any> implements TableProps<RecordType> {
   loading = false;
@@ -21,6 +28,8 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   sorter?: SorterParams<RecordType>;
 
+  initialFilters: TableProps<RecordType>['initialFilters'] = {};
+
   filter = {} as any;
 
   /** antd的filter中，setSelectedKeys使用是React.Keys[]格式的值，数组转回期望的值类型 */
@@ -34,6 +43,8 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   remoteDataSource?: TableProps<RecordType>['remoteDataSource'];
 
+  searchStatus?: TableSearchStatus = TableSearchStatus.SEARCH;
+
   constructor(props: TableProps<RecordType>) {
     Object.keys(props).forEach((key) => {
       // @ts-ignore
@@ -45,6 +56,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
       if (key === 'initialFilters') {
         this.filter = props[key];
+        this.initialFilters = clone(props[key]);
       }
     });
 
@@ -109,13 +121,16 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       })
       .catch(() => {
         this.loading = false;
+      })
+      .finally(() => {
+        this.searchStatus = TableSearchStatus.SEARCH;
       });
   }
 
-  // TODO: 初始排序、分页、筛选、搜索
   reset() {
+    this.searchStatus = TableSearchStatus.RESET;
     this.setInitialPagination({ pagination: this.initialPagination });
-    this.filter = {};
+    this.filter = this.initialFilters;
     this.sorter = undefined;
     this.params = this.initialParams;
     // TODO: 重置是否清空选中行？

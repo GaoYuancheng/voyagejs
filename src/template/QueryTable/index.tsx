@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Form, FormStore, type FormProps } from '../../form';
 import type { PluginsType } from '../../plugins';
-import { Table, TableInstance, type TableProps } from '../../table';
+import { Table, TableInstance, TableSearchStatus, type TableProps } from '../../table';
 import { type ActionsProps } from '../Actions';
 import { QueryForm, type QueryFormProps } from '../QueryForm';
 import { QueryActions, type QueryActionsProps } from './QueryActions';
@@ -64,6 +64,7 @@ const IQueryTable = <RecordType extends object, Values = any, P extends PluginsT
 
   const onSearch = async (values: Values) => {
     const { table } = tableRef.current!;
+    table.searchStatus = TableSearchStatus.SEARCH;
     if (table?.pagination) {
       table.pagination.current = 1;
     }

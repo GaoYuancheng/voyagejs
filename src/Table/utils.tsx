@@ -9,6 +9,7 @@ import { toStringKey } from '../utils';
 import { FilterDropdown } from './FilterDropdown';
 import type { ColumnType } from './interface';
 import type { TableStore } from './store';
+import { TableSearchStatus } from './store';
 
 export function renderColumns<RecordType extends object = any, P extends PluginsType = PluginsType>(
   columns: ColumnType<RecordType>[],
@@ -65,9 +66,11 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
       const defaultFilteredValue = initialFilters?.[dataIndex] ? [initialFilters[dataIndex]] : [];
 
       const filteredValue =
-        table.filter[dataIndex] && table.filterConvert[dataIndex]
+        table.searchStatus === TableSearchStatus.RESET
+          ? defaultFilteredValue
+          : table.filter[dataIndex] && table.filterConvert[dataIndex]
           ? [table.filter[dataIndex]]
-          : table.filter[dataIndex] || null;
+          : table.filter[dataIndex] || [];
 
       return {
         dataIndex: column.key,
