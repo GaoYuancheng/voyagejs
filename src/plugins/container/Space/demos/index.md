@@ -11,4 +11,4 @@ nav:
 
 # Space
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>

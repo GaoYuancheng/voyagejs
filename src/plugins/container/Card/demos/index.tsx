@@ -3,7 +3,7 @@ import { sleep } from 'radash';
 import React, { Fragment } from 'react';
 import { DEFAULT_PLUGINS, Form, FormGroup, useForm } from 'voyagejs';
 
-function CardDemo() {
+function Demo() {
   const [form] = useForm();
 
   return (
@@ -70,4 +70,4 @@ function CardDemo() {
   );
 }
 
-export default CardDemo;
+export default Demo;

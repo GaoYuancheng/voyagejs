@@ -1,5 +1,5 @@
 ---
-title: DatePicker
+title: TimePicker
 order: 2
 nav:
   title: 插件
@@ -9,6 +9,8 @@ nav:
     order: 2
 ---
 
-# DatePicker
+# TimePicker
 
-<code src="./demos/index.tsx" ></code>
+支持format设置日期格式
+
+<code src="./index.tsx" ></code>

@@ -10,7 +10,7 @@ export interface SwitchProps<T = any, K = any> extends Omit<ASwitchProps, 'onCha
 }
 
 export const OSwitch: React.FC<SwitchProps> = (props) => {
-  const { checkedValue = true, unCheckedValue = false, checked, onChange, ...restProps } = props;
+  const { checkedValue = true, unCheckedValue = false, value, onChange, ...restProps } = props;
 
   return (
     <ASwitch
@@ -18,8 +18,8 @@ export const OSwitch: React.FC<SwitchProps> = (props) => {
       onChange={(checked) => {
         onChange?.(checked ? checkedValue : unCheckedValue);
       }}
-      // eslint-disable-next-line
-      checked={checked == checkedValue}
+      // eslint-disable-next-line eqeqeq
+      checked={value == checkedValue}
     />
   );
 };

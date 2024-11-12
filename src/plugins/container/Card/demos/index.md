@@ -13,4 +13,4 @@ nav:
 
 共享`Form`组件的 loading 状态
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>
