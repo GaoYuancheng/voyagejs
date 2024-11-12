@@ -52,7 +52,6 @@ const TableFilterDemo = () => {
             title: '发送人',
             tooltip: '提示',
             filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-            // filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" component="input" />,
             filterField: 'input',
             filterFieldProps: {
               allowClear: true,

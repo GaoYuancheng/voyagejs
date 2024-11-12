@@ -29,7 +29,7 @@ const SaveModal = memo(() => {
           name: 'a3',
           label: 'a3',
           children: <Select />,
-          componentProps: { style: { width: '100%' } },
+          fieldProps: { style: { width: '100%' } },
           remoteOptions: async () => {
             console.log('remoteOptions');
             return Promise.resolve([

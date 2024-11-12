@@ -133,8 +133,8 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       valuePropName: observable.ref,
       remoteOptions: observable,
 
-      component: observable.ref,
-      componentProps: observable,
+      fieldType: observable.ref,
+      fieldProps: observable,
     });
   }
 
@@ -207,7 +207,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
     });
   }
 
-  public get fieldProps(): AFormItemProps<Values> {
+  public get fieldChildProps(): AFormItemProps<Values> {
     return filterUndefinedProps({
       colon: this.colon,
       dependencies: this.dependencies,
@@ -238,11 +238,11 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   }
 
   // ===== 插件 =====
-  component?: any;
+  fieldType?: any;
 
-  componentProps?: any;
+  fieldProps?: any;
 
   get plugin() {
-    return parsePlugin(this.getFormStore().plugins.field, this.component);
+    return parsePlugin(this.getFormStore().plugins.field, this.fieldType);
   }
 }

@@ -16,8 +16,8 @@ function Plugins() {
       <FormItem<any, typeof DEFAULT_PLUGINS>
         name={'a1'}
         label="a1"
-        component="switch"
-        componentProps={{
+        fieldType="switch"
+        fieldProps={{
           checkedChildren: 'aa',
           unCheckedChildren: 'aa',
         }}
@@ -25,8 +25,8 @@ function Plugins() {
       <FormItem<any, typeof DEFAULT_PLUGINS>
         name={'a2'}
         label="a2"
-        component="input"
-        componentProps={{
+        fieldType="input"
+        fieldProps={{
           allowClear: true,
         }}
       />
@@ -34,8 +34,8 @@ function Plugins() {
       <FormItem<any, typeof DEFAULT_PLUGINS>
         name={'b'}
         label="b"
-        component="select"
-        componentProps={{ placeholder: '请选择xx' }}
+        fieldType="select"
+        fieldProps={{ placeholder: '请选择xx' }}
         remoteOptions={async () => {
           return [
             { label: 'a', value: 'a' },
@@ -55,16 +55,16 @@ function Plugins() {
             name: 'x1',
             label: 'x1',
             rules: [{ required: true, message: '请输入xx' }],
-            component: 'input',
-            componentProps: {
+            fieldType: 'input',
+            fieldProps: {
               placeholder: '请输入xx',
             },
           },
           {
             name: 'x2',
             label: 'x2',
-            component: 'inputnumber',
-            componentProps: {
+            fieldType: 'inputnumber',
+            fieldProps: {
               placeholder: '请输入数字',
               style: { width: '100%' },
             },
@@ -80,13 +80,13 @@ function Plugins() {
           {
             name: 'x3',
             label: 'x3',
-            component: 'select',
+            fieldType: 'select',
             options: [
               { label: 'a', value: 'a' },
               { label: 'b', value: 'b' },
               { label: 'c', value: 'c' },
             ],
-            componentProps: {
+            fieldProps: {
               style: { width: '100%' },
               placeholder: '请选择',
             },

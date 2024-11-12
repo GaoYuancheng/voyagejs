@@ -17,32 +17,32 @@ function RemoteValues() {
           {
             name: 'a',
             label: 'a',
-            component: 'input',
-            componentProps: {
+            fieldType: 'input',
+            fieldProps: {
               allowClear: true,
             },
           },
           {
             name: 'b',
             label: 'b',
-            component: 'input',
-            componentProps: {
+            fieldType: 'input',
+            fieldProps: {
               placeholder: '请输入',
             },
           },
           {
             name: 'c',
             label: 'c',
-            component: 'input',
-            componentProps: {
+            fieldType: 'input',
+            fieldProps: {
               placeholder: '请输入',
             },
           },
           {
             name: 'd',
             label: 'd',
-            component: 'input',
-            componentProps: {
+            fieldType: 'input',
+            fieldProps: {
               placeholder: '请输入',
             },
           },

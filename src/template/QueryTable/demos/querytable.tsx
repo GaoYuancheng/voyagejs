@@ -71,15 +71,15 @@ const Demo = () => {
         {
           name: 'name',
           label: '姓名',
-          component: 'input',
-          componentProps: {
+          fieldType: 'input',
+          fieldProps: {
             allowClear: true,
           },
         },
         {
           name: 'age',
           label: '年龄',
-          component: 'input',
+          fieldType: 'input',
         },
       ]}
       columns={columns}

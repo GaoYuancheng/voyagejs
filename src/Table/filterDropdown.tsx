@@ -10,8 +10,8 @@ export interface FilterDropdownProps<RecordType extends object = any>
   extends React.PropsWithChildren<AFilterDropdownProps> {
   table?: TableStore<RecordType>;
   dataIndex: string;
-  component: string;
-  componentProps?: Record<string, any>;
+  fieldType: string;
+  fieldProps?: Record<string, any>;
   ctx?: any;
 }
 
@@ -29,13 +29,13 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
     table,
     dataIndex,
     children,
-    component,
-    componentProps,
+    fieldType,
+    fieldProps,
   } = props;
 
   const plugins = (pluginStore.getPlugins() as P)['field'];
 
-  const { element } = parsePlugin(plugins, component, componentProps, props);
+  const { element } = parsePlugin(plugins, fieldType, fieldProps, props);
 
   return (
     <div>

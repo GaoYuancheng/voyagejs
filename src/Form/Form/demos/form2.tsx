@@ -33,7 +33,7 @@ function Demo() {
             {
               name: 'bdId',
               label: '选择标段',
-              component: 'select',
+              fieldType: 'select',
               remoteOptions: async () => {
                 await sleep(1000);
                 return [
@@ -61,7 +61,7 @@ function Demo() {
                           name: [name, 'name'],
                           span: 12,
                           style: { marginBottom: 0 },
-                          component: 'select',
+                          fieldType: 'select',
                           dependencies: ['bdId'],
                           remoteOptions: async ([bdId]) => {
                             if (!bdId) return [];
@@ -73,7 +73,7 @@ function Demo() {
                             ];
                           },
                           // reactions: [{ dependencies: ['bdId'], result: { value: undefined } }],
-                          componentProps: {
+                          fieldProps: {
                             placeholder: '请选择啥啊？',
                           },
                         },
@@ -81,7 +81,7 @@ function Demo() {
                           name: [name, 'postId'],
                           span: 12,
                           style: { marginBottom: 0 },
-                          component: 'input',
+                          fieldType: 'input',
                           // reactions: [
                           //   {
                           //     dependencies: [['bdId']],

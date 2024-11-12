@@ -32,8 +32,8 @@ function CardDemo() {
             {
               name: 'a',
               label: 'a',
-              component: 'input',
-              componentProps: {},
+              fieldType: 'input',
+              fieldProps: {},
             },
           ]}
         />
@@ -47,7 +47,7 @@ function CardDemo() {
             {
               name: 'b',
               label: 'b',
-              component: 'input',
+              fieldType: 'input',
             },
             {
               name: 'g-1',
@@ -59,7 +59,7 @@ function CardDemo() {
                 {
                   name: 'c',
                   label: 'c',
-                  component: 'input',
+                  fieldType: 'input',
                 },
               ],
             },

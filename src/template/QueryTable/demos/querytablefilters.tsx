@@ -73,15 +73,15 @@ const Demo = () => {
         {
           name: 'name',
           label: '姓名',
-          component: 'input',
-          componentProps: {
+          fieldType: 'input',
+          fieldProps: {
             allowClear: true,
           },
         },
         {
           name: 'age',
           label: '年龄',
-          component: 'input',
+          fieldType: 'input',
         },
       ]}
       columns={[
@@ -100,7 +100,7 @@ const Demo = () => {
           title: '发送人',
           tooltip: '提示',
           filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-          // filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" component="input" />,
+          // filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" fieldType="input" />,
           filterField: 'input',
           filterFieldProps: {
             allowClear: true,

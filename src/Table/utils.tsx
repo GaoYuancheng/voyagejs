@@ -45,8 +45,8 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
                 {...p}
                 ctx={{ column }}
                 dataIndex={column.key!}
-                component={filterField}
-                componentProps={filterFieldProps}
+                fieldType={filterField}
+                fieldProps={filterFieldProps}
               />
             ),
           };

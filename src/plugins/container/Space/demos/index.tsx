@@ -26,12 +26,12 @@ function SpaceDemo() {
               {
                 name: 'a',
                 label: 'a',
-                component: 'input',
+                fieldType: 'input',
               },
               {
                 name: 'b',
                 label: 'b',
-                component: 'input',
+                fieldType: 'input',
               },
             ],
           },
@@ -42,12 +42,12 @@ function SpaceDemo() {
               {
                 name: 'c',
                 label: 'c',
-                component: 'input',
+                fieldType: 'input',
               },
               {
                 name: 'd',
                 label: 'd',
-                component: 'input',
+                fieldType: 'input',
               },
             ],
           },

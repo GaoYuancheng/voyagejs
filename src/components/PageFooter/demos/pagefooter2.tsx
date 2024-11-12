@@ -36,7 +36,7 @@ const PageFooterDemo = () => {
               name: 'a',
               label: 'a',
               rules: [{ required: true, message: '请输入a' }],
-              component: 'input',
+              fieldType: 'input',
             },
           ]}
         />

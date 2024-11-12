@@ -26,8 +26,8 @@ export const FormItem = observer(
       'optionsPropName',
       'remoteOptions',
       'reactions',
-      'component',
-      'componentProps',
+      'fieldType',
+      'fieldProps',
     ]);
 
     const [updateKey, update] = useState({});
@@ -84,13 +84,13 @@ export const FormItem = observer(
       return null;
     }
 
-    const { element: ele, defaultFormItemProps } = parsePlugin(formStore.plugins.field, field.component, {
-      ...toJS(field.componentProps),
+    const { element: ele, defaultFormItemProps } = parsePlugin(formStore.plugins.field, field.fieldType, {
+      ...toJS(field.fieldProps),
       ...toJS(field.childProps),
     });
 
     const element = (
-      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldProps} name={name}>
+      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldChildProps} name={name}>
         {ele || children}
       </Item>
     );
