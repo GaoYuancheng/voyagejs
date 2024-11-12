@@ -16,8 +16,8 @@ export class ListStore<Values = any, P extends PluginsType = PluginsType> extend
   _props: FormListProps<Values>;
 
   constructor(
-    props: FormListProps<Values>,
-    form: FormInstance,
+    props: FormListProps<Values, P>,
+    form: FormInstance<Values>,
     getFormStore: () => FormStore<Values, P>,
     getGroupStore: () => GroupStore<Values, P>,
   ) {

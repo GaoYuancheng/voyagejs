@@ -80,7 +80,7 @@ export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<V
   const renderFields = (fields: FormItemProps<Values, P>[]) => {
     return fields.map((field, index) => {
       const finalLabel = isSingleSearch ? undefined : field.label;
-      const fieldChild = field.children || parsePlugin(form.plugins['field'], field.component, field.componentProps);
+      const fieldChild = field.children || parsePlugin(form.plugins['field'], field.fieldType, field.fieldProps);
       const children = isSingleSearch
         ? React.cloneElement(fieldChild as React.ReactElement, {
             allowClear: true,

@@ -152,12 +152,12 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     return group;
   }
 
-  addGroup<NameType extends keyof Values>(name: NameType, group: GroupStore<Values>) {
+  addGroup(name: NamePath, group: GroupStore<Values>) {
     if (!name) return;
     this.addField(name, group as unknown as any);
   }
 
-  addList<NameType extends keyof Values>(name: NameType, list: ListStore<Values>) {
+  addList(name: NamePath, list: ListStore<Values>) {
     if (!name) return;
     this.addField(name, list as unknown as any);
   }

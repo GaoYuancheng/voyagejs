@@ -18,7 +18,7 @@ export interface FormListProps<Values = any, P extends PluginsType = PluginsType
 export const FormList = <Values extends any = any, P extends PluginsType = PluginsType>(
   props: FormListProps<Values, P>,
 ) => {
-  const { name, reactions } = props;
+  const { name } = props;
 
   const listCtx = useFormListContext();
   const formStore = useFormContext<Values, P>();
@@ -33,16 +33,17 @@ export const FormList = <Values extends any = any, P extends PluginsType = Plugi
   }, [realName]);
 
   useEffect(() => {
-    formStore.addGroup(
-      realName as unknown as string,
-      new ListStore(
+    formStore.addList(
+      realName,
+      // @ts-expect-error
+      new ListStore<Values, P>(
         { ...props, name: realName },
         formStore.form,
         () => formStore,
         () => groupStore,
       ),
     );
-  }, [contextValue.name]);
+  }, [realName]);
 
   return (
     <FormListContext.Provider value={contextValue}>
