@@ -9,4 +9,4 @@ nav:
     order: 2
 ---
 
-<code src="./demos/dependency.tsx" ></code>
+<code src="./dependency.tsx" ></code>

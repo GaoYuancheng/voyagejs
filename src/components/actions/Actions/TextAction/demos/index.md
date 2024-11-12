@@ -11,8 +11,8 @@ order: 5
 
 ## TextAction
 
-<code src="./demos/textaction.tsx" ></code>
+<code src="./textaction.tsx" ></code>
 
 ## TextActions
 
-<code src="./demos/textactions.tsx" ></code>
+<code src="./textactions.tsx" ></code>

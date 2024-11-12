@@ -13,4 +13,4 @@ nav:
 
 ## 示例
 
-<code src="./demos/list.tsx" ></code>
+<code src="./list.tsx" ></code>

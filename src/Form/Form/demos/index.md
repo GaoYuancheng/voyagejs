@@ -16,14 +16,14 @@ nav:
 
 ## 示例
 
-<code src="./demos/remoteValues.tsx" ></code>
+<code src="./remoteValues.tsx" ></code>
 
 ## 配置化表单
 
 > 使用`items`属性生成表单
 
-<code src="./demos/form.tsx" ></code>
+<code src="./form.tsx" ></code>
 
 ## 示例
 
-<code src="./demos/form2.tsx" ></code>
+<code src="./form2.tsx" ></code>

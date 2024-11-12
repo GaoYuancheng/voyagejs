@@ -15,8 +15,8 @@ nav:
 
 ## 实例 getField
 
-<code src="./demos/instance.tsx" ></code>
+<code src="./instance.tsx" ></code>
 
 ## 容器 container
 
-<code src="./demos/container.tsx" ></code>
+<code src="./container.tsx" ></code>

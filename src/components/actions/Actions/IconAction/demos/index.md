@@ -11,8 +11,8 @@ order: 4
 
 ## IconAction
 
-<code src="./demos/iconaction.tsx" ></code>
+<code src="./iconaction.tsx" ></code>
 
 ## IconActions
 
-<code src="./demos/iconactions.tsx" ></code>
+<code src="./iconactions.tsx" ></code>

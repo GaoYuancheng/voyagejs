@@ -14,12 +14,12 @@ order: 1
 1. 支持通用属性透传给子 Group 和子 Item
 2. 支持`remoteValues`设置远程值
 
-<code src="./demos/queryform.tsx" ></code>
+<code src="./queryform.tsx" ></code>
 
 ## 单个模式
 
-<code src="./demos/single.tsx" ></code>
+<code src="./single.tsx" ></code>
 
 ## 单行展示
 
-<code src="./demos/singlerow.tsx" ></code>
+<code src="./singlerow.tsx" ></code>

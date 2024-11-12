@@ -16,5 +16,5 @@ demo:
 
 ## 示例
 
-<code src="./demos/pagefooter.tsx" ></code>
-<code src="./demos/pagefooter2.tsx" ></code>
+<code src="./pagefooter.tsx" ></code>
+<code src="./pagefooter2.tsx" ></code>

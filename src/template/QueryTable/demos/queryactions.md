@@ -9,4 +9,4 @@ title: QueryActions
 order: 2
 ---
 
-<code src="./demos/queryactions.tsx" ></code>
+<code src="./queryactions.tsx" ></code>

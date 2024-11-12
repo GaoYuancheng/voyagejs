@@ -9,4 +9,4 @@ title: Actions
 order: 1
 ---
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>

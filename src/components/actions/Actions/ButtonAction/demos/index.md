@@ -11,8 +11,8 @@ order: 3
 
 ## ButtonAction
 
-<code src="./demos/buttonaction.tsx" ></code>
+<code src="./buttonaction.tsx" ></code>
 
 ## ButtonActions
 
-<code src="./demos/buttonactions.tsx" ></code>
+<code src="./buttonactions.tsx" ></code>

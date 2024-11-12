@@ -13,4 +13,4 @@ order: 1
 
 展开关闭交互按钮。
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>

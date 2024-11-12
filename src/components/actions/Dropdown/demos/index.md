@@ -11,4 +11,4 @@ order: 7
 
 ## Dropdown
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>

@@ -11,4 +11,4 @@ order: 2
 
 ## Text
 
-<code src="./demos/index.tsx" ></code>
+<code src="./index.tsx" ></code>

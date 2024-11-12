@@ -11,8 +11,8 @@ order: 1
 
 ## 基础
 
-<code src="./demos/querytable.tsx" ></code>
+<code src="./querytable.tsx" ></code>
 
 ## 筛选
 
-<code src="./demos/querytablefilters.tsx" ></code>
+<code src="./querytablefilters.tsx" ></code>
