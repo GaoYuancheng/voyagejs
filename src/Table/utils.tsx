@@ -20,7 +20,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
   return columns
     .filter((column) => column.visible !== false)
     .map((column) => {
-      const { children, filterField, filterFieldProps, filterDropdown, title, required, tooltip } = column;
+      const { children, filterFieldType, filterFieldProps, filterDropdown, title, required, tooltip } = column;
       const { initialFilters } = props;
 
       const dataIndex: string = toStringKey(column.dataIndex) || column.key!;
@@ -34,7 +34,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
 
       //  ===== filterDropdown支持插件 =====
       const getFilterDropDownProps = () => {
-        if (isString(filterField)) {
+        if (isString(filterFieldType)) {
           table.filterConvert[dataIndex] = (value: any[]) => {
             return Array.isArray(value) ? value[0] : value;
           };
@@ -45,7 +45,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
                 {...p}
                 ctx={{ column }}
                 dataIndex={column.key!}
-                fieldType={filterField}
+                fieldType={filterFieldType}
                 fieldProps={filterFieldProps}
               />
             ),

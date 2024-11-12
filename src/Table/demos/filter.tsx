@@ -41,7 +41,7 @@ const TableFilterDemo = () => {
             key: 'id',
             title: 'ID',
             sorter: true,
-            filterField: 'input',
+            filterFieldType: 'input',
             filterFieldProps: {
               allowClear: true,
               placeholder: '请输入',
@@ -52,7 +52,7 @@ const TableFilterDemo = () => {
             title: '发送人',
             tooltip: '提示',
             filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-            filterField: 'input',
+            filterFieldType: 'input',
             filterFieldProps: {
               allowClear: true,
               placeholder: '请选择',
@@ -66,7 +66,7 @@ const TableFilterDemo = () => {
           {
             key: 'time',
             title: '时间',
-            filterField: 'datepicker',
+            filterFieldType: 'datepicker',
             filterFieldProps: {
               allowClear: true,
               format: 'YYYY-MM-DD',

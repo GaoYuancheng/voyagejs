@@ -67,7 +67,7 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
     children?: ColumnType<RecordType>[];
     tooltip?: string | TooltipProps;
     required?: boolean;
-    filterField?: PN;
+    filterFieldType?: PN;
     filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
   } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
 }[keyof P['field']];
