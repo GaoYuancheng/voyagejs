@@ -1,0 +1,21 @@
+@import (reference) '../../styles/index.less';
+
+@text-prefix-cls: ~'@{ant-prefix}-custom-title';
+
+.@{text-prefix-cls} {
+  font-size: 18px;
+  color: @text-primary-color;
+  position: relative;
+  padding-left: 12px;
+  font-weight: 600;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: @primary-color;
+  }
+}

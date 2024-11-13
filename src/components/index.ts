@@ -5,3 +5,4 @@ export * from './StatisticsCard';
 export * from './Text';
 export * from './ToggleOpenButton';
 export * from './actions';
+export * from './Title';

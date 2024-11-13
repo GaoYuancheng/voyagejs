@@ -31,7 +31,7 @@ export const Text: React.FC<TextProps> = (props) => {
     ellipsis = {},
     ...restProps
   } = props;
-  const prefix = usePrefixCls('text');
+  const prefix = usePrefixCls('custom-text');
 
   return (
     <Spin spinning={loading} indicator={<LoadingOutlined />}>
