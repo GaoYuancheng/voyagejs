@@ -100,7 +100,6 @@ const Demo = () => {
           title: '发送人',
           tooltip: '提示',
           filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-          // filterDropdown: (props) => <FilterDropdown {...props} dataIndex="senderName" fieldType="input" />,
           filterFieldType: 'input',
           filterFieldProps: {
             allowClear: true,

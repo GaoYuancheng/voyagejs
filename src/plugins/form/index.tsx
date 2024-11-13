@@ -24,7 +24,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: CheckboxChangeEvent) => setSelectedKeys([e.target.checked as unknown as React.Key]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -48,7 +48,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -63,7 +63,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys(e.target.value ? [e.target.value] : []),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -79,7 +79,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
         onChange: (e: any) => {
           setSelectedKeys(Array.isArray(e) ? e : [e]);
         },
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
         style: { width: '100%' },
       };
     },
@@ -100,7 +100,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys([e.target.value]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -112,7 +112,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys(checkedValues ? [checkedValues] : []),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -127,7 +127,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys([e]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
         style: { width: '100%' },
       };
     },
@@ -147,7 +147,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (checkedValues: any) => setSelectedKeys([checkedValues]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
       };
     },
   },
@@ -163,7 +163,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       const { setSelectedKeys, selectedKeys } = ctx;
       return {
         onChange: (e: any) => setSelectedKeys([e]),
-        value: selectedKeys[0],
+        value: selectedKeys?.[0],
         style: { width: '100%' },
       };
     },

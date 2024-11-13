@@ -24,7 +24,7 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 
   const plugins = (pluginStore.getPlugins() as P)['field'];
 
-  const { element } = parsePlugin(plugins, fieldType, fieldProps, props);
+  const { element } = parsePlugin(plugins, fieldType, fieldProps, ctx);
 
   return (
     <div>
