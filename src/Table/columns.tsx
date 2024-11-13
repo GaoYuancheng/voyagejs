@@ -1,6 +1,6 @@
 import type { ColumnType as AColumnType } from 'antd/lib/table';
 import type { FilterDropdownProps } from 'antd/lib/table/interface';
-import { isString } from 'radash';
+import { isFunction, isString } from 'radash';
 import React from 'react';
 import { ColumnTitle } from '../components';
 import type { ModalFormInstance } from '../form';
@@ -42,12 +42,24 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
           return {
             filterDropdown: (p: FilterDropdownProps) => (
               <FilterDropdown<RecordType, P>
-                {...p}
-                ctx={{ column }}
+                ctx={{ column, ...p }}
                 dataIndex={column.key!}
                 fieldType={filterFieldType}
                 fieldProps={filterFieldProps}
               />
+            ),
+          };
+        }
+
+        if (isFunction(filterFieldType)) {
+          table.filterConvert[dataIndex] = (value: any[]) => {
+            return Array.isArray(value) ? value[0] : value;
+          };
+          return {
+            filterDropdown: (p: FilterDropdownProps) => (
+              <FilterDropdown<RecordType, P> ctx={{ column, ...p }} dataIndex={column.key!}>
+                {filterFieldType(p)}
+              </FilterDropdown>
             ),
           };
         }

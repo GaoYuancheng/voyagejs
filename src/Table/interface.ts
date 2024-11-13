@@ -1,6 +1,10 @@
 import { TooltipProps } from 'antd';
 import type { ColumnType as AColumnType, TableProps as ATableProps } from 'antd/lib/table';
-import type { SorterResult, TableRowSelection } from 'antd/lib/table/interface';
+import type {
+  FilterDropdownProps as AFilterDropdownProps,
+  SorterResult,
+  TableRowSelection,
+} from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
 import type { ModalFormInstance } from '../form';
 import type { PluginPropsType, PluginsType } from '../plugins';
@@ -67,7 +71,7 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
     children?: ColumnType<RecordType>[];
     tooltip?: string | TooltipProps;
     required?: boolean;
-    filterFieldType?: PN;
+    filterFieldType?: PN | ((ctx: AFilterDropdownProps) => React.ReactNode);
     filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
   } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
 }[keyof P['field']];

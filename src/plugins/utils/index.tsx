@@ -1,6 +1,6 @@
-import { isString } from 'radash';
+import { isFunction, isString } from 'radash';
 import React from 'react';
-import type { PluginType } from '..';
+import type { PluginType } from '../interfaces';
 
 // 使用插件
 export const parsePlugin = (
@@ -9,6 +9,10 @@ export const parsePlugin = (
   props?: any,
   ctx?: any,
 ): { element: React.ReactNode; defaultFormItemProps?: any } => {
+  if (isFunction(pluginName)) {
+    return { element: pluginName(ctx) };
+  }
+
   if (!isString(pluginName)) {
     return { element: pluginName };
   }

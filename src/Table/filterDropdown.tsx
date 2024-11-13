@@ -4,34 +4,23 @@ import React from 'react';
 import { ButtonActions } from '../components';
 import { parsePlugin, PluginsType } from '../plugins';
 import { pluginStore } from '../utils';
+import type { ColumnType } from './interface';
 import type { TableStore } from './store';
 
-export interface FilterDropdownProps<RecordType extends object = any>
-  extends React.PropsWithChildren<AFilterDropdownProps> {
+export interface FilterDropdownProps<RecordType extends object = any> {
   table?: TableStore<RecordType>;
   dataIndex: string;
-  fieldType: string;
+  fieldType?: string | ((ctx: TableStore<RecordType>) => React.ReactNode);
   fieldProps?: Record<string, any>;
-  ctx?: any;
+  ctx: AFilterDropdownProps & { column: ColumnType<RecordType> };
 }
 
 export const FilterDropdown = <RecordType extends object = any, P extends PluginsType = PluginsType>(
-  props: FilterDropdownProps<RecordType>,
+  props: React.PropsWithChildren<FilterDropdownProps<RecordType>>,
 ) => {
-  const {
-    clearFilters,
-    close,
-    confirm,
-    filters,
-    selectedKeys,
-    setSelectedKeys,
-    visible,
-    table,
-    dataIndex,
-    children,
-    fieldType,
-    fieldProps,
-  } = props;
+  const { fieldType, fieldProps, ctx, table, dataIndex, children } = props;
+
+  const { clearFilters, close, confirm, filters, selectedKeys, setSelectedKeys, visible } = ctx;
 
   const plugins = (pluginStore.getPlugins() as P)['field'];
 
@@ -39,7 +28,7 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 
   return (
     <div>
-      <div style={{ padding: 8 }}>{element}</div>
+      <div style={{ padding: 8 }}>{children || element}</div>
       <Divider style={{ margin: 0 }} />
       <ButtonActions
         style={{ display: 'flex', justifyContent: 'flex-end', padding: 8 }}

@@ -8,7 +8,7 @@ import { useModalForm } from '../form';
 import type { PluginsType } from '../plugins';
 import type { TableProps } from './interface';
 import { TableStore } from './store';
-import { renderColumns } from './utils';
+import { renderColumns } from './columns';
 
 export type TableInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType> = {
   table: TableStore<RecordType>;

@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input } from 'antd';
+import { Button, Input, InputNumber } from 'antd';
 import React, { useRef } from 'react';
 import { DEFAULT_PLUGINS, Table, TableInstance, type FormProps } from 'voyagejs';
 import { recipientName, remoteDataSource, status } from './config';
@@ -66,11 +66,26 @@ const TableFilterDemo = () => {
           {
             key: 'time',
             title: '时间',
-            filterFieldType: 'datepicker',
+            filterFieldType: 'rangepicker',
             filterFieldProps: {
               allowClear: true,
               format: 'YYYY-MM-DD',
-              placeholder: '请选择',
+              placeholder: ['开始时间', '结束时间'],
+            },
+          },
+          {
+            key: 'custom',
+            title: '自定义搜索',
+            filterFieldType: (ctx) => {
+              return (
+                <InputNumber
+                  style={{ width: 120 }}
+                  onChange={(val) => {
+                    ctx.setSelectedKeys([val]);
+                  }}
+                  value={ctx.selectedKeys?.[0]}
+                />
+              );
             },
           },
           {
