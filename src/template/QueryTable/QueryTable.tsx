@@ -1,3 +1,4 @@
+import { useWhyDidYouUpdate } from 'ahooks';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Form, FormStore, type FormProps } from '../../form';
 import type { PluginsType } from '../../plugins';
@@ -23,20 +24,22 @@ export interface QueryTableProps<RecordType = any, Values = any, P extends Plugi
   initialValues?: FormProps<Values, P>['initialValues'];
 }
 
-export interface QueryFormInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
+export interface QueryTableInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
   extends TableInstance<RecordType> {
   form: FormStore<Values, P>;
 }
 
 const IQueryTable = <RecordType extends object, Values = any, P extends PluginsType = PluginsType>(
   props: QueryTableProps<RecordType, Values, P>,
-  ref: React.Ref<QueryFormInstance<RecordType, Values, P>>,
+  ref: React.Ref<QueryTableInstance<RecordType, Values, P>>,
 ) => {
   const [form] = useForm<Values, P>();
 
   const tableRef = useRef<TableInstance<RecordType>>();
 
   const [, update] = useState({});
+
+  useWhyDidYouUpdate('QueryTable', props);
 
   const forceUpdate = useCallback(() => {
     return update({});
@@ -59,7 +62,7 @@ const IQueryTable = <RecordType extends object, Values = any, P extends PluginsT
     actionsProps,
     rowSelection,
     initialValues,
-    initialFilters = {},
+    initialFilters,
   } = props;
   const { onReset: onResetForm, onSearch: onSearchForm } = formProps || {};
 

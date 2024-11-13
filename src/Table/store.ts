@@ -4,6 +4,8 @@ import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
 import { clone, isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
 
+const INITIAL_FILTERS = {} as const;
+
 export enum TableSearchStatus {
   /** 查询 */
   SEARCH = 'search',
@@ -28,7 +30,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   sorter?: SorterParams<RecordType>;
 
-  initialFilters: TableProps<RecordType>['initialFilters'] = {};
+  initialFilters: TableProps<RecordType>['initialFilters'] = INITIAL_FILTERS;
 
   filter = {} as any;
 
@@ -55,21 +57,19 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       }
 
       if (key === 'initialFilters') {
-        this.filter = props[key];
+        this.filter = props[key] || {};
         this.initialFilters = clone(props[key]);
       }
     });
 
     this.makeObservable();
     this.setInitialPagination(props);
-
-    this.refresh();
   }
 
   makeObservable() {
     makeObservable(this, {
       loading: observable.ref,
-      dataSource: observable,
+      dataSource: observable.deep,
       pagination: observable,
       sorter: observable,
       filter: observable,

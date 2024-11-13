@@ -1,14 +1,20 @@
 import { message, Tag } from 'antd';
 import { toJS } from 'mobx';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { DEFAULT_PLUGINS, QueryFormInstance, QueryTable } from 'voyagejs';
 import { columns, remoteDataSource } from 'voyagejs/table/demos/config';
 
 const Demo = () => {
   const ref = useRef<QueryFormInstance>();
 
+  const [, update] = useState({});
+
   useEffect(() => {
     console.log('ref.current?.table.selectedRows.length', ref.current?.table.selectedRows.length);
+  }, []);
+
+  const initialValues = useMemo(() => {
+    return { name: '张三', age: '18' };
   }, []);
 
   return (
@@ -16,10 +22,10 @@ const Demo = () => {
       ref={ref}
       remoteDataSource={remoteDataSource}
       rowSelection
-      initialValues={{ name: '张三', age: '18' }}
+      initialValues={initialValues}
       // actions={[]}
       actions={{
-        left: [{ actionType: 'text', type: 'title', children: '标题' }],
+        left: [{ actionType: 'text', type: 'title', children: '标题', onClick: () => update({}) }],
         right: [
           {
             actionType: 'button',

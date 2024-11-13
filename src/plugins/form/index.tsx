@@ -6,6 +6,7 @@ import { DatePicker } from './DatePicker';
 import { OSwitch as Switch } from './OSwitch';
 import { RangePicker } from './RangePicker';
 import { TimePicker } from './TimePicker';
+import { QueryTableSelect } from './QueryTableSelect';
 
 export * from './all';
 
@@ -86,6 +87,10 @@ export const DEFAULT_COMPONENT_PLUGINS = {
         style: { width: '100%' },
       };
     },
+  },
+  querytableselect: {
+    component: QueryTableSelect,
+    defaultComponentProps: {},
   },
   radio: {
     component: Radio,

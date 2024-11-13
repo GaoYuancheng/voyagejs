@@ -1,7 +1,8 @@
+import { useWhyDidYouUpdate } from 'ahooks';
 import { Table as ATable } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import React, { Fragment, forwardRef, useImperativeHandle, useMemo } from 'react';
+import React, { Fragment, forwardRef, useEffect, useImperativeHandle, useMemo } from 'react';
 import type { ModalFormInstance } from '../form';
 import { useModalForm } from '../form';
 import type { PluginsType } from '../plugins';
@@ -24,6 +25,12 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   const [modalForm, modalCtx] = useModalForm<P>();
 
   const { columns } = props;
+
+  useWhyDidYouUpdate('Table', props);
+
+  useEffect(() => {
+    table.refresh();
+  }, []);
 
   useImperativeHandle(
     ref,

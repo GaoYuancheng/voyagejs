@@ -42,7 +42,7 @@ export const columns: ColumnType<RecordType>[] = [
   },
 ];
 
-export const remoteDataSource: TableProps['remoteDataSource'] = (params) => {
+export const remoteDataSource: TableProps<any>['remoteDataSource'] = (params) => {
   console.log('params', params);
 
   setTimeout(() => {
