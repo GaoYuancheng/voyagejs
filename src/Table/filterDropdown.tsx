@@ -31,7 +31,7 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
       <div style={{ padding: 8 }}>{children || element}</div>
       <Divider style={{ margin: 0 }} />
       <ButtonActions
-        style={{ display: 'flex', justifyContent: 'flex-end', padding: 8 }}
+        style={{ display: 'flex', justifyContent: 'space-between', padding: 8 }}
         actions={[
           {
             children: '重置',
