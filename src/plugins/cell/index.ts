@@ -1,5 +1,5 @@
 export * from './all';
-import { CellBadge, CellHolder, CellTag } from './all';
+import { CellBadge, CellHolder, CellIndex, CellTag } from './all';
 
 export const DEFAULT_CELL_PLUGINS = {
   holder: {
@@ -13,5 +13,8 @@ export const DEFAULT_CELL_PLUGINS = {
   },
   badge: {
     component: CellBadge,
+  },
+  index: {
+    component: CellIndex,
   },
 };

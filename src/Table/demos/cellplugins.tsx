@@ -30,6 +30,7 @@ const TableFilterDemo = () => {
           {
             key: 'id',
             title: 'ID',
+            render: 'index',
           },
           {
             key: 'senderName',

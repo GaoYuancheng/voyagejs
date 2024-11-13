@@ -1,3 +1,5 @@
+import type { PluginsType } from '../interfaces';
+
 class PluginStore<T> {
   plugins = {} as any;
 
@@ -33,4 +35,4 @@ class PluginStore<T> {
   }
 }
 
-export const pluginStore = new PluginStore();
+export const pluginStore = new PluginStore<PluginsType>();

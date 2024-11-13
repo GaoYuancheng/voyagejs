@@ -29,9 +29,8 @@ export interface FieldBaseProps {
   readOnly?: boolean;
 }
 
-export interface CellBaseProps<RecordType extends object = any> {
+export interface CellBaseProps<RecordType extends object = any> extends TableInstance<RecordType> {
   record: RecordType;
   index: number;
   value: any;
-  table: TableInstance<RecordType>;
 }

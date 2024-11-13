@@ -2,8 +2,7 @@ import { Divider } from 'antd';
 import type { FilterDropdownProps as AFilterDropdownProps } from 'antd/lib/table/interface';
 import React from 'react';
 import { ButtonActions } from '../components';
-import { parsePlugin, PluginsType } from '../plugins';
-import { pluginStore } from '../utils';
+import { PluginsType, parsePlugin, pluginStore } from '../plugins';
 import type { ColumnType } from './interface';
 import type { TableStore } from './store';
 
@@ -22,7 +21,7 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 
   const { clearFilters, close, confirm, filters, selectedKeys, setSelectedKeys, visible } = ctx;
 
-  const plugins = (pluginStore.getPlugins() as P)['field'];
+  const plugins = pluginStore.getPlugins('field');
 
   const { element } = parsePlugin(plugins, fieldType, fieldProps, ctx);
 
