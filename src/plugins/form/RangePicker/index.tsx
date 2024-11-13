@@ -2,6 +2,8 @@ import { DatePicker as ADatePicker } from 'antd';
 import type { RangePickerProps as ARangePickerProps } from 'antd/lib/date-picker';
 import moment, { type Moment } from 'moment';
 import React from 'react';
+import { Text } from '../../../components';
+import type { FieldBaseProps } from '../../interfaces';
 
 const { RangePicker: ARangePicker } = ADatePicker;
 
@@ -13,10 +15,10 @@ export type RangePickerProps = Omit<ARangePickerProps, 'value' | 'onChange'> & {
   showTime?: boolean;
 
   onChange?: (value: RangePickerProps['value']) => void;
-};
+} & FieldBaseProps;
 
 export const RangePicker: React.FC<RangePickerProps> = (props) => {
-  const { onChange, value, valueFormat = true, format, ...restProps } = props;
+  const { onChange, value, valueFormat = true, format, readOnly, ...restProps } = props;
 
   const onFormatChange: ARangePickerProps['onChange'] = (time) => {
     let finalTime: RangePickerProps['value'] = time!;
@@ -29,6 +31,10 @@ export const RangePicker: React.FC<RangePickerProps> = (props) => {
 
     onChange?.(finalTime);
   };
+
+  if (readOnly) {
+    return <Text>{value?.join(' ~ ')}</Text>;
+  }
 
   let finalValue = value;
   if (value) {

@@ -21,3 +21,8 @@ export type PluginPropsType<
   T extends keyof PluginsType,
   CN extends keyof PluginsType[T],
 > = P[T][CN]['component'] extends React.ComponentType<infer E> ? E : never;
+
+export interface FieldBaseProps {
+  /** 禁用态 */
+  readOnly?: boolean;
+}

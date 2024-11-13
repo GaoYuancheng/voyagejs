@@ -1,19 +1,25 @@
-import { Space } from 'antd';
-import React, { useState } from 'react';
+import { Form } from 'antd';
+import React from 'react';
 import { OSwitch } from 'voyagejs';
 
 const Demo = () => {
-  const [checked, setChecked] = useState('1');
-
-  const onChange = (value) => {
-    console.log('value', value);
-    setChecked(value);
-  };
-
   return (
-    <Space direction="vertical">
-      <OSwitch checkedValue={'1'} unCheckedValue={'0'} onChange={onChange} value={checked} />
-    </Space>
+    <Form
+      onValuesChange={(value, values) => {
+        console.log('values', value, values);
+      }}
+      labelCol={{ span: 6 }}
+    >
+      <Form.Item label="设置选中值和未选中值格式" name="a">
+        <OSwitch checkedValue={'1'} unCheckedValue={'0'} />
+      </Form.Item>
+      <Form.Item label="查看态" name="a">
+        <OSwitch checkedValue={'1'} unCheckedValue={'0'} readOnly />
+      </Form.Item>
+      <Form.Item label="禁用态" name="a">
+        <OSwitch checkedValue={'1'} unCheckedValue={'0'} disabled />
+      </Form.Item>
+    </Form>
   );
 };
 
