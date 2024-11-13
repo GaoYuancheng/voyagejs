@@ -11,6 +11,6 @@ nav:
 
 # RangePicker
 
-主动设置选中和未选中值 `checkedVaule` & `unCheckedValue`
+支持`format`格式化日期格式
 
 <code src="./index.tsx" ></code>

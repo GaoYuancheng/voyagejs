@@ -11,6 +11,6 @@ nav:
 
 # DatePicker
 
-支持format设置日期格式
+支持`format`格式化日期格式
 
 <code src="./index.tsx" ></code>
