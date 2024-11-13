@@ -1,5 +1,5 @@
 ---
-title: OSwitch
+title: Switch
 order: 10
 nav:
   title: 插件
@@ -9,7 +9,7 @@ nav:
     order: 2
 ---
 
-# OSwitch
+# Switch
 
 主动设置选中和未选中值 `checkedVaule` & `unCheckedValue`
 

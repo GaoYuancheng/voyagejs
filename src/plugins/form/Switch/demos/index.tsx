@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import React from 'react';
-import { OSwitch } from 'voyagejs';
+import { Switch } from 'voyagejs';
 
 const Demo = () => {
   return (
@@ -11,13 +11,13 @@ const Demo = () => {
       labelCol={{ span: 6 }}
     >
       <Form.Item label="设置选中值和未选中值格式" name="a">
-        <OSwitch checkedValue={'1'} unCheckedValue={'0'} />
+        <Switch checkedValue={'1'} unCheckedValue={'0'} />
       </Form.Item>
       <Form.Item label="查看态" name="a">
-        <OSwitch checkedValue={'1'} unCheckedValue={'0'} readOnly />
+        <Switch checkedValue={'1'} unCheckedValue={'0'} readOnly />
       </Form.Item>
       <Form.Item label="禁用态" name="a">
-        <OSwitch checkedValue={'1'} unCheckedValue={'0'} disabled />
+        <Switch checkedValue={'1'} unCheckedValue={'0'} disabled />
       </Form.Item>
     </Form>
   );

@@ -3,19 +3,21 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import type { PluginsType } from '../../../plugins';
 import { QueryTable, QueryTableInstance, QueryTableProps } from '../../../template';
 
+type BaseValueType = React.Key;
+
 export type QueryTableSelectProps<
   RecordType extends object = any,
   Values = any,
   P extends PluginsType = PluginsType,
-> = Omit<QueryTableProps<RecordType, Values, P>, 'remoteDataSource' | 'rowKey' | 'rowSelection'> & {
+> = Omit<QueryTableProps<RecordType, Values, P>, 'remoteDataSource' | 'rowKey' | 'rowSelection' | 'onChange'> & {
   rowKey?: string;
   disabled?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
 } & (
     | {
         labelInValue?: false;
-        onChange?: (val?: string | number) => void;
-        value?: string | number;
+        onChange?: (val?: BaseValueType) => void;
+        value?: BaseValueType;
         rowSelectionType: 'radio';
       }
     | {
@@ -26,8 +28,8 @@ export type QueryTableSelectProps<
       }
     | {
         labelInValue?: false;
-        onChange?: (val?: (string | number)[]) => void;
-        value?: (string | number)[];
+        onChange?: (val?: BaseValueType[]) => void;
+        value?: BaseValueType[];
         rowSelectionType?: 'checkbox';
       }
     | {
@@ -59,22 +61,23 @@ export const QueryTableSelect = <RecordType extends object = any, Values = any, 
           disabled: props.disabled || checkboxDisabled,
         };
       },
-      onChange(key, rows) {
+      onChange: (key, rows) => {
         if (isSingleMode && labelInValue) {
-          onChange?.(rows[0]);
+          // TODO: 打包报错
+          onChange?.(rows[0] as any);
           return;
         }
 
         if (isSingleMode && !labelInValue) {
-          onChange?.(key[0]);
+          onChange?.(key[0] as any);
           return;
         }
         if (!isSingleMode && labelInValue) {
-          onChange?.(rows);
+          onChange?.(rows as any);
           return;
         }
         if (!isSingleMode && !labelInValue) {
-          onChange?.(key);
+          onChange?.(key as any);
           return;
         }
       },
@@ -95,12 +98,14 @@ export const QueryTableSelect = <RecordType extends object = any, Values = any, 
     }
 
     if (!isSingleMode && !labelInValue) {
-      queryTableRef.current!.table.selectedRows = value.map((i) => ({ [rowKey]: i })) as RecordType[];
+      queryTableRef.current!.table.selectedRows = (value as BaseValueType[]).map((i) => ({
+        [rowKey]: i,
+      })) as RecordType[];
       return;
     }
 
     if (!isSingleMode && labelInValue) {
-      queryTableRef.current!.table.selectedRows = value as RecordType[];
+      queryTableRef.current!.table.selectedRows = value as RecordType[] as RecordType[];
       return;
     }
   }, [isSingleMode, value]);

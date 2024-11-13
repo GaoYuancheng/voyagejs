@@ -11,7 +11,7 @@ export * from './QueryActions';
 
 const { useForm } = Form;
 
-export interface QueryTableProps<RecordType = any, Values = any, P extends PluginsType = PluginsType>
+export interface QueryTableProps<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
   extends Pick<TableProps<RecordType>, 'columns' | 'remoteDataSource' | 'initialFilters'> {
   fields: QueryFormProps<Values, P>['items'];
   formProps?: Omit<QueryFormProps<Values, P>, 'form' | 'items' | 'initialValues'>;
@@ -29,7 +29,7 @@ export interface QueryTableInstance<RecordType extends object = any, Values = an
   form: FormStore<Values, P>;
 }
 
-const IQueryTable = <RecordType extends object, Values = any, P extends PluginsType = PluginsType>(
+const IQueryTable = <RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>(
   props: QueryTableProps<RecordType, Values, P>,
   ref: React.Ref<QueryTableInstance<RecordType, Values, P>>,
 ) => {

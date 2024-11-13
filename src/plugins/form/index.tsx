@@ -1,12 +1,8 @@
-import { Cascader, Checkbox, Input, InputNumber, Radio, Select, TreeSelect } from 'antd';
+import { Cascader, Checkbox, Input, Radio, TreeSelect } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
-import { DatePicker } from './DatePicker';
-import { OSwitch as Switch } from './OSwitch';
-import { RangePicker } from './RangePicker';
-import { TimePicker } from './TimePicker';
-import { QueryTableSelect } from './QueryTableSelect';
+import { DatePicker, InputNumber, QueryTableSelect, RangePicker, Select, Switch, TimePicker } from './all';
 
 export * from './all';
 
@@ -72,7 +68,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     },
   },
   inputnumber: {
-    component: InputNumber as any,
+    component: InputNumber,
     defaultComponentProps: {
       placeholder: '请输入',
     },
@@ -121,7 +117,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     },
   },
   select: {
-    component: Select as any,
+    component: Select,
     defaultComponentProps: {
       allowClear: true,
       placeholder: '请选择',
