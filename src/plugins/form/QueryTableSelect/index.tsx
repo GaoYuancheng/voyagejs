@@ -51,6 +51,14 @@ export const QueryTableSelect = <RecordType extends object = any, Values = any, 
     return {
       type: rowSelectionType,
       ...rowSelection,
+      getCheckboxProps: (record) => {
+        const { getCheckboxProps } = rowSelection || {};
+        const { disabled: checkboxDisabled, ...restCheckboxProps } = getCheckboxProps?.(record) || {};
+        return {
+          ...restCheckboxProps,
+          disabled: props.disabled || checkboxDisabled,
+        };
+      },
       onChange(key, rows) {
         if (isSingleMode && labelInValue) {
           onChange?.(rows[0]);
