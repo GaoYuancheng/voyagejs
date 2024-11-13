@@ -13,7 +13,7 @@ export const parsePlugin = (
     return { element: pluginName };
   }
 
-  const plugin = plugins[pluginName];
+  const plugin = plugins[pluginName.toLocaleLowerCase()];
 
   if (!plugin) {
     console.error(`Plugin ${pluginName} not found`);
