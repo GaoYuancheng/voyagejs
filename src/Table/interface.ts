@@ -71,6 +71,8 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
     children?: ColumnType<RecordType>[];
     tooltip?: string | TooltipProps;
     required?: boolean;
+    /** TODO: 数据源，透传筛选框和render插件 */
+    options?: { label: string; value: string }[];
     filterFieldType?: PN | ((ctx: AFilterDropdownProps) => React.ReactNode);
     filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
   } & Omit<AColumnType<RecordType>, 'render' | 'key'>;

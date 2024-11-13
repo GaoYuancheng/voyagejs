@@ -6,7 +6,7 @@ import type { PluginType } from '../interfaces';
 export const parsePlugin = (
   plugins: PluginType,
   pluginName?: any,
-  props?: any,
+  pluginProps?: any,
   ctx?: any,
 ): { element: React.ReactNode; defaultFormItemProps?: any } => {
   if (isFunction(pluginName)) {
@@ -28,7 +28,7 @@ export const parsePlugin = (
 
   return {
     // @ts-expect-error
-    element: <Com {...(defaultComponentProps as any)} {...defaultFilterProps?.(ctx)} {...props} />,
+    element: <Com {...(defaultComponentProps as any)} {...defaultFilterProps?.(ctx)} {...pluginProps} />,
     ...rest,
   };
 };

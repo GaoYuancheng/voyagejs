@@ -5,7 +5,8 @@ import React from 'react';
 import { ColumnTitle } from '../components';
 import type { ModalFormInstance } from '../form';
 import type { PluginsType } from '../plugins';
-import { toStringKey } from '../utils';
+import { parsePlugin } from '../plugins';
+import { pluginStore, toStringKey } from '../utils';
 import { FilterDropdown } from './FilterDropdown';
 import type { ColumnType } from './interface';
 import type { TableStore } from './store';
@@ -25,10 +26,31 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
 
       const dataIndex: string = toStringKey(column.dataIndex) || column.key!;
 
-      //  ===== 改写render参数类型，增加 table modal实例传参 =====
-      const finalRender = column.render
-        ? (value: any, record: RecordType, index: number) => column.render!({ value, record, index, ...getCtx() })
-        : undefined;
+      const getRender = () => {
+        //  ===== 改写render参数类型，增加 table modal实例传参 =====
+        if (isFunction(column.render)) {
+          return (value: any, record: RecordType, index: number) =>
+            column.render!({ value, record, index, ...getCtx() });
+        }
+        // ===== 插件模式 =====
+        if (isString(column.render)) {
+          return (value: any, record: RecordType, index: number) => {
+            const { element } = parsePlugin(pluginStore.getPlugins('cell'), column.render, {
+              value,
+              record,
+              index,
+              options: column.options ?? column.filters,
+              ...getCtx(),
+            });
+            return element;
+          };
+        }
+        // ===== TODO:数组模式 =====
+        if (Array.isArray(column.render)) {
+          return undefined;
+        }
+        return undefined;
+      };
 
       const table = getCtx().table;
 
@@ -94,7 +116,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
         // TODO: Columns should all contain `filteredValue` or not contain `filteredValue`
         ...(filteredValue ? { filteredValue } : {}),
         children: children ? renderColumns(children, props, getCtx, callback) : undefined,
-        render: finalRender,
+        render: getRender(),
         ...(callback ? callback(column) : {}),
       };
     });

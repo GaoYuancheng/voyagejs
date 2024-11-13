@@ -13,8 +13,12 @@ order: 1
 
 ## 示例
 
-<code src="./index.tsx" ></code>
+<code src="./base.tsx" ></code>
 
 ## 表头筛选
 
 <code src="./filter.tsx" ></code>
+
+## Cell 插件
+
+<code src="./cellplugins.tsx" ></code>

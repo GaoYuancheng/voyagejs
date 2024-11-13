@@ -1,4 +1,5 @@
 import React from 'react';
+import { TableInstance } from 'voyagejs/table';
 import type { FilterDropdownProps } from '../table/FilterDropdown';
 
 export type PluginType = {
@@ -14,6 +15,7 @@ export type PluginsType = {
   container: PluginType;
   field: PluginType;
   action: PluginType;
+  cell: PluginType;
 };
 
 export type PluginPropsType<
@@ -25,4 +27,11 @@ export type PluginPropsType<
 export interface FieldBaseProps {
   /** 禁用态 */
   readOnly?: boolean;
+}
+
+export interface CellBaseProps<RecordType extends object = any> {
+  record: RecordType;
+  index: number;
+  value: any;
+  table: TableInstance<RecordType>;
 }

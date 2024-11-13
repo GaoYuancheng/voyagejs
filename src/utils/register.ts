@@ -19,7 +19,12 @@ class PluginStore<T> {
     return this.plugins;
   }
 
-  getPlugins(): T {
+  getPlugins(pluginType: keyof T): T[keyof T];
+  getPlugins(): T;
+  getPlugins(pluginType?: any): any {
+    if (pluginType) {
+      return this.plugins[pluginType];
+    }
     return this.plugins;
   }
 
