@@ -23,7 +23,7 @@ export interface QueryFormProps<Values = any, P extends PluginsType = PluginsTyp
   /** 点击重置时的回调函数 */
   onReset?: () => void;
   /** 只有一个字段时，单一展示 */
-  allowSingleSearch?: boolean;
+  enableMainSearch?: boolean;
   /** 重置按钮属性 */
   resetActionProps?: Omit<ButtonActionProps, 'onClick'>;
   /** 查询按钮属性 */
@@ -38,7 +38,7 @@ export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<V
     form,
     onReset,
     onSearch,
-    allowSingleSearch = true,
+    enableMainSearch = false,
     showFieldsLength = 2,
     defaultCollapse = true,
     resetActionProps,
@@ -53,7 +53,7 @@ export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<V
   const fields = items.filter((i) => i.mode !== FieldMode.HIDDEN && i.hidden !== true && i.mode !== FieldMode.NODE);
 
   const needCollapse = fields.length > showFieldsLength;
-  const isSingleSearch = allowSingleSearch && fields.length === 1;
+  const isSingleSearch = enableMainSearch && fields.length === 1;
 
   // ===== 重置 =====
   const handleReset = useCallback(async () => {

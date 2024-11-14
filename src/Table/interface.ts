@@ -82,8 +82,6 @@ export interface TableProps<RecordType = any, P extends PluginsType = PluginsTyp
   extends Omit<ATableProps<RecordType>, 'dataSource' | 'loading' | 'rowSelection' | 'columns'> {
   /** 远程数据源 */
   remoteDataSource?: (params: RequestParams) => Promise<RequestResult<RecordType>>;
-  /** 默认分页配置 */
-  defaultPagination?: Pagination;
   /** 选中行配置 */
   rowSelection?: true | TableRowSelection<RecordType>;
   /** 初始是否发起一次请求，默认发起请求 */

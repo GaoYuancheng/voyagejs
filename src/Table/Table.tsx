@@ -6,9 +6,9 @@ import React, { Fragment, forwardRef, useEffect, useImperativeHandle, useMemo } 
 import type { ModalFormInstance } from '../form';
 import { useModalForm } from '../form';
 import type { PluginsType } from '../plugins';
+import { renderColumns } from './columns';
 import type { TableProps } from './interface';
 import { TableStore } from './store';
-import { renderColumns } from './columns';
 
 export type TableInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType> = {
   table: TableStore<RecordType>;
@@ -21,6 +21,8 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
 ) => {
   // @ts-expect-error
   const table = useMemo(() => new TableStore<RecordType>(props), [props]);
+
+  const { rowSelection, ...restProps } = props;
 
   const [modalForm, modalCtx] = useModalForm<P>();
 
@@ -53,8 +55,9 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
       <ATable<RecordType>
         rowKey={'id'}
         bordered={false}
-        onChange={table.onTableChange}
+        {...restProps}
         {...toJS(table.tableProps)}
+        onChange={table.onTableChange}
         columns={finalColumns}
       />
     </Fragment>
