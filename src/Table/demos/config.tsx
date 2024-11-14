@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import { draw, isEmpty, random, shake } from 'radash';
+import { draw, random } from 'radash';
 import React from 'react';
 import type { ColumnType, TableProps } from 'voyagejs';
 
@@ -51,7 +51,8 @@ export const remoteDataSource: TableProps<any>['remoteDataSource'] = (params) =>
       description: (
         <pre>
           {JSON.stringify(
-            shake(params, (value) => isEmpty(value)),
+            // shake(params, (value) => isEmpty(value)),
+            params,
             null,
             2,
           )}

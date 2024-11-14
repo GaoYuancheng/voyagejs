@@ -133,15 +133,12 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
     this.filter = this.initialFilters;
     this.sorter = undefined;
     this.params = this.initialParams;
-    // TODO: 重置是否清空选中行？
     this.selectedRows = [];
     this.refresh();
   }
 
   onTableChange: TableProps<RecordType>['onChange'] = (pagination, filters, sorter, ...args) => {
     this.pagination = { ...this.initialPagination, ...pagination };
-
-    const {} = this.filterConvert;
 
     this.filter = Object.keys(filters).reduce((memo, cur) => {
       if (this.filterConvert[cur]) {
@@ -151,6 +148,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       }
       return memo;
     }, {} as any);
+
     this.sorter = sorter;
     this.onChange?.(pagination, filters, sorter, ...args);
     this.refresh();

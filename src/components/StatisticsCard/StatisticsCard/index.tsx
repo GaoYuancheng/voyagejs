@@ -42,7 +42,8 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = (props) => {
 
   return (
     <Card
-      bordered={false}
+      bordered
+      size="small"
       {...rest}
       className={cls(prefixCls, className, {
         [`${prefixCls}-active`]: active,
