@@ -19,7 +19,7 @@ function Plugins() {
         fieldType="switch"
         fieldProps={{
           checkedChildren: 'aa',
-          unCheckedChildren: 'aa',
+          unCheckedChildren: 'bb',
         }}
       />
       <FormItem<any, typeof DEFAULT_PLUGINS>
@@ -55,28 +55,28 @@ function Plugins() {
             name: 'x1',
             label: 'x1',
             rules: [{ required: true, message: '请输入xx' }],
-            fieldType: 'input',
+            fieldType: 'inputnumber',
             fieldProps: {
               placeholder: '请输入xx',
             },
           },
-          {
-            name: 'x2',
-            label: 'x2',
-            fieldType: 'inputnumber',
-            fieldProps: {
-              placeholder: '请输入数字',
-              style: { width: '100%' },
-            },
-            reactions: [
-              {
-                dependencies: ['a1'],
-                result: {
-                  value: `$deps[0]`,
-                },
-              },
-            ],
-          },
+          // {
+          //   name: 'x2',
+          //   label: 'x2',
+          //   fieldType: 'inputnumber',
+          //   fieldProps: {
+          //     placeholder: '请输入数字',
+          //     style: { width: '100%' },
+          //   },
+          //   reactions: [
+          //     {
+          //       dependencies: ['a2'],
+          //       result: {
+          //         value: `$deps[0]`,
+          //       },
+          //     },
+          //   ],
+          // },
           {
             name: 'x3',
             label: 'x3',

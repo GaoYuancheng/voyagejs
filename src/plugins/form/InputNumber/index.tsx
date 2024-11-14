@@ -1,3 +1,4 @@
+import { InputNumber as AInputNumber } from 'antd';
 import { InputNumberProps as AInputNumberProps } from 'antd/es/input-number';
 import { omit } from 'radash';
 import React from 'react';
@@ -13,5 +14,5 @@ export const InputNumber = (props: InputNumberProps) => {
     return <Text>{`${value}`}</Text>;
   }
 
-  return <InputNumber {...omit(props, ['readOnly'])} />;
+  return <AInputNumber {...omit(props, ['readOnly'])} />;
 };

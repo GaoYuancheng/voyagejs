@@ -136,7 +136,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Switch,
     defaultComponentProps: {},
     defaultFormItemProps: {
-      valuePropName: 'checked',
+      // valuePropName: 'checked',
     },
   },
   timepicker: {

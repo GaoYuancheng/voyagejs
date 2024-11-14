@@ -11,7 +11,17 @@ export interface SwitchProps<T = any, K = any> extends Omit<ASwitchProps, 'onCha
 }
 
 export const Switch: React.FC<SwitchProps> = (props) => {
-  const { checkedValue = true, unCheckedValue = false, value, onChange, readOnly, disabled, ...restProps } = props;
+  const {
+    checkedValue = true,
+    unCheckedValue = false,
+    value,
+    onChange,
+    readOnly,
+    disabled,
+    // @ts-expect-error
+    bordered,
+    ...restProps
+  } = props;
 
   return (
     <ASwitch
