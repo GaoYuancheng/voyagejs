@@ -17,7 +17,8 @@ export const parsePlugin = (
     return { element: pluginName };
   }
 
-  const plugin = plugins[pluginName.toLocaleLowerCase()];
+  // 插件名转成小写匹配，并去除特殊字符
+  const plugin = plugins[pluginName.toLocaleLowerCase().replace(/[^\w\s]/g, '')];
 
   if (!plugin) {
     console.error(`Plugin ${pluginName} not found`);

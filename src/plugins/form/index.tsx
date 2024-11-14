@@ -2,7 +2,16 @@ import { Cascader, Checkbox, Input, Radio, TreeSelect } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
-import { DatePicker, InputNumber, QueryTableSelect, RangePicker, Select, Switch, TimePicker } from './all';
+import {
+  CheckboxGroup,
+  DatePicker,
+  InputNumber,
+  QueryTableSelect,
+  RangePicker,
+  Select,
+  Switch,
+  TimePicker,
+} from './all';
 
 export * from './all';
 
@@ -28,8 +37,9 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       };
     },
   },
-  'checkbox.group': {
-    component: Checkbox.Group,
+  // 可以匹配checkbox.group
+  'checkboxgroup': {
+    component: CheckboxGroup,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};

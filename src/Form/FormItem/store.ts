@@ -191,9 +191,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
     };
 
     if (this.mode === FieldMode.VIEW) {
-      displayOptions.bordered = false;
       displayOptions.readOnly = true;
-      displayOptions.disabled = true;
     }
 
     if (this.mode === FieldMode.DISABLED) {

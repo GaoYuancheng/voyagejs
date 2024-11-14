@@ -1,3 +1,4 @@
+export * from './CheckboxGroup';
 export * from './DatePicker';
 export * from './InputNumber';
 export * from './QueryTableSelect';
