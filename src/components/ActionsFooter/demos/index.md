@@ -2,12 +2,8 @@
 nav:
   title: 组件
   order: 5
-  second:
-    title: PageFooter
-    order: 6
-title: PageFooter
-order: 1
-cols: 2
+title: 吸底按钮组 ActionsFooter
+order: 6
 demo:
   cols: 2
 ---

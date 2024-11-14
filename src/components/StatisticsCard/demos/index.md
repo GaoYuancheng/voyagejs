@@ -2,10 +2,7 @@
 nav:
   title: 组件
   order: 5
-  second:
-    title: StatisticsCard
-    order: 6
-title: StatisticsCard
+title: 统计卡片 StatisticsCard
 order: 1
 cols: 2
 demo:

@@ -2,10 +2,7 @@
 nav:
   title: 组件
   order: 5
-  second:
-    title: ColumnTitle
-    order: 4
-title: ColumnTitle
+title: 表格标题 ColumnTitle
 order: 1
 cols: 2
 demo:

@@ -2,12 +2,8 @@
 nav:
   title: 组件
   order: 5
-  second:
-    title: If
-    order: 4
-title: If
-order: 1
-cols: 2
+title: 条件渲染 If
+order: 5
 demo:
   cols: 2
 ---

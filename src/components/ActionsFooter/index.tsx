@@ -2,13 +2,13 @@ import { Affix, Layout } from 'antd';
 import React, { useState } from 'react';
 import { QueryActions, QueryActionsProps } from '../../template';
 
-export interface PageFooterProps extends QueryActionsProps {
+export interface ActionsFooterProps extends QueryActionsProps {
   items: QueryActionsProps['items'];
   contentStyle?: React.CSSProperties;
   footerStyle?: React.CSSProperties;
 }
 
-export const PageFooter: React.FC<PageFooterProps> = (props) => {
+export const ActionsFooter: React.FC<ActionsFooterProps> = (props) => {
   const { children, contentStyle, footerStyle, ...restProps } = props;
   const [affixed, setAffixed] = useState(false);
 

@@ -2,7 +2,7 @@
  * background: '#f6f7f9'
  */
 import React from 'react';
-import { Form, PageFooter } from 'voyagejs';
+import { Form, ActionsFooter } from 'voyagejs';
 
 const { useForm } = Form;
 
@@ -12,7 +12,7 @@ const PageFooterDemo = () => {
   return (
     <div style={{ background: '#f0f2f5', height: '100vh' }}>
       <div style={{ height: '500px' }} />
-      <PageFooter
+      <ActionsFooter
         contentStyle={{}}
         items={[
           {
@@ -40,7 +40,7 @@ const PageFooterDemo = () => {
             },
           ]}
         />
-      </PageFooter>
+      </ActionsFooter>
     </div>
   );
 };

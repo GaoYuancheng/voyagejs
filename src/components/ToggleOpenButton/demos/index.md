@@ -2,10 +2,7 @@
 nav:
   title: 组件
   order: 5
-  second:
-    title: ToggleOpenButton
-    order: 5
-title: ToggleOpenButton
+title: 展开关闭按钮 ToggleOpenButton
 order: 1
 ---
 
