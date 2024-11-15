@@ -47,7 +47,17 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   searchStatus?: TableSearchStatus = TableSearchStatus.SEARCH;
 
-  constructor(props: TableProps<RecordType>) {
+  forceUpdate: () => void;
+
+  constructor(props: TableProps<RecordType>, forceUpdate: () => void) {
+    this.updateProps(props);
+
+    this.forceUpdate = forceUpdate;
+    this.makeObservable();
+    this.setInitialPagination(props);
+  }
+
+  updateProps(props: TableProps<RecordType>) {
     Object.keys(props).forEach((key) => {
       // @ts-ignore
       this[key] = props[key];
@@ -61,9 +71,6 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
         this.initialFilters = clone(props[key]);
       }
     });
-
-    this.makeObservable();
-    this.setInitialPagination(props);
   }
 
   makeObservable() {
@@ -78,6 +85,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       rowSelection: observable,
       noPagination: computed,
       params: observable,
+      tableProps: computed,
     });
   }
 
@@ -175,8 +183,8 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   get tableProps(): ATableProps<RecordType> {
     return {
-      dataSource: this.dataSource,
-      pagination: this.pagination,
+      dataSource: toJS(this.dataSource),
+      pagination: toJS(this.pagination),
       loading: this.loading,
       rowSelection: this.rowSelection
         ? ({

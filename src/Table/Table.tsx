@@ -1,4 +1,4 @@
-import { useWhyDidYouUpdate } from 'ahooks';
+import { useDeepCompareEffect, useUpdate, useWhyDidYouUpdate } from 'ahooks';
 import { Table as ATable } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -19,8 +19,10 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   props: TableProps<RecordType, P>,
   ref: React.Ref<TableInstance<RecordType, P>>,
 ) => {
+  const forceUpdate = useUpdate();
+
   // @ts-expect-error
-  const table = useMemo(() => new TableStore<RecordType>(props), [props]);
+  const table = useMemo(() => new TableStore<RecordType>(props, forceUpdate), []);
 
   const { rowSelection, ...restProps } = props;
 
@@ -42,6 +44,11 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
     }),
     [table, modalCtx],
   );
+
+  useDeepCompareEffect(() => {
+    // @ts-expect-error
+    table.updateProps(props);
+  }, [props]);
 
   // @ts-expect-error
   const finalColumns = renderColumns<RecordType, P>(columns!, { initialFilters: props.initialFilters }, () => ({
