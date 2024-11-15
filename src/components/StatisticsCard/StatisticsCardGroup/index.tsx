@@ -9,12 +9,12 @@ export type StatisticsCardGroupDataType =
   | {
       labelInValue?: true;
       value?: StatisticsCardDataType;
-      onChange?: (value: StatisticsCardDataType) => void;
+      onChange?: (value?: StatisticsCardDataType) => void;
     }
   | {
       labelInValue?: false;
       value?: string | number;
-      onChange?: (value: string | number) => void;
+      onChange?: (value?: string | number) => void;
     };
 
 export type StatisticsCardGroupProps = StatisticsCardGroupDataType &
@@ -37,11 +37,12 @@ export const StatisticsCardGroup: React.FC<StatisticsCardGroupProps> = (props) =
           loading={loading}
           active={!!item.name && (labelInValue ? (value as StatisticsCardDataType)?.name : value) === item.name}
           onClick={(data) => {
+            if (!data.name) return;
             if (labelInValue) {
               // @ts-expect-error
-              onChange?.(data as StatisticsCardDataType);
+              onChange?.(data.name === value ? undefined : (data as StatisticsCardDataType));
             } else {
-              onChange?.(data.name as string | number);
+              onChange?.(data.name === value ? undefined : (data.name as string | number));
             }
           }}
         />
