@@ -68,10 +68,10 @@ export const DEFAULT_CHART_PLUGINS = {
   dualAxes: {
     component: DualAxes,
     defaultComponentProps: (ctx: DefaultComponentPropsCtx) => {
-      const { data = [], ...restOptions } = ctx || {};
+      const { data = [[], []], ...restOptions } = ctx || {};
       return {
         ...restOptions,
-        data: [data, data],
+        data,
         geometryOptions: [
           {
             geometry: 'column',

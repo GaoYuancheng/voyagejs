@@ -42,7 +42,17 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
   const [loading, setLoading] = useState(false);
   const [data, setRemoteData] = useState<any[]>([]);
 
-  const getOptions = (data: any): any => {
+  function renderChart(opts: any) {
+    if (!domRef.current) return;
+    if (chartRef.current) {
+      chartRef.current.update(opts);
+    }
+    if (!type) return;
+    chartRef.current = new DEFAULT_CHART_PLUGINS[type].component(domRef.current, opts);
+    chartRef.current.render(domRef.current);
+  }
+
+  const getOptions = (data?: any): any => {
     if (!type) return {};
     return DEFAULT_CHART_PLUGINS[type].defaultComponentProps({ data, ...options });
   };
@@ -52,7 +62,7 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
     remoteData(params)
       .then((data) => {
         setRemoteData(data);
-        chartRef.current?.update(getOptions(data));
+        renderChart(getOptions(data));
       })
       .finally(() => {
         setLoading(false);
@@ -86,16 +96,6 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
       />
     );
   };
-
-  useEffect(() => {
-    if (!domRef.current) return;
-    if (chartRef.current) return;
-    if (!type) return;
-
-    chartRef.current = new DEFAULT_CHART_PLUGINS[type].component(domRef.current, getOptions([]));
-
-    chartRef.current.render(domRef.current);
-  }, [domRef.current, type]);
 
   const renderChildren = () => {
     return (
