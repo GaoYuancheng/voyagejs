@@ -21,7 +21,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   /** 表单loading状态 */
   optionsLoading?: boolean;
   /** 数据源 */
-  options: any[] = [];
+  options?: any[];
   /** 数据源属性名 */
   optionsPropName: string = 'options';
   /** 远程数据源 */
@@ -157,14 +157,14 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
     return this.remoteOptions(deps)
       .then((data) => {
         runInAction(() => {
-          this.options = data || [];
+          this.options = data;
           this.optionsLoading = false;
         });
       })
       .catch((e) => {
         console.warn(`${this.name} remote options error`, e);
         runInAction(() => {
-          this.options = [];
+          this.options = undefined;
           this.optionsLoading = false;
         });
       });

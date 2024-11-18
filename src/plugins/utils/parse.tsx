@@ -28,8 +28,14 @@ export const parsePlugin = (
   const { component: Com, defaultComponentProps, defaultFilterProps, ...rest } = plugin;
 
   return {
-    // @ts-expect-error
-    element: <Com {...(defaultComponentProps as any)} {...defaultFilterProps?.(ctx)} {...pluginProps} />,
+    element: (
+      // @ts-expect-error
+      <Com
+        {...(isFunction(defaultComponentProps) ? defaultComponentProps(ctx) : (defaultComponentProps as any))}
+        {...defaultFilterProps?.(ctx)}
+        {...pluginProps}
+      />
+    ),
     ...rest,
   };
 };

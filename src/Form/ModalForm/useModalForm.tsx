@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import type { PluginsType } from '../../plugins';
 import type { FormOptionProps, FormProps, FormStore } from '../Form';
 import { Form } from '../Form';
+import type { FormGroupProps } from '../FormGroup';
 import type { ModalProps } from './useModal';
 import { useModal } from './useModal';
 
@@ -31,6 +32,8 @@ export interface ModalFormProps<Values = any, P extends PluginsType = PluginsTyp
   onCancel?: (e: MouseEvent<HTMLElement>, ctx: ModalFormContext<Values, P>) => void;
   /** 表单属性 */
   formProps?: Omit<FormProps<Values, P>, 'form' | 'initialValues'>;
+  /** 表单组属性 */
+  formGroupProps?: Omit<FormGroupProps<Values, P>, 'items'>;
   /** Modal的其他属性 */
   modalProps?: Omit<AModalProps, Exclude<ExcludeModalType, 'confirmLoading'> | 'onOk' | 'onCancel'> & {
     footerRender?: (ctx: ModalFormContext<Values, P>) => ReactNode;
@@ -50,7 +53,7 @@ export const useModalForm = <Values, P extends PluginsType = any>(
 ): [ReactElement, ModalFormInstance<Values, P>] => {
   const [modal, { open, close, isOpen }] = useModal();
 
-  const [form] = useForm(props);
+  const [form] = useForm<Values, P>(props);
 
   const propsRef = useRef<ModalFormProps<Values, P>>();
 
@@ -74,7 +77,8 @@ export const useModalForm = <Values, P extends PluginsType = any>(
       open: (params: ModalFormProps<Values, P>) => {
         propsRef.current = params;
 
-        const { initialValues, onOk, onCancel, modalProps, formProps, items, children, ...restParams } = params;
+        const { initialValues, onOk, onCancel, modalProps, formProps, formGroupProps, items, children, ...restParams } =
+          params;
 
         const { footerRender, footer, ...restModalProps } = modalProps || {};
 
@@ -90,7 +94,8 @@ export const useModalForm = <Values, P extends PluginsType = any>(
         return open({
           ...restParams,
           ...restModalProps,
-          children: items ? <FormGroup items={items} /> : children,
+          // @ts-expect-error
+          children: items ? <FormGroup<Values, P> items={items} {...formGroupProps} /> : children,
           modalProps: {
             footer: renderFooter(),
             ...modalProps,

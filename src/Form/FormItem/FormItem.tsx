@@ -84,10 +84,15 @@ export const FormItem = observer(
       return null;
     }
 
-    const { element: ele, defaultFormItemProps } = parsePlugin(formStore.plugins.field, field.fieldType, {
-      ...toJS(field.fieldProps),
-      ...toJS(field.childProps),
-    });
+    const { element: ele, defaultFormItemProps } = parsePlugin(
+      formStore.plugins.field,
+      field.fieldType,
+      {
+        ...toJS(field.fieldProps),
+        ...toJS(field.childProps),
+      },
+      props,
+    );
 
     const element = (
       <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldChildProps} name={name}>

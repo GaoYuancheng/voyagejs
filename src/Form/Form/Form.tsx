@@ -1,3 +1,4 @@
+import { useDeepCompareEffect } from 'ahooks';
 import { Form as AForm, Spin } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -26,6 +27,10 @@ export const Form = observer(
     useEffect(() => {
       formStore.init(props);
     }, []);
+
+    useDeepCompareEffect(() => {
+      formStore.init(props, false);
+    }, [props]);
 
     const formContextValue = useMemo(() => {
       return formStore;

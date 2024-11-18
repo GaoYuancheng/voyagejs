@@ -11,7 +11,7 @@ export interface FilterDropdownProps<RecordType extends object = any> {
   dataIndex: string;
   fieldType?: string | ((ctx: TableStore<RecordType>) => React.ReactNode);
   fieldProps?: Record<string, any>;
-  ctx: AFilterDropdownProps & { column: ColumnType<RecordType> };
+  ctx: AFilterDropdownProps & ColumnType<RecordType>;
 }
 
 export const FilterDropdown = <RecordType extends object = any, P extends PluginsType = PluginsType>(

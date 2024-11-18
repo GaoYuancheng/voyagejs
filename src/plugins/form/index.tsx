@@ -18,8 +18,11 @@ export * from './all';
 export const DEFAULT_COMPONENT_PLUGINS = {
   cascader: {
     component: Cascader,
-    defaultComponentProps: {
-      placeholder: '请选择',
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        placeholder: `请选择${label || title || ''}`,
+      };
     },
   },
   checkbox: {
@@ -38,7 +41,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     },
   },
   // 可以匹配checkbox.group
-  'checkboxgroup': {
+  checkboxgroup: {
     component: CheckboxGroup,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
@@ -52,7 +55,13 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   datepicker: {
     component: DatePicker,
-    defaultComponentProps: {},
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        style: { width: '100%' },
+        placeholder: `请选择${label || title || ''}`,
+      };
+    },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
@@ -64,9 +73,12 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   input: {
     component: Input,
-    defaultComponentProps: {
-      allowClear: true,
-      placeholder: '请输入',
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        allowClear: true,
+        placeholder: `请输入${label || title || ''}`,
+      };
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
@@ -77,10 +89,33 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       };
     },
   },
+  'input.textarea': {
+    component: Input.TextArea,
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        placeholder: `请输入${label || title || ''}`,
+        allowClear: true,
+      };
+    },
+  },
+  textarea: {
+    component: Input.TextArea,
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        placeholder: `请输入${label || title || ''}`,
+        allowClear: true,
+      };
+    },
+  },
   inputnumber: {
     component: InputNumber,
-    defaultComponentProps: {
-      placeholder: '请输入',
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        placeholder: `请输入${label || title || ''}`,
+      };
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
@@ -116,7 +151,9 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   rangepicker: {
     component: RangePicker,
-    defaultComponentProps: {},
+    defaultComponentProps: {
+      style: { width: '100%' },
+    },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
@@ -128,9 +165,13 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   select: {
     component: Select,
-    defaultComponentProps: {
-      allowClear: true,
-      placeholder: '请选择',
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        allowClear: true,
+        placeholder: `请选择${label || title || ''}`,
+        style: { width: '100%' },
+      };
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
@@ -151,7 +192,9 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   },
   timepicker: {
     component: TimePicker,
-    defaultComponentProps: {},
+    defaultComponentProps: {
+      style: { width: '100%' },
+    },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
       const { setSelectedKeys, selectedKeys } = ctx;
@@ -164,9 +207,12 @@ export const DEFAULT_COMPONENT_PLUGINS = {
   treeselect: {
     // TODO: 类型推断不出来，断言指定
     component: TreeSelect as any,
-    defaultComponentProps: {},
-    defaultFormItemProps: {
-      optionsPropName: 'treeData',
+    defaultComponentProps: (ctx: any) => {
+      const { label, title } = ctx || {};
+      return {
+        optionsPropName: 'treeData',
+        placeholder: `请选择${label || title || ''}`,
+      };
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};

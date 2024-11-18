@@ -297,13 +297,14 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     });
   }
 
-  init(props: FormProps<Values, P>) {
+  init(props: FormProps<Values, P>, refresh: boolean = true) {
     Object.keys(props).forEach((key) => {
       if (key === 'form') return;
       // @ts-expect-error
       this[key] = props[key];
     });
 
+    if (!refresh) return;
     this.refresh();
   }
 

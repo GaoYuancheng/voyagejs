@@ -64,7 +64,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
           return {
             filterDropdown: (p: FilterDropdownProps) => (
               <FilterDropdown<RecordType, P>
-                ctx={{ column, ...p }}
+                ctx={{ ...column, ...p }}
                 dataIndex={column.key!}
                 fieldType={filterFieldType}
                 fieldProps={filterFieldProps}
@@ -79,7 +79,7 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
           };
           return {
             filterDropdown: (p: FilterDropdownProps) => (
-              <FilterDropdown<RecordType, P> ctx={{ column, ...p }} dataIndex={column.key!}>
+              <FilterDropdown<RecordType, P> ctx={{ ...column, ...p }} dataIndex={column.key!}>
                 {filterFieldType(p)}
               </FilterDropdown>
             ),
