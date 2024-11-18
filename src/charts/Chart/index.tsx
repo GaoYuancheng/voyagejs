@@ -20,12 +20,12 @@ export interface ChartProps<Values, P extends PluginsType = PluginsType> {
   options?: any;
 }
 
-export const Chart: React.FC<ChartProps<any, any>> = (props) => {
+export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartProps<Values, P>) => {
   const { title, remoteData, params, fields, type, options } = props;
 
   const prefixCls = usePrefixCls('chart');
 
-  const [form] = useForm();
+  const [form] = useForm<Values, P>();
 
   const domRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
@@ -57,12 +57,13 @@ export const Chart: React.FC<ChartProps<any, any>> = (props) => {
   const renderExtra = () => {
     if (!fields?.length) return null;
     return (
-      <Form
+      <Form<Values, P>
         layout="inline"
         onValuesChange={(_, values) => {
           init(values);
         }}
         form={form}
+        // @ts-expect-error
         items={[
           {
             container: 'space',

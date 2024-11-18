@@ -5,8 +5,8 @@ import type { FilterDropdownProps } from '../table/FilterDropdown';
 export type PluginType = {
   [key: string]: {
     component: React.ComponentType<any>;
-    defaultComponentProps: unknown;
-    defaultFormItemProps?: unknown;
+    defaultComponentProps: any;
+    defaultFormItemProps?: any;
     defaultFilterProps?: (ctx: FilterDropdownProps) => any;
   };
 };
