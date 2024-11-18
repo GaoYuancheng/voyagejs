@@ -137,7 +137,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Radio,
     defaultComponentProps: {},
   },
-  'radio.group': {
+  radiogroup: {
     component: Radio.Group,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {

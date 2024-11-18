@@ -1,7 +1,7 @@
 ---
 nav:
-  title: 组件
-  order: 5
+  title: 图表
+  order: 6
 title: 统计卡片 StatisticsCard
 order: 1
 cols: 2

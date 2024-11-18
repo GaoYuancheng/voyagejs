@@ -22,7 +22,7 @@ export class BaseStore<Values = any, P extends PluginsType = PluginsType> implem
   }
 
   private getVal<K extends keyof BaseProps<Values>>(key: K): BaseProps<Values>[K] {
-    return this.commonProps[key] ?? this._parent[key];
+    return this.commonProps[key] === undefined ? this._parent[key] : this.commonProps[key];
   }
 
   private setVal<K extends keyof BaseProps<Values>>(key: K, val: BaseProps<Values>[K]) {

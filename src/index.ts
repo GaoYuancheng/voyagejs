@@ -4,3 +4,4 @@ export * from './plugins';
 export * from './table';
 export * from './template';
 export * from './utils';
+export * from './charts';

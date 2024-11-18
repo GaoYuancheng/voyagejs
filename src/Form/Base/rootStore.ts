@@ -2,9 +2,9 @@ import { makeObservable, observable } from 'mobx';
 import { BaseProps } from './interface';
 
 export const commonKeys = [
-  'id',
-  'className',
-  'style',
+  // 'id',
+  // 'className',
+  // 'style',
   'bordered',
   'hidden',
   'colon',

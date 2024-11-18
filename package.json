@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
+    "@antv/g2plot": "^2.4.32",
     "ahooks": "^3.8.1",
     "antd": "^4.24.15",
     "classnames": "^2.5.1",

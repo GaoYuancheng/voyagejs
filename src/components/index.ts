@@ -2,7 +2,6 @@ export * from './ColumnTitle';
 export * from './Condition';
 export * from './Icon';
 export * from './ActionsFooter';
-export * from './StatisticsCard';
 export * from './Text';
 export * from './Title';
 export * from './ToggleOpenButton';
