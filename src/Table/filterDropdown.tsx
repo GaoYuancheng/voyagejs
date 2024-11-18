@@ -23,7 +23,7 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 
   const plugins = pluginStore.getPlugins('field');
 
-  const { element } = parsePlugin(plugins, fieldType, fieldProps, ctx);
+  const { element } = parsePlugin(plugins, fieldType, fieldProps, { ...ctx, _filter: true });
 
   return (
     <div>

@@ -30,7 +30,7 @@ export interface QueryFormProps<Values = any, P extends PluginsType = PluginsTyp
   queryActionProps?: Omit<ButtonActionProps, 'onClick'>;
 }
 
-export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values, P>): React.ReactElement => {
+const IQueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values, P>): React.ReactElement => {
   const prefix = usePrefixCls('queryform');
 
   const {
@@ -168,3 +168,15 @@ export const QueryForm = <Values, P extends PluginsType>(props: QueryFormProps<V
     </div>
   );
 };
+
+type InternalQueryFormType = typeof IQueryForm;
+
+export interface QueryFormType extends InternalQueryFormType {
+  useForm: typeof Form.useForm;
+}
+
+const QueryForm = IQueryForm as QueryFormType;
+
+QueryForm.useForm = Form.useForm;
+
+export { QueryForm };
