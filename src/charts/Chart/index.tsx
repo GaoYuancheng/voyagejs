@@ -1,4 +1,4 @@
-import { Card, Empty, Spin } from 'antd';
+import { Card, CardProps, Empty, Spin } from 'antd';
 import { isEmpty } from 'radash';
 import React, { useEffect, useRef, useState } from 'react';
 import { usePrefixCls } from '../../context';
@@ -11,17 +11,26 @@ import './index.less';
 const { useForm } = Form;
 
 export interface ChartProps<Values, P extends PluginsType = PluginsType> {
-  title: string;
+  /** 图表标题 */
+  title?: string;
+  /** 是否显示边框 */
+  bordered?: boolean;
+  /** 图表高度 */
+  height?: number;
+  /** 远程数据 */
   remoteData: (params?: any) => Promise<any>;
-  params: any;
+  /** 外部参数，变化时触发重渲染 */
+  params?: any;
+  /** 表单项 */
   fields?: FormItemProps[];
-
+  /** 卡片组件配置 */
+  cardProps?: Omit<CardProps, 'title' | 'extra'>;
   type?: keyof typeof DEFAULT_CHART_PLUGINS;
   options?: any;
 }
 
 export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartProps<Values, P>) => {
-  const { title, remoteData, params, fields, type, options } = props;
+  const { title, height = 400, remoteData, params, fields, type, options, bordered = false, cardProps } = props;
 
   const prefixCls = usePrefixCls('chart');
 
@@ -92,13 +101,13 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
     return (
       <Spin spinning={loading}>
         <Empty description={null} style={{ display: isEmpty(data) ? 'block' : 'none' }} />
-        <div ref={domRef} style={{ width: '100%', height: 400, display: isEmpty(data) ? 'none' : 'block' }}></div>
+        <div ref={domRef} style={{ width: '100%', height, display: isEmpty(data) ? 'none' : 'block' }}></div>
       </Spin>
     );
   };
 
   return (
-    <Card title={title} extra={renderExtra()} className={prefixCls}>
+    <Card bordered={bordered} {...cardProps} title={title} extra={renderExtra()} className={prefixCls}>
       {renderChildren()}
     </Card>
   );

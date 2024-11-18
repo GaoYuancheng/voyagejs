@@ -22,6 +22,7 @@ export const DEFAULT_CHART_PLUGINS = {
         },
         legend: {
           position: 'right',
+          offsetX: -30,
           itemValue: {
             alignRight: true,
             formatter: (text: string) => {
