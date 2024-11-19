@@ -25,7 +25,7 @@ export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = O
       /** 联动关系 */
       reactions?: ReactionType[];
       /** 插件名称 */
-      fieldType?: CN;
+      fieldType?: CN | React.ReactElement;
       /** 插件属性 */
       fieldProps?: PluginPropsType<P, 'field', CN extends string ? CN : never>;
     };
