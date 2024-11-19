@@ -1,6 +1,5 @@
 import { useDeepCompareEffect } from 'ahooks';
 import { Form as AForm, Spin } from 'antd';
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { omit } from 'radash';
 import React, { PropsWithChildren, useEffect, useMemo } from 'react';
@@ -48,7 +47,7 @@ export const Form = observer(
         <Spin spinning={formStore.enableLoading ? formStore.loading : false} {...spinProps}>
           <AForm<Values>
             {...restProps}
-            {...toJS(formStore.formProps)}
+            {...formStore.formProps}
             form={aForm}
             onValuesChange={(changeValues, values) => {
               formStore.innerValueChange(changeValues);

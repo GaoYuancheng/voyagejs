@@ -89,7 +89,7 @@ export const FormItem = observer(
       field.fieldType || children,
       {
         ...toJS(field.fieldProps),
-        ...toJS(field.childProps),
+        ...field.childProps,
       },
       props,
     );

@@ -326,9 +326,10 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   init(props: FormProps<Values, P>) {
     this.updateProps(props);
 
-    if (this.form.getFieldsValue()) {
-      debugger;
-      this.initReactionResult(this.form.getFieldsValue());
+    const initialValues = this.form.getFieldsValue();
+
+    if (!isEmpty(initialValues)) {
+      this.initReactionResult(initialValues);
     }
 
     this.refresh();
