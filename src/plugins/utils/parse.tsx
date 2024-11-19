@@ -1,5 +1,5 @@
 import { isFunction, isString } from 'radash';
-import React from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import type { PluginType } from '../interfaces';
 
 // 使用插件
@@ -11,6 +11,10 @@ export const parsePlugin = (
 ): { element: React.ReactNode; defaultFormItemProps?: any } => {
   if (isFunction(pluginName)) {
     return { element: pluginName(ctx) };
+  }
+
+  if (isValidElement(pluginName)) {
+    return { element: cloneElement(pluginName, pluginProps) };
   }
 
   if (!isString(pluginName)) {
