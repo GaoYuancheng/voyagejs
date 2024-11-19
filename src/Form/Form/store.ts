@@ -252,38 +252,56 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     this.triggerReactions(value);
   };
 
-  triggerReactions(value: Values) {
+  triggerReactions(value: Values, ignoreValueChange = false) {
     runInAction(() => {
-      this.triggerChange(this.effects, value, ({ name: effectName, result, dependencies }, changeName) => {
-        if (!result) return;
-        // @ts-expect-error
-        Object.keys(result).forEach((key: keyof typeof result) => {
-          let resultValue;
+      this.triggerChange(this.effects, value, (config, changeName) => {
+        const changeValue = this.getField(changeName).value;
+        this.reactionResults(config, changeValue, ignoreValueChange);
+      });
+    });
+  }
 
-          const changeValue = this.getField(changeName).value;
-          const depValues = dependencies ? dependencies.map((depName) => this.getField(depName).value) : [];
-          if (isFunction(result![key])) {
-            resultValue = (result![key] as ReactionResultFunctionType<any>)(changeValue);
-          } else if (isString(result![key])) {
-            {
-              resultValue = new Function('$root', `with($root) { return (${result![key]}); }`)({
-                $self: changeValue,
-                $deps: depValues,
-                $values: this.values,
-              });
-            }
-          } else {
-            resultValue = result![key];
-          }
+  reactionResults(config: InnerDependencyType, changeValue: any, ignoreValueChange = false) {
+    const { result, dependencies, name: effectName } = config;
+    if (!result) return;
+    // @ts-expect-error
+    Object.keys(result).forEach((key: keyof typeof result) => {
+      let resultValue;
 
-          // @ts-expect-error
-          this.getField(effectName)[key] = resultValue;
+      const depValues = dependencies ? dependencies.map((depName) => this.getField(depName).value) : [];
+      if (isFunction(result![key])) {
+        resultValue = (result![key] as ReactionResultFunctionType<any>)(changeValue);
+      } else if (isString(result![key])) {
+        {
+          resultValue = new Function('$root', `with($root) { return (${result![key]}); }`)({
+            $self: changeValue,
+            $deps: depValues,
+            $values: this.values,
+          });
+        }
+      } else {
+        resultValue = result![key];
+      }
 
-          // 循环触发 a -> b -> c
-          if (key === 'value') {
-            this.triggerReactions({ [effectName]: resultValue } as Values);
-          }
-        });
+      // 获取initialValue和remoteValues时，不触发值联动
+      if (ignoreValueChange && key === 'value') return;
+
+      // @ts-expect-error
+      this.getField(effectName)[key] = resultValue;
+
+      // 循环触发 a -> b -> c
+      if (key === 'value') {
+        this.triggerReactions({ [effectName]: resultValue } as Values);
+      }
+    });
+  }
+
+  /** 根据initialValues和remoteValues初始化联动结果 */
+  initReactionResult(values: Values) {
+    Object.keys(this.effects).forEach((effectName) => {
+      const changeValue = this.getField(effectName).value;
+      this.effects[effectName].forEach((config) => {
+        this.reactionResults(config, changeValue, true);
       });
     });
   }
@@ -297,14 +315,22 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     });
   }
 
-  init(props: FormProps<Values, P>, refresh: boolean = true) {
+  updateProps(props: FormProps<Values, P>) {
     Object.keys(props).forEach((key) => {
       if (key === 'form') return;
       // @ts-expect-error
       this[key] = props[key];
     });
+  }
 
-    if (!refresh) return;
+  init(props: FormProps<Values, P>) {
+    this.updateProps(props);
+
+    if (this.form.getFieldsValue()) {
+      debugger;
+      this.initReactionResult(this.form.getFieldsValue());
+    }
+
     this.refresh();
   }
 
@@ -314,6 +340,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       this.remoteValues()
         .then((values) => {
           this.form?.setFieldsValue(values);
+          this.initReactionResult(values);
           this.loading = false;
         })
         .catch(() => {

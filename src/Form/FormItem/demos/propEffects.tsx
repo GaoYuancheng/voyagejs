@@ -8,6 +8,7 @@ function PropEffects() {
   return (
     <Form
       form={form}
+      initialValues={{ a: '1' }}
       onValuesChange={(_, values) => {
         console.log('values', values);
       }}

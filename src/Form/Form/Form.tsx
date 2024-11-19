@@ -29,7 +29,7 @@ export const Form = observer(
     }, []);
 
     useDeepCompareEffect(() => {
-      formStore.init(props, false);
+      formStore.updateProps(props);
     }, [props]);
 
     const formContextValue = useMemo(() => {
