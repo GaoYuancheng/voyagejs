@@ -27,10 +27,12 @@ export interface ChartProps<Values, P extends PluginsType = PluginsType> {
   cardProps?: Omit<CardProps, 'title' | 'extra'>;
   type?: keyof typeof DEFAULT_CHART_PLUGINS;
   options?: any;
+
+  onElementClick?: (data: any) => void;
 }
 
 export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartProps<Values, P>) => {
-  const { title, height = 400, remoteData, params, fields, type, options, bordered = false, cardProps } = props;
+  const { title, height = 400, remoteData, params, fields, type, options, bordered = false, cardProps, onElementClick } = props;
 
   const prefixCls = usePrefixCls('chart');
 
@@ -50,6 +52,12 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
     if (!type) return;
     chartRef.current = new DEFAULT_CHART_PLUGINS[type].component(domRef.current, opts);
     chartRef.current.render(domRef.current);
+
+    chartRef.current.off('element:click');
+
+    chartRef.current.on('element:click', (e: any) => {
+      onElementClick?.(e.data.data);
+    });
   }
 
   const getOptions = (data?: any): any => {

@@ -19,24 +19,26 @@ export type StatisticsCardGroupDataType =
 
 export type StatisticsCardGroupProps = StatisticsCardGroupDataType &
   Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'onClick'> & {
-    options?: StatisticsCardProps[];
+    items?: StatisticsCardProps[];
     loading?: boolean;
+    onClick?: StatisticsCardProps['onClick'];
   };
 
 export const StatisticsCardGroup: React.FC<StatisticsCardGroupProps> = (props) => {
-  const { options, value, labelInValue = false, onChange, loading = false, ...rest } = props;
+  const { items, value, labelInValue = false, onChange, loading = false, onClick, ...rest } = props;
 
   const prefixCls = usePrefixCls('statistics-group');
 
   const render = () => {
-    return options?.map((item, idx) => {
+    return items?.map((item, idx) => {
       return (
         <StatisticsCard
           key={idx}
           {...item}
           loading={loading}
           active={!!item.name && (labelInValue ? (value as StatisticsCardDataType)?.name : value) === item.name}
-          onClick={(data) => {
+          onClick={(data, e) => {
+            onClick?.(data, e);
             if (!data.name) return;
             if (labelInValue) {
               // @ts-expect-error

@@ -26,13 +26,7 @@ export interface StatisticsCardProps extends StatisticsCardDataType, Omit<CardPr
   /** 是否选中 */
   active?: boolean;
 
-  onClick?: (
-    data: {
-      name: StatisticsCardProps['name'];
-      value: StatisticsCardProps['value'];
-    },
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => void;
+  onClick?: (data: StatisticsCardDataType, e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const StatisticsCard: React.FC<StatisticsCardProps> = (props) => {
@@ -50,7 +44,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = (props) => {
         [`${prefixCls}-hover`]: !!onClick,
       })}
       onClick={(e) => {
-        onClick?.({ name, value }, e);
+        onClick?.({ name, value, label }, e);
       }}
     >
       <div className={`${prefixCls}-wrapper`}>

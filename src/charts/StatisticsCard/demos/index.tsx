@@ -63,7 +63,7 @@ const Demo = () => {
         labelInValue
         value={value}
         onChange={setValue}
-        options={[
+        items={[
           { label: '总访问量1', value: '1', unit: '次', name: 'name1' },
           { label: '总访问量2', value: '2', unit: '次', name: 'name2' },
           { label: '总访问量3', value: '3', unit: '次', name: 'name3' },
