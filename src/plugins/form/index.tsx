@@ -89,7 +89,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       };
     },
   },
-  'input.textarea': {
+  'inputtextarea': {
     component: Input.TextArea,
     defaultComponentProps: (ctx: any) => {
       const { label, title } = ctx || {};

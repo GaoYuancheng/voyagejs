@@ -55,10 +55,11 @@ function Demo() {
                   <div style={{ flex: 1 }}>
                     <Form.Group<any, typeof DEFAULT_PLUGINS>
                       name={['group', name]}
+                      prefixName={name}
                       rowProps={{ gutter: 8 }}
                       items={[
                         {
-                          name: [name, 'name'],
+                          name: ['name'],
                           span: 12,
                           style: { marginBottom: 0 },
                           fieldType: 'select',
@@ -78,7 +79,7 @@ function Demo() {
                           },
                         },
                         {
-                          name: [name, 'postId'],
+                          name: ['postId'],
                           span: 12,
                           style: { marginBottom: 0 },
                           fieldType: 'input',

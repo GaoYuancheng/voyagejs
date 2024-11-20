@@ -6,7 +6,7 @@ import { omit } from 'radash';
 import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import type { PluginsType } from '../../plugins';
 import { parsePlugin } from '../../plugins';
-import { toArray } from '../../utils';
+import { isNill, toArray } from '../../utils';
 import { FieldMode, commonKeys } from '../Base';
 import { useFormContext } from '../Form/context';
 import { useFormGroupContext } from '../FormGroup';
@@ -34,13 +34,14 @@ export const FormItem = observer(
 
     const formStore = useFormContext();
     const groupStore = useFormGroupContext();
-    const listCtx = useFormListContext();
+    const listStore = useFormListContext();
 
     const form = useFormInstance();
 
     const forceUpdate = () => update({});
 
-    const fieldName = listCtx.name ? [...toArray(listCtx.name), ...toArray(name)] : name;
+    const fullName = !isNill(groupStore?.prefixName) ? [...toArray(groupStore.prefixName), ...toArray(name)] : name;
+    const fieldName = !isNill(listStore?.name) ? [...toArray(listStore.name), ...toArray(fullName)] : fullName;
 
     const field = useMemo(() => {
       return formStore.createField(
@@ -95,7 +96,7 @@ export const FormItem = observer(
     );
 
     const element = (
-      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldChildProps} name={name}>
+      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldChildProps} name={fullName}>
         {ele}
       </Item>
     );

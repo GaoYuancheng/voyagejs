@@ -9,6 +9,8 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
   // Omit<FormGroupProps<Values, P>, 'form'>,
   implements BaseProps<Values>
 {
+  prefixName?: FormGroupProps<Values, P>['prefixName'] = [];
+
   name?: FormGroupProps<Values, P>['name'];
 
   items?: FormGroupProps<Values, P>['items'];
