@@ -1,6 +1,6 @@
 import { Button, Input, Select, Space } from 'antd';
 import React, { memo, useEffect } from 'react';
-import { FormGroup, useModalForm } from 'voyagejs';
+import { DefaultPluginsType, FormGroup, useModalForm } from 'voyagejs';
 
 const SaveModal = memo(() => {
   useEffect(() => {
@@ -44,7 +44,7 @@ const SaveModal = memo(() => {
 });
 
 const ModalForm = () => {
-  const [modalForm, { open: openModalForm, close: closeModalForm }] = useModalForm();
+  const [modalForm, { open: openModalForm, close: closeModalForm }] = useModalForm<any, DefaultPluginsType>();
   const [modalForm2, { open: openModalForm2, close: closeModalForm2 }] = useModalForm();
 
   return (

@@ -13,19 +13,19 @@ export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = O
   AFormItemProps<Values>,
   keyof BaseProps
 > &
-  BaseProps &
-  {
+  BaseProps & {
+    /** 数据源类型 */
+    options?: any[];
+    /** 数据源属性名 */
+    optionsPropName?: string;
+    /** 远程数据源 */
+    remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
+    /** 联动关系 */
+    reactions?: ReactionType[];
+  } & {
     [CN in keyof P['field']]: {
-      /** 数据源类型 */
-      options?: any[];
-      /** 数据源属性名 */
-      optionsPropName?: string;
-      /** 远程数据源 */
-      remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
-      /** 联动关系 */
-      reactions?: ReactionType[];
       /** 插件名称 */
-      fieldType?: CN | React.ReactElement;
+      fieldType?: CN;
       /** 插件属性 */
       fieldProps?: PluginPropsType<P, 'field', CN extends string ? CN : never>;
     };
