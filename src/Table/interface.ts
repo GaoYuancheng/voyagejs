@@ -56,29 +56,40 @@ export type RequestResult<RecordType = any> = {
   pageSize: number;
 };
 
-export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
-  [PN in keyof P['field']]: {
-    render?:
-      | ((ctx: {
-          value: RecordType;
-          index: number;
-          table: any;
-          record: RecordType;
-          modal: ModalFormInstance<any, PluginsType>;
-        }) => ReactElement)
-      | string;
-    key?: string;
-    /** 列显示状态，为false时隐藏列 */
-    visible?: boolean;
-    children?: ColumnType<RecordType>[];
-    tooltip?: string | TooltipProps;
-    required?: boolean;
-    /** TODO: 数据源，透传筛选框和render插件 */
-    options?: { label: string; value: string }[];
-    filterFieldType?: PN | ((ctx: AFilterDropdownProps) => React.ReactNode);
-    filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
-  } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
-}[keyof P['field']];
+export type ColumnType<RecordType, P extends PluginsType = PluginsType> = (
+  | {
+      render?:
+        | ((ctx: {
+            value: RecordType;
+            index: number;
+            table: any;
+            record: RecordType;
+            modal: ModalFormInstance<any, PluginsType>;
+          }) => ReactElement)
+        | string;
+    }
+  | {
+      [PN in keyof P['cell']]: {
+        render?: PN;
+        /** TODO: 透传给插件的参数 */
+        renderProps?: any;
+      };
+    }[keyof P['cell']]
+) & {
+  key?: string;
+  /** 列显示状态，为false时隐藏列 */
+  visible?: boolean;
+  children?: ColumnType<RecordType>[];
+  tooltip?: string | TooltipProps;
+  required?: boolean;
+  /** TODO: 数据源，透传筛选框和render插件 */
+  options?: { label: string; value: string }[];
+} & {
+    [PN in keyof P['field']]: {
+      filterFieldType?: PN | ((ctx: AFilterDropdownProps) => React.ReactNode);
+      filterFieldProps?: PluginPropsType<P, 'field', PN extends string ? PN : never>;
+    } & Omit<AColumnType<RecordType>, 'render' | 'key'>;
+  }[keyof P['field']];
 
 export interface TableProps<RecordType = any, P extends PluginsType = PluginsType>
   extends Omit<ATableProps<RecordType>, 'dataSource' | 'loading' | 'rowSelection' | 'columns'> {

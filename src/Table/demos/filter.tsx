@@ -46,6 +46,7 @@ const TableFilterDemo = () => {
               allowClear: true,
               placeholder: '请输入',
             },
+            render: 'holder',
           },
           {
             key: 'senderName',
