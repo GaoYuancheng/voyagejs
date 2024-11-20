@@ -27,11 +27,6 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
       const dataIndex: string = toStringKey(column.dataIndex) || column.key!;
 
       const getRender = () => {
-        //  ===== 改写render参数类型，增加 table modal实例传参 =====
-        if (isFunction(column.render)) {
-          return (value: any, record: RecordType, index: number) =>
-            column.render!({ value, record, index, ...getCtx() });
-        }
         // ===== 插件模式 =====
         if (isString(column.render)) {
           return (value: any, record: RecordType, index: number) => {
@@ -45,6 +40,13 @@ export function renderColumns<RecordType extends object = any, P extends Plugins
             return element;
           };
         }
+
+        //  ===== 改写render参数类型，增加 table modal实例传参 =====
+        if (isFunction(column.render)) {
+          return (value: any, record: RecordType, index: number) =>
+            (column.render as any)({ value, record, index, ...getCtx() });
+        }
+
         // ===== TODO:数组模式 =====
         if (Array.isArray(column.render)) {
           return undefined;

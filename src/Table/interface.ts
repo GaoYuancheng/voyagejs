@@ -58,13 +58,15 @@ export type RequestResult<RecordType = any> = {
 
 export type ColumnType<RecordType, P extends PluginsType = PluginsType> = {
   [PN in keyof P['field']]: {
-    render?: (ctx: {
-      value: RecordType;
-      index: number;
-      table: any;
-      record: RecordType;
-      modal: ModalFormInstance<any, PluginsType>;
-    }) => ReactElement;
+    render?:
+      | ((ctx: {
+          value: RecordType;
+          index: number;
+          table: any;
+          record: RecordType;
+          modal: ModalFormInstance<any, PluginsType>;
+        }) => ReactElement)
+      | string;
     key?: string;
     /** 列显示状态，为false时隐藏列 */
     visible?: boolean;
