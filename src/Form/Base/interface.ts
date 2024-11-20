@@ -11,7 +11,7 @@ export enum FieldMode {
   /** 隐藏状态，渲染组件 */
   HIDDEN = 'hidden',
   /** 隐藏状态，不渲染组件 */
-  NODE = 'none',
+  NONE = 'none',
 }
 
 export interface BaseProps<Values = any> {

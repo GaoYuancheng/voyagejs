@@ -80,7 +80,7 @@ export const FormItem = observer(
       field.updateProps({ ...props, name: fieldName } as FormItemProps<any>);
     }, [props, fieldName]);
 
-    if (field.mode === FieldMode.NODE) {
+    if (field.mode === FieldMode.NONE) {
       return null;
     }
 

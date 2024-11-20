@@ -47,7 +47,7 @@ function Destroy() {
       <Button
         onClick={() => {
           const field = form.getField('a');
-          field.mode = FieldMode.NODE;
+          field.mode = FieldMode.NONE;
         }}
       >
         移除

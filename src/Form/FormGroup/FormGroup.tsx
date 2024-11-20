@@ -85,7 +85,7 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
     container = <div style={{ display: 'none' }}></div>;
   }
 
-  if (group.mode === FieldMode.NODE) {
+  if (group.mode === FieldMode.NONE) {
     return null;
   }
 

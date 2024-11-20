@@ -50,7 +50,7 @@ function ItemInstance(props: any) {
           data-testid="remove"
           onClick={() => {
             const field = form.getField('a');
-            field.mode = FieldMode.NODE;
+            field.mode = FieldMode.NONE;
           }}
         >
           移除
