@@ -6,6 +6,8 @@ import type { BaseProps } from '../Base';
 import type { FormItemProps } from '../FormItem';
 
 type FormGroupPropsType<Values = any, P extends PluginsType = PluginsType> = {
+  /** 标题 */
+  title?: string;
   /** Item名称前缀 */
   prefixName?: NamePath;
   /** 组唯一标识 */

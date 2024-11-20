@@ -207,6 +207,8 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   removeField(name: NamePath) {
     const field = this.getField(name);
 
+    if (!field) return;
+
     // 清空dependencies的关联关系
     field.dependencies?.forEach((depName) => {
       this.deps[this.getName(depName)] = this.deps[this.getName(depName)].filter(

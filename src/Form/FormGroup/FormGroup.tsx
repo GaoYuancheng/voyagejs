@@ -1,7 +1,9 @@
+import { useDeepCompareEffect } from 'ahooks';
 import { Row } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, cloneElement, useEffect, useMemo } from 'react';
+import { Title } from '../../components';
 import type { PluginsType } from '../../plugins';
 import { parsePlugin } from '../../plugins';
 import { FieldMode } from '../Base';
@@ -36,6 +38,11 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
       formStore.removeGroup(name);
     };
   }, []);
+
+  useDeepCompareEffect(() => {
+    // @ts-expect-error
+    group.updateProps(props as FormGroupProps<Values, P>);
+  }, [props]);
 
   const isGroup = (item: any): item is FormGroupProps<Values, P> => {
     return !!item.container || !!item.items;
@@ -77,6 +84,8 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
   let container;
   if (group.container) {
     container = ele;
+  } else if (group.container === null) {
+    container = <div />;
   } else {
     container = <Row {...toJS(group.rowProps)}></Row>;
   }
@@ -91,7 +100,8 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
 
   return (
     <FormGroupContext.Provider value={group}>
-      {container ? cloneElement(container as any, group.containerProps, element) : element}
+      {group.title && <Title style={{ marginBottom: 12 }}>{group.title}</Title>}
+      {container ? cloneElement(container as any, group.containerProps || {}, element) : element}
     </FormGroupContext.Provider>
   );
 });

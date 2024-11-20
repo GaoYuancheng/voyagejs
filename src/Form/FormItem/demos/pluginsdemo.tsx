@@ -1,19 +1,27 @@
 import { Divider } from 'antd';
 import React from 'react';
-import { DEFAULT_PLUGINS, Form, FormGroup, FormItem, DEFAULT_PLUGINS as plugins, useForm } from 'voyagejs';
+import {
+  DEFAULT_PLUGINS,
+  DefaultPluginsType,
+  Form,
+  FormGroup,
+  FormItem,
+  DEFAULT_PLUGINS as plugins,
+  useForm,
+} from 'voyagejs';
 
 function Plugins() {
   const [form] = useForm({ plugins });
 
   return (
-    <Form<any, typeof DEFAULT_PLUGINS>
+    <Form<any, DefaultPluginsType>
       form={form}
       labelCol={{ style: { width: 50 } }}
       onValuesChange={(_, values) => {
         console.log('values', values);
       }}
     >
-      <FormItem<any, typeof DEFAULT_PLUGINS>
+      <FormItem<any, DefaultPluginsType>
         name={'a1'}
         label="a1"
         fieldType="switch"

@@ -22,6 +22,7 @@ export class ListStore<Values = any, P extends PluginsType = PluginsType> extend
     getGroupStore: () => GroupStore<Values, P>,
   ) {
     super(getFormStore, getGroupStore);
+    super.makeObservable();
     this._props = props;
     this.form = form;
     this.updateProps(props);

@@ -41,7 +41,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     },
   },
   // 可以匹配checkbox.group
-  checkboxgroup: {
+  'checkbox.group': {
     component: CheckboxGroup,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
@@ -89,7 +89,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
       };
     },
   },
-  'inputtextarea': {
+  'input.textarea': {
     component: Input.TextArea,
     defaultComponentProps: (ctx: any) => {
       const { label, title } = ctx || {};
@@ -137,7 +137,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     component: Radio,
     defaultComponentProps: {},
   },
-  radiogroup: {
+  'radio.group': {
     component: Radio.Group,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {

@@ -84,10 +84,10 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   /** 子节点的值的属性 */
   valuePropName?: FormItemProps<Values, P>['valuePropName'];
 
-  _props: FormItemProps<Values, P>;
+  _props?: FormItemProps<Values, P>;
 
   constructor(
-    props: FormItemProps<Values>,
+    props: FormItemProps<Values, P>,
     form: FormInstance<Values>,
     getFormStore: () => FormStore<Values, P>,
     getGroupStore: () => GroupStore<Values, P>,

@@ -10,5 +10,5 @@ export const Card: React.FC<ACardProps> = observer((props) => {
 
   formStore.enableLoading = false;
 
-  return <ACard {...props} loading={formStore.loading} />;
+  return <ACard {...props} loading={formStore.loading || props.loading} />;
 });

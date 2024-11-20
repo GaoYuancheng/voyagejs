@@ -48,9 +48,9 @@ export const FormItem = observer(
         fieldName as string,
         // @ts-expect-error
         new FieldStore<Values, P>(
-          // @ts-expect-error
           { ...props, name: fieldName },
           form,
+          // @ts-expect-error
           () => formStore,
           () => groupStore,
           forceUpdate,

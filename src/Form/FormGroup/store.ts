@@ -15,6 +15,8 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
 
   items?: FormGroupProps<Values, P>['items'];
 
+  title?: FormGroupProps<Values, P>['title'];
+
   rowProps?: FormGroupProps<Values, P>['rowProps'];
 
   /** 容器 */
@@ -29,13 +31,17 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
   ) {
     super(getFormStore, getGroupStore);
 
+    this.updateProps(props);
+
+    super.makeObservable();
+    this.makeObservable();
+  }
+
+  updateProps(props: FormGroupProps<Values, P>) {
     Object.keys(props).forEach((key) => {
       // @ts-expect-error
       this[key] = props[key];
     });
-
-    super.makeObservable();
-    this.makeObservable();
   }
 
   makeObservable() {
@@ -43,6 +49,7 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
       items: observable.shallow,
       container: observable,
       containerProps: observable.deep,
+      title: observable.ref,
       // containerPlugin: computed,
     });
   }

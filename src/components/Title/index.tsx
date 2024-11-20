@@ -9,7 +9,7 @@ export interface TitleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
 }
 
 export const Title: React.FC<TitleProps> = (props) => {
-  const { children, className, style = {}, ...restProps } = props;
+  const { children, className, ...restProps } = props;
   const prefix = usePrefixCls('custom-title');
 
   return (

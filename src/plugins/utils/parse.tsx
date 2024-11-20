@@ -22,7 +22,7 @@ export const parsePlugin = (
   }
 
   // 插件名转成小写匹配，并去除特殊字符
-  const plugin = plugins[pluginName.toLocaleLowerCase().replace(/[^\w\s]/g, '')];
+  const plugin = plugins[pluginName.toLocaleLowerCase() /** replace(/[^\w\s]/g, '') */];
 
   if (!plugin) {
     console.error(`Plugin ${pluginName} not found`);
@@ -35,7 +35,6 @@ export const parsePlugin = (
 
   return {
     element: (
-      // @ts-expect-error
       <Com
         {...(isFunction(defaultComponentProps) ? defaultComponentProps(ctx) : (defaultComponentProps as any))}
         {...(_filter && defaultFilterProps ? defaultFilterProps(ctx) : {})}
