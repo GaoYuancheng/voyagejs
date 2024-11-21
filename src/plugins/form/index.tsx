@@ -212,9 +212,11 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultComponentProps: (ctx: any) => {
       const { label, title } = ctx || {};
       return {
-        optionsPropName: 'treeData',
         placeholder: `请选择${label || title || ''}`,
       };
+    },
+    defaultFormItemProps: {
+      optionsPropName: 'treeData',
     },
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};

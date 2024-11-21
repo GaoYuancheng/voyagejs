@@ -25,6 +25,9 @@ const Demo = () => {
             name: 'mode',
             label: '模式',
             fieldType: 'radio.group',
+            fieldProps: {
+              optionType: 'button',
+            },
             options: [
               { label: '编辑', value: FieldMode.EDIT },
               { label: '预览', value: FieldMode.VIEW },

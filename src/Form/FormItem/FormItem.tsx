@@ -99,7 +99,12 @@ export const FormItem = observer(
     );
 
     const element = (
-      <Item<Values> {...defaultFormItemProps} {...restProps} {...field.fieldChildProps} name={fullName}>
+      <Item<Values>
+        {...omit(defaultFormItemProps, ['optionsPropName'])}
+        {...restProps}
+        {...field.fieldChildProps}
+        name={fullName}
+      >
         {ele}
       </Item>
     );
