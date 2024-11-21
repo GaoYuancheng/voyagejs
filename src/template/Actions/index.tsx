@@ -27,13 +27,12 @@ export type ActionItem<Ctx> =
   | ({
       actionType: 'dropdown';
       items: DropdownActionItemType<Ctx>[];
-    } & Omit<DropdownProps, 'items' | 'onClick'>)
-  | ((ctx: Ctx) => React.ReactNode);
+    } & Omit<DropdownProps, 'items' | 'onClick'>);
 
 type FnActionType<Ctx> = (ctx?: Ctx) => React.ReactNode;
 
 export interface ActionsProps<Ctx = any> extends React.HTMLAttributes<HTMLDivElement> {
-  items?: ActionItem<Ctx>[] | FnActionType<Ctx>;
+  items?: (ActionItem<Ctx> | FnActionType<Ctx>)[] | FnActionType<Ctx>;
   getCtx?: () => Ctx;
 }
 
@@ -79,7 +78,15 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
     return <Space>{element}</Space>;
   };
 
-  if (!items?.length) return <Fragment />;
+  if (
+    Array.isArray(items) &&
+    !items.filter((item) => {
+      if (isFunction(item)) return item !== null;
+      return item.render !== false;
+    }).length
+  ) {
+    return <Fragment />;
+  }
 
   return <div {...restProps}>{renderActions(items)}</div>;
 };
