@@ -3,6 +3,7 @@ import React from 'react';
 import {
   DEFAULT_PLUGINS,
   DefaultPluginsType,
+  FieldMode,
   Form,
   FormGroup,
   FormItem,
@@ -20,6 +21,7 @@ function Plugins() {
       onValuesChange={(_, values) => {
         console.log('values', values);
       }}
+      mode={FieldMode.VIEW}
     >
       <FormItem<any, DefaultPluginsType>
         name={'a1'}

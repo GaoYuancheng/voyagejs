@@ -22,6 +22,10 @@ export type FormItemProps<Values = any, P extends PluginsType = PluginsType> = O
     remoteOptions?: (depValues?: any[]) => Promise<any[] | undefined>;
     /** 联动关系 */
     reactions?: ReactionType[];
+    /** 预览模式渲染 */
+    viewFieldType?: any;
+    /** 预览模式渲染属性 */
+    viewFieldProps?: any;
   } & {
     [CN in keyof P['field']]: {
       /** 插件名称 */

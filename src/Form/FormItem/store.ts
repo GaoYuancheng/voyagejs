@@ -223,7 +223,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       normalize: this.normalize,
       noStyle: this.noStyle,
       preserve: this.preserve,
-      required: this.required,
+      required: this.mode === FieldMode.VIEW ? false : this.required,
       rules: this.rules,
       shouldUpdate: this.shouldUpdate,
       tooltip: this.tooltip,
@@ -232,6 +232,7 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       validateTrigger: this.validateTrigger,
       valuePropName: this.valuePropName,
       wrapperCol: this.wrapperCol,
+      // style: this.mode === FieldMode.VIEW ? { marginBottom: 0 } : this.style,
     });
   }
 
@@ -239,6 +240,11 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
   fieldType?: any;
 
   fieldProps?: any;
+
+  /** 预览模式渲染 */
+  viewFieldType?: FormItemProps<Values, P>['viewFieldType'];
+  /** 预览模式渲染属性 */
+  viewFieldProps?: FormItemProps<Values, P>['viewFieldProps'];
 
   get plugin() {
     return parsePlugin(this.getFormStore().plugins.field, this.fieldType);

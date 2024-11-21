@@ -11,7 +11,7 @@ export const InputNumber = (props: InputNumberProps) => {
   const { readOnly, value, ...restProps } = props;
 
   if (readOnly) {
-    return <Text>{`${value}`}</Text>;
+    return <Text>{`${value ?? '-'}`}</Text>;
   }
 
   return <AInputNumber {...omit(props, ['readOnly'])} />;

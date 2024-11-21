@@ -85,14 +85,17 @@ export const FormItem = observer(
       return null;
     }
 
-    const { element: ele, defaultFormItemProps } = parsePlugin(
+    const enableViewPlugin = field.viewFieldType && field.mode === FieldMode.VIEW;
+
+    let { element: ele, defaultFormItemProps } = parsePlugin(
       formStore.plugins.field,
-      field.fieldType || children,
+      // TODO: fieldType支持支持ReactElement格式
+      (enableViewPlugin ? field.viewFieldType : field.fieldType) || children,
       {
-        ...toJS(field.fieldProps),
+        ...toJS(enableViewPlugin ? field.viewFieldProps : field.fieldProps),
         ...field.childProps,
       },
-      props,
+      { ...props, value: field.value, field, values: form.getFieldsValue(), form },
     );
 
     const element = (

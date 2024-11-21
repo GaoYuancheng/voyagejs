@@ -8,6 +8,7 @@ import {
   Input,
   InputNumber,
   QueryTableSelect,
+  RadioGroup,
   RangePicker,
   Select,
   Switch,
@@ -139,7 +140,7 @@ export const DEFAULT_COMPONENT_PLUGINS = {
     defaultComponentProps: {},
   },
   'radio.group': {
-    component: Radio.Group,
+    component: RadioGroup,
     defaultComponentProps: {},
     defaultFilterProps: (ctx: FilterDropdownProps) => {
       if (!ctx) return {};
