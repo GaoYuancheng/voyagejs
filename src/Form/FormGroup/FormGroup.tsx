@@ -78,7 +78,7 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
     ? renderFields(group.groupProps.items as FormGroupProps<Values, P>['items'])
     : props.children;
 
-  const { element: ele } = parsePlugin(formStore.plugins.container, group.container, toJS(group.containerProps));
+  const { element: ele } = parsePlugin(formStore.plugins.container, toJS(group.container), toJS(group.containerProps));
 
   // ===== 容器  ======
   let container;

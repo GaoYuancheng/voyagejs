@@ -1,5 +1,6 @@
 import { Card as ACard } from 'antd';
 import type { CardProps as ACardProps } from 'antd/lib/card';
+import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Form } from '../../../form';
@@ -10,5 +11,5 @@ export const Card: React.FC<ACardProps> = observer((props) => {
 
   formStore.enableLoading = false;
 
-  return <ACard {...props} loading={formStore.loading || props.loading} />;
+  return <ACard {...toJS(props)} loading={toJS(formStore.loading || props.loading)} />;
 });
