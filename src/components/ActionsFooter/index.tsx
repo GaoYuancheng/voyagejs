@@ -27,7 +27,7 @@ export const ActionsFooter: React.FC<ActionsFooterProps> = (props) => {
           ...(isFunction(contentStyle) ? contentStyle(affixed) : contentStyle),
         }}
       >
-        {children && <div style={{ padding: 24, paddingBottom: 0, borderBottom: '1px solid #d9d9d9' }}>{children}</div>}
+        {children && <div style={{ padding: 24, borderBottom: '1px solid #d9d9d9' }}>{children}</div>}
         <Layout.Footer
           style={{ padding: 24, background: '#fff', ...(isFunction(footerStyle) ? footerStyle(affixed) : footerStyle) }}
         >

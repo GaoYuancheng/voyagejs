@@ -77,7 +77,7 @@ export const Icon: React.FC<BaseIconProps> = (props) => {
     >
       <Space
         size={4}
-        style={{ display: 'inline-flex', flexDirection: textPosition === 'start' ? 'row-reverse' : 'row' }}
+        style={{ display: 'inline-flex', flexDirection: textPosition === 'end' ? 'row-reverse' : 'row' }}
       >
         {textEle}
         {icon}
