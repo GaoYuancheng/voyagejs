@@ -5,7 +5,18 @@ import type { BaseProps } from '../Base';
 
 export type ReactionResultKeyType = keyof Omit<FormItemProps, 'reactions' | 'dependencies'> & 'value';
 
-export type ReactionResultFunctionType<Key extends keyof FormItemProps> = (target: any) => FormItemProps[Key];
+export type ReactionResultFunctionPropsType = {
+  /** 当前变化的表单值 */
+  self: any;
+  /** 依赖的表单值 */
+  deps: any[];
+  /** 所有表单值 */
+  values: any;
+};
+
+export type ReactionResultFunctionType<Key extends keyof FormItemProps> = (
+  target: ReactionResultFunctionPropsType,
+) => FormItemProps[Key];
 
 export type ReactionResultType<Key extends keyof FormItemProps> = ReactionResultFunctionType<Key> | string;
 

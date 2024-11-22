@@ -1,7 +1,7 @@
 import type { FormInstance } from 'antd/lib/form';
 import type { NamePath } from 'antd/lib/form/interface';
 import { configure, makeObservable, observable, runInAction } from 'mobx';
-import { isEmpty, isEqual, isFunction, isString, pick } from 'radash';
+import { isEmpty, isEqual, isFunction, isPromise, isString, pick } from 'radash';
 import type { PluginsType } from '../../plugins';
 import { DEFAULT_PLUGINS, pluginStore } from '../../plugins';
 import { filterUndefinedProps } from '../../utils';
@@ -271,8 +271,29 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       let resultValue;
 
       const depValues = dependencies ? dependencies.map((depName) => this.getField(depName).value) : [];
+
+      const triggerResultChange = (data: any) => {
+        // @ts-expect-error
+        this.getField(effectName)[key] = data;
+
+        // 循环触发 a -> b -> c
+        if (key === 'value') {
+          this.triggerReactions({ [effectName]: data } as Values);
+        }
+      };
+
       if (isFunction(result![key])) {
-        resultValue = (result![key] as ReactionResultFunctionType<any>)(changeValue);
+        resultValue = (result![key] as ReactionResultFunctionType<any>)({
+          self: changeValue,
+          deps: depValues,
+          values: this.values,
+        });
+        if (isPromise(resultValue)) {
+          resultValue.then((data: any) => {
+            triggerResultChange(data);
+          });
+          return;
+        }
       } else if (isString(result![key])) {
         {
           resultValue = new Function('$root', `with($root) { return (${result![key]}); }`)({
@@ -288,13 +309,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       // 获取initialValue和remoteValues时，不触发值联动
       if (ignoreValueChange && key === 'value') return;
 
-      // @ts-expect-error
-      this.getField(effectName)[key] = resultValue;
-
-      // 循环触发 a -> b -> c
-      if (key === 'value') {
-        this.triggerReactions({ [effectName]: resultValue } as Values);
-      }
+      triggerResultChange(resultValue);
     });
   }
 

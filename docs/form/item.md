@@ -1,7 +1,7 @@
 ---
 group: 表单
 demo:
-  rows: 2
+  cols: 2
 ---
 
 # Form.Item

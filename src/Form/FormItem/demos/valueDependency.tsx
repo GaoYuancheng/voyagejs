@@ -43,7 +43,21 @@ function ValueDependency() {
       >
         <Input data-testid="inputC" />
       </FormItem>
-      <FormItem name="d" label="d">
+      <FormItem
+        name="d"
+        label="d"
+        reactions={[
+          {
+            dependencies: ['a', 'b'],
+            result: {
+              value: async (ctx) => {
+                console.log(ctx);
+                return '123';
+              },
+            },
+          },
+        ]}
+      >
         <Input data-testid="inputD" />
       </FormItem>
     </Form>
