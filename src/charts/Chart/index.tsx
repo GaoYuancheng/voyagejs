@@ -1,5 +1,5 @@
 import { Card, CardProps, Empty, Spin } from 'antd';
-import { isEmpty } from 'radash';
+import { isEmpty, isFunction } from 'radash';
 import React, { useEffect, useRef, useState } from 'react';
 import { usePrefixCls } from '../../context';
 import { Form, FormItemProps } from '../../form';
@@ -26,7 +26,7 @@ export interface ChartProps<Values, P extends PluginsType = PluginsType> {
   /** 卡片组件配置 */
   cardProps?: Omit<CardProps, 'title' | 'extra'>;
   type?: keyof typeof DEFAULT_CHART_PLUGINS;
-  options?: any;
+  options?: any | ((data: any) => any);
 
   onElementClick?: (data: any) => void;
 }
@@ -74,7 +74,10 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
 
   const getOptions = (data?: any): any => {
     if (!type) return {};
-    return DEFAULT_CHART_PLUGINS[type].defaultComponentProps({ data, ...options });
+    return DEFAULT_CHART_PLUGINS[type].defaultComponentProps({
+      data,
+      ...(isFunction(options) ? options({ data }) : options),
+    });
   };
 
   function init(params: any) {
