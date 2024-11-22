@@ -123,6 +123,124 @@ const Demo = () => {
             }}
           />
         </Col>
+
+        <Col span={12}>
+          <Chart<any, DefaultPluginsType>
+            title="基础图表"
+            params={params}
+            type="column"
+            options={{
+              xField: 'year',
+              yField: 'value',
+              // 堆叠柱状图
+              isStack: true,
+              // 分组柱状图
+              // isGroup: true,
+              seriesField: 'type',
+            }}
+            remoteData={async (params) => {
+              notification.info({
+                message: JSON.stringify(params, null, 2),
+              });
+              await sleep(2000);
+
+              const data = [
+                {
+                  year: '1991',
+                  value: 3,
+                  type: 'Lon',
+                },
+                {
+                  year: '1992',
+                  value: 4,
+                  type: 'Lon',
+                },
+                {
+                  year: '1993',
+                  value: 3.5,
+                  type: 'Lon',
+                },
+                {
+                  year: '1994',
+                  value: 5,
+                  type: 'Lon',
+                },
+                {
+                  year: '1995',
+                  value: 4.9,
+                  type: 'Lon',
+                },
+                {
+                  year: '1996',
+                  value: 6,
+                  type: 'Lon',
+                },
+                {
+                  year: '1997',
+                  value: 7,
+                  type: 'Lon',
+                },
+                {
+                  year: '1998',
+                  value: 9,
+                  type: 'Lon',
+                },
+                {
+                  year: '1999',
+                  value: 13,
+                  type: 'Lon',
+                },
+                {
+                  year: '1991',
+                  value: 3,
+                  type: 'Bor',
+                },
+                {
+                  year: '1992',
+                  value: 4,
+                  type: 'Bor',
+                },
+                {
+                  year: '1993',
+                  value: 3.5,
+                  type: 'Bor',
+                },
+                {
+                  year: '1994',
+                  value: 5,
+                  type: 'Bor',
+                },
+                {
+                  year: '1995',
+                  value: 4.9,
+                  type: 'Bor',
+                },
+                {
+                  year: '1996',
+                  value: 6,
+                  type: 'Bor',
+                },
+                {
+                  year: '1997',
+                  value: 7,
+                  type: 'Bor',
+                },
+                {
+                  year: '1998',
+                  value: 9,
+                  type: 'Bor',
+                },
+                {
+                  year: '1999',
+                  value: 13,
+                  type: 'Bor',
+                },
+              ];
+
+              return data;
+            }}
+          />
+        </Col>
       </Row>
     </Space>
   );

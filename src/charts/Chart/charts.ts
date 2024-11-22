@@ -1,4 +1,4 @@
-import { DualAxes, Pie } from '@antv/g2plot';
+import { Column, DualAxes, Pie } from '@antv/g2plot';
 
 type DefaultComponentPropsCtx = {
   data: any[];
@@ -85,6 +85,20 @@ export const DEFAULT_CHART_PLUGINS = {
             },
           },
         ],
+      };
+    },
+  },
+
+  column: {
+    component: Column,
+    defaultComponentProps: (ctx: DefaultComponentPropsCtx) => {
+      const { data = [], ...restOptions } = ctx || {};
+      return {
+        data,
+        legend: {
+          position: 'top',
+        },
+        ...restOptions,
       };
     },
   },
