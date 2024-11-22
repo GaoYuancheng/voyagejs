@@ -22,7 +22,7 @@ export interface ChartProps<Values, P extends PluginsType = PluginsType> {
   /** 外部参数，变化时触发重渲染 */
   params?: any;
   /** 表单项 */
-  fields?: FormItemProps[];
+  fields?: FormItemProps<Values, P>[];
   /** 卡片组件配置 */
   cardProps?: Omit<CardProps, 'title' | 'extra'>;
   type?: keyof typeof DEFAULT_CHART_PLUGINS;
