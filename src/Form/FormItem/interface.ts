@@ -2,14 +2,19 @@ import type { NamePath } from 'antd/es/form/interface';
 import type { FormItemProps as AFormItemProps } from 'antd/lib/form/FormItem';
 import type { PluginPropsType, PluginsType } from '../../plugins';
 import type { BaseProps } from '../Base';
+import { FieldStore } from './store';
 
 export type ReactionResultKeyType = keyof Omit<FormItemProps, 'reactions' | 'dependencies'> & 'value';
 
 export type ReactionResultFunctionPropsType = {
+  /** 当前变化的表单 */
+  self: FieldStore;
   /** 当前变化的表单值 */
-  self: any;
+  selfValue: any;
+  /** 依赖的表单 */
+  deps: FieldStore[];
   /** 依赖的表单值 */
-  deps: any[];
+  depValues: any[];
   /** 所有表单值 */
   values: any;
 };

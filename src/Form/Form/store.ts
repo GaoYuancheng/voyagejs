@@ -258,12 +258,12 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     runInAction(() => {
       this.triggerChange(this.effects, value, (config, changeName) => {
         const changeValue = this.getField(changeName).value;
-        this.reactionResults(config, changeValue, ignoreValueChange);
+        this.reactionResults(config, changeValue, changeName, ignoreValueChange);
       });
     });
   }
 
-  reactionResults(config: InnerDependencyType, changeValue: any, ignoreValueChange = false) {
+  reactionResults(config: InnerDependencyType, changeValue: any, changeName: NamePath, ignoreValueChange = false) {
     const { result, dependencies, name: effectName } = config;
     if (!result) return;
     // @ts-expect-error
@@ -284,9 +284,11 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
       if (isFunction(result![key])) {
         resultValue = (result![key] as ReactionResultFunctionType<any>)({
-          self: changeValue,
-          deps: depValues,
+          selfValue: changeValue,
+          depValues,
           values: this.values,
+          deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
+          self: this.getField(changeName),
         });
         if (isPromise(resultValue)) {
           resultValue.then((data: any) => {
@@ -318,7 +320,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     Object.keys(this.effects).forEach((effectName) => {
       const changeValue = this.getField(effectName).value;
       this.effects[effectName].forEach((config) => {
-        this.reactionResults(config, changeValue, true);
+        this.reactionResults(config, changeValue, effectName, true);
       });
     });
   }
