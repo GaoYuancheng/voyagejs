@@ -135,12 +135,14 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       });
   }
 
-  reset() {
+  reset(params?: any) {
     this.searchStatus = TableSearchStatus.RESET;
-    this.setInitialPagination({ pagination: this.initialPagination });
-    this.filter = this.initialFilters;
+    if (!this.noPagination) {
+      this.setInitialPagination({ pagination: this.initialPagination });
+    }
+    this.filter = this.initialFilters || {};
     this.sorter = undefined;
-    this.params = this.initialParams;
+    this.params = params || this.initialParams;
     this.selectedRows = [];
     this.refresh();
   }

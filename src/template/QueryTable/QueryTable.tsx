@@ -77,7 +77,7 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
 
   const onReset = () => {
     onResetForm?.();
-    tableRef.current?.table.reset();
+    tableRef.current?.table.reset(form.values as any);
   };
 
   useEffect(() => {
