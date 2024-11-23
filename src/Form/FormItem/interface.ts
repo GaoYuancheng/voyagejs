@@ -11,6 +11,8 @@ export type ReactionResultFunctionPropsType = {
   self: FieldStore;
   /** 当前变化的表单值 */
   selfValue: any;
+  /** 目标表单实例 */
+  target?: FieldStore;
   /** 依赖的表单 */
   deps: FieldStore[];
   /** 依赖的表单值 */

@@ -266,6 +266,19 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   reactionResults(config: InnerDependencyType, changeValue: any, changeName: NamePath, ignoreValueChange = false) {
     const { result, dependencies, name: effectName } = config;
     if (!result) return;
+
+    if (isFunction(result)) {
+      result({
+        selfValue: changeValue,
+        depValues: dependencies ? dependencies.map((depName) => this.getField(depName).value) : [],
+        values: this.values,
+        self: this.getField(changeName),
+        deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
+        target: effectName,
+      });
+      return;
+    }
+
     // @ts-expect-error
     Object.keys(result).forEach((key: keyof typeof result) => {
       let resultValue;
@@ -277,7 +290,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
         this.getField(effectName)[key] = data;
 
         // 循环触发 a -> b -> c
-        if (key === 'value') {
+        if ((key as string) === 'value') {
           this.triggerReactions({ [effectName]: data } as Values);
         }
       };
@@ -309,7 +322,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       }
 
       // 获取initialValue和remoteValues时，不触发值联动
-      if (ignoreValueChange && key === 'value') return;
+      if (ignoreValueChange && (key as string) === 'value') return;
 
       triggerResultChange(resultValue);
     });
