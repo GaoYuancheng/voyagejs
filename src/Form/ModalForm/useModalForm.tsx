@@ -70,7 +70,7 @@ export const useModalForm = <Values, P extends PluginsType = any>(
 
   return [
     // eslint-disable-next-line react/jsx-key
-    <Form<Values, P> remoteValues={remoteValues} {...formProps} form={form}>
+    <Form<Values, P> remoteValues={remoteValues} {...formProps} form={form} _inModal={{ isOpen }}>
       {modal}
     </Form>,
     {

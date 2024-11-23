@@ -15,7 +15,7 @@ export { ErrorList, Provider, useAForm };
 
 export const Form = observer(
   <Values, P extends PluginsType = PluginsType>(props: PropsWithChildren<FormProps<Values, P>>) => {
-    const { children, form: formStore, onValuesChange, spinProps, items } = props;
+    const { children, form: formStore, onValuesChange, spinProps, items, _inModal } = props;
 
     const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps']);
 
@@ -24,8 +24,9 @@ export const Form = observer(
     formStore.setFormInstance(aForm);
 
     useEffect(() => {
+      if (_inModal?.isOpen === false) return;
       formStore.init(props);
-    }, []);
+    }, [_inModal?.isOpen]);
 
     useDeepCompareEffect(() => {
       formStore.updateProps(props);
