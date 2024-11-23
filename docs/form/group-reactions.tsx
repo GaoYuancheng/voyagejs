@@ -41,8 +41,9 @@ const Demo = () => {
 
       <Group<any, DefaultPluginsType>
         labelCol={{ style: { width: 100 } }}
-        // 使用联动一定要有name
-        name="gruop2"
+        // Group联动一定要配置name属性
+        name="gruop"
+        title="表单组"
         reactions={[
           {
             dependencies: ['mode'],

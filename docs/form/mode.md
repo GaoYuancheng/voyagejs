@@ -21,9 +21,9 @@ order: 4
 
 ## 预览状态 FieldMode.VIEW
 
-预览模式`Form.Item`会传递`readOnly: true`属性给表单控件，自定义开发的表单控件中，根据这一属性，适配`Form`预览模式;
+预览模式`Form.Item`会传递`readOnly: true`属性给表单控件；自定义开发的表单控件中，根据这一属性，适配`Form`预览模式;
 
-这种模式下，`Form.Item`的`viewFieldType`属性会优先于`fieldType`、`children`属性渲染表单控件
+预览模式下，`Form.Item`的`viewFieldType`属性会优先于`fieldType`、`children`属性渲染表单控件
 
 ## 禁用状态 FieldMode.DISABLED
 

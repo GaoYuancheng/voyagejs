@@ -6,6 +6,6 @@ export default defineConfig({
     name: 'voyagejs',
   },
   resolve: {
-    docDirs: ['docs', 'src'],
+    docDirs: ['docs'],
   },
 });

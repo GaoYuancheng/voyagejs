@@ -1,6 +1,6 @@
 import { Modal as AModal } from 'antd';
 import type { ModalProps as AModalProps } from 'antd/lib/modal';
-import { isPromise } from 'radash';
+import { isFunction, isPromise } from 'radash';
 import React, { useCallback, useRef, useState } from 'react';
 
 type ExcludeModalType = 'title' | 'width' | 'children' | 'onOk' | 'onCancel' | 'confirmLoading';
@@ -8,6 +8,7 @@ type ExcludeModalType = 'title' | 'width' | 'children' | 'onOk' | 'onCancel' | '
 export interface ModalProps extends Pick<AModalProps, ExcludeModalType> {
   modalProps?: Omit<AModalProps, ExcludeModalType>;
   onOpen?: () => void;
+  children?: React.ReactNode | (() => React.ReactNode);
 }
 
 export interface ModalInstance {
@@ -77,7 +78,7 @@ export const useModal = (): [React.ReactNode, ModalInstance] => {
       width={width}
       onOk={handleOk}
     >
-      {children}
+      {isFunction(children) ? children() : children}
     </AModal>,
     {
       open: (props) => {
