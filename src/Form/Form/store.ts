@@ -274,7 +274,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
         values: this.values,
         self: this.getField(changeName),
         deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
-        target: effectName,
+        target: this.getField(effectName),
       });
       return;
     }
