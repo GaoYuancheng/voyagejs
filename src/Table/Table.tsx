@@ -24,7 +24,7 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   // @ts-expect-error
   const table = useMemo(() => new TableStore<RecordType>(props, forceUpdate), []);
 
-  const { rowSelection, ...restProps } = props;
+  const { rowSelection, requestOnMount, ...restProps } = props;
 
   const [modalForm, modalCtx] = useModalForm<P>();
 
@@ -33,8 +33,9 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   useWhyDidYouUpdate('Table', props);
 
   useEffect(() => {
+    if (requestOnMount === false) return;
     table.refresh();
-  }, []);
+  }, [requestOnMount]);
 
   useImperativeHandle(
     ref,

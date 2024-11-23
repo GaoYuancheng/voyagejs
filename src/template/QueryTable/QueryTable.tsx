@@ -22,6 +22,7 @@ export interface QueryTableProps<RecordType extends object = any, Values = any, 
   actionsProps?: Omit<ActionsProps<TableInstance>, 'items'>;
   rowSelection?: TableProps<RecordType>['rowSelection'];
   initialValues?: FormProps<Values, P>['initialValues'];
+  pagination?: TableProps<RecordType, P>['pagination'];
 }
 
 export interface QueryTableInstance<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
@@ -45,11 +46,6 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
     return update({});
   }, []);
 
-  useEffect(() => {
-    // QueryActions在没加载完成时，无法拿到table实例
-    forceUpdate();
-  }, []);
-
   const {
     fields = [],
     columns = [],
@@ -59,6 +55,7 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
     actions,
     style,
     className,
+    pagination,
     actionsProps,
     rowSelection,
     initialValues,
@@ -82,6 +79,13 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
     onResetForm?.();
     tableRef.current?.table.reset();
   };
+
+  useEffect(() => {
+    // QueryActions在没加载完成时，无法拿到table实例
+    forceUpdate();
+    tableRef.current!.table.params = form.values as any;
+    tableRef.current?.table.refresh();
+  }, []);
 
   useImperativeHandle(ref, () => {
     return {
@@ -109,10 +113,11 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
       />
       <Table<RecordType>
         {...tableProps}
+        pagination={pagination}
         columns={columns}
         remoteDataSource={remoteDataSource}
         initialFilters={initialFilters}
-        initialParams={initialValues}
+        requestOnMount={false}
         // @ts-expect-error
         ref={tableRef}
         rowSelection={rowSelection}
