@@ -50,17 +50,19 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
   forceUpdate: () => void;
 
   constructor(props: TableProps<RecordType>, forceUpdate: () => void) {
-    this.updateProps(props);
+    this.updateProps(props, true);
 
     this.forceUpdate = forceUpdate;
     this.makeObservable();
     this.setInitialPagination(props);
   }
 
-  updateProps(props: TableProps<RecordType>) {
+  updateProps(props: TableProps<RecordType>, isInit = false) {
     Object.keys(props).forEach((key) => {
       // @ts-ignore
       this[key] = props[key];
+
+      if (!isInit) return;
 
       if (key === 'initialParams') {
         this.params = props[key];
