@@ -11,7 +11,7 @@ export interface BaseIconProps {
   disabled?: boolean;
   loading?: boolean;
   className?: string;
-  type?: 'primary' | 'error' | 'success' | 'warning';
+  type?: 'primary' | 'error' | 'danger' | 'success' | 'warning';
   text?: string;
   textClassName?: string;
   textStyle?: React.CSSProperties;
@@ -75,10 +75,7 @@ export const Icon: React.FC<BaseIconProps> = (props) => {
       onClick={onClick}
       style={style}
     >
-      <Space
-        size={4}
-        style={{ display: 'inline-flex', flexDirection: textPosition === 'end' ? 'row-reverse' : 'row' }}
-      >
+      <Space size={4} style={{ display: 'inline-flex', flexDirection: textPosition === 'end' ? 'row-reverse' : 'row' }}>
         {textEle}
         {icon}
       </Space>
