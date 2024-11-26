@@ -18,6 +18,10 @@ group: 组件
 
 <code src="./actions-icon.tsx" ></code>
 
+## 下拉菜单
+
+<code src="./actions-dropdown.tsx" ></code>
+
 ### API
 
 组件的通用属性如下:
@@ -34,11 +38,11 @@ group: 组件
 
 #### ModalConfirm
 
-ModalConfirm 组件继承了 antd 的 [Modal.metthod()](https://4x.ant.design/components/modal-cn/#Modal.method()) ，并扩展了如下属性：
+ModalConfirm 组件继承了 antd 的 [Modal.metthod()](<https://4x.ant.design/components/modal-cn/#Modal.method()>) ，并扩展了如下属性：
 
-| 属性名 | 类型                                                       | 描述 |
-| ------ | ---------------------------------------------------------- | ---- |
-| type   | `'info' \| 'success' \| 'error' \| 'warning' \| 'confirm'` | method类型 |
+| 属性名 | 类型                                                       | 描述        |
+| ------ | ---------------------------------------------------------- | ----------- |
+| type   | `'info' \| 'success' \| 'error' \| 'warning' \| 'confirm'` | method 类型 |
 
 ### 按钮属性
 
