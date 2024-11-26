@@ -1,6 +1,5 @@
 import React from 'react';
 import { TableInstance } from 'voyagejs/table';
-import type { FilterDropdownProps } from '../table/FilterDropdown';
 
 export type PluginType = {
   [key: string]: {
