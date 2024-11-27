@@ -1,6 +1,6 @@
 import type { ModalProps as AModalProps } from 'antd';
 import type { MouseEvent, ReactElement, ReactNode } from 'react';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import type { PluginsType } from '../../plugins';
 import type { FormOptionProps, FormProps, FormStore } from '../Form';
 import { Form } from '../Form';
@@ -67,6 +67,18 @@ export const useModalForm = <Values, P extends PluginsType = any>(
   };
 
   const { formProps, remoteValues } = propsRef.current || {};
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    timer = setTimeout(() => {
+      // 表单打开后，才能渲染表单生成Form.Item实例，触发更新
+      form.initReactionResult();
+    }, 20);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isOpen, form]);
 
   return [
     // eslint-disable-next-line react/jsx-key

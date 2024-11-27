@@ -33,9 +33,9 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
   }, []);
 
   useEffect(() => {
-    formStore.addGroup(name, group);
+    formStore.addGroup(group.name, group);
     return () => {
-      formStore.removeGroup(name);
+      formStore.removeGroup(group.name);
     };
   }, []);
 

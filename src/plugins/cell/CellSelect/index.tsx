@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from '../../../components';
 import type { CellBaseProps } from '../../interfaces';
 
 export interface CellSelectProps<RecordType extends object> extends CellBaseProps<RecordType> {
@@ -17,5 +16,5 @@ export const CellSelect = <RecordType extends object>(props: CellSelectProps<Rec
 
   const { label, text, color, ...rest } = options.find((item) => item.value === value) || {};
 
-  return <Text type={color as any}>{label ?? text ?? value}</Text>;
+  return <div style={{ color }}>{label ?? text ?? value ?? '-'}</div>;
 };

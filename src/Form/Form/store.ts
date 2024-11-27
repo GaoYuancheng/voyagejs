@@ -1,7 +1,7 @@
 import type { FormInstance } from 'antd/lib/form';
 import type { NamePath } from 'antd/lib/form/interface';
 import { configure, makeObservable, observable, runInAction } from 'mobx';
-import { isEmpty, isEqual, isFunction, isPromise, isString, pick } from 'radash';
+import { isEmpty, isEqual, isFunction, isPromise, isString, pick, uid } from 'radash';
 import type { PluginsType } from '../../plugins';
 import { DEFAULT_PLUGINS, pluginStore } from '../../plugins';
 import { filterUndefinedProps } from '../../utils';
@@ -147,8 +147,14 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     return field;
   }
 
-  createGroup<NameType extends keyof Values>(name: NameType, group: GroupStore<Values>) {
-    this.addField(name, group as unknown as FieldStore);
+  createGroup(name: NamePath, group: GroupStore<Values>) {
+    if (name) {
+      this.addField(name, group as unknown as FieldStore);
+    } else {
+      const groupName = uid(10);
+      this.addField(groupName as any, group as unknown as FieldStore);
+      this.name = groupName;
+    }
     return group;
   }
 
@@ -257,7 +263,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   triggerReactions(value: Values, ignoreValueChange = false) {
     runInAction(() => {
       this.triggerChange(this.effects, value, (config, changeName) => {
-        const changeValue = this.getField(changeName).value;
+        const changeValue = this.getField(changeName)?.value;
         this.reactionResults(config, changeValue, changeName, ignoreValueChange);
       });
     });
@@ -329,9 +335,9 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   }
 
   /** 根据initialValues和remoteValues初始化联动结果 */
-  initReactionResult(values: Values) {
+  initReactionResult() {
     Object.keys(this.effects).forEach((effectName) => {
-      const changeValue = this.getField(effectName).value;
+      const changeValue = this.getField(effectName)?.value;
       this.effects[effectName].forEach((config) => {
         this.reactionResults(config, changeValue, effectName, true);
       });
@@ -350,6 +356,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   updateProps(props: FormProps<Values, P>) {
     Object.keys(props).forEach((key) => {
       if (key === 'form') return;
+      if (key === 'name') return;
       // @ts-expect-error
       this[key] = props[key];
     });
@@ -358,13 +365,15 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   init(props: FormProps<Values, P>) {
     this.updateProps(props);
 
-    const initialValues = this.form.getFieldsValue();
-
-    if (!isEmpty(initialValues)) {
-      this.initReactionResult(initialValues);
-    }
+    this.initReactionResult();
 
     this.refresh();
+  }
+
+  destroy() {
+    this.store = {};
+    this.deps = {};
+    this.effects = {};
   }
 
   refresh() {
@@ -373,7 +382,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       this.remoteValues()
         .then((values) => {
           this.form?.setFieldsValue(values);
-          this.initReactionResult(values);
+          this.initReactionResult();
           this.loading = false;
         })
         .catch(() => {

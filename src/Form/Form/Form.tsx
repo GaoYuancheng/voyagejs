@@ -24,9 +24,8 @@ export const Form = observer(
     formStore.setFormInstance(aForm);
 
     useEffect(() => {
-      if (_inModal?.isOpen === false) return;
       formStore.init(props);
-    }, [_inModal?.isOpen]);
+    }, []);
 
     useDeepCompareEffect(() => {
       formStore.updateProps(props);
