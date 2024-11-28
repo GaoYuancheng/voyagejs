@@ -100,6 +100,13 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   submit: FormInstance<Values>['submit'] = this.form!.submit;
   validateFields: FormInstance<Values>['validateFields'] = this.form!.validateFields;
 
+  // ===== 弹框内使用 =====
+  resetStore = () => {
+    this.store = {};
+  };
+
+  modalOpenStatus: boolean = false;
+
   // ===== 表单联动控制 =====
   /** 是否开启loading状态，如果有子容器，loading状态由子容器控制 */
   enableLoading: boolean = true;
@@ -153,7 +160,6 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
     } else {
       const groupName = uid(10);
       this.addField(groupName as any, group as unknown as FieldStore);
-      this.name = groupName;
     }
     return group;
   }
@@ -232,7 +238,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
       });
     });
 
-    this.store[this.getName(name)] = null;
+    delete this.store[this.getName(name)];
   }
 
   getField<NameType>(name: NameType): FieldStore<any> {
@@ -261,6 +267,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   };
 
   triggerReactions(value: Values, ignoreValueChange = false) {
+    if (this.modalOpenStatus === false) return;
     runInAction(() => {
       this.triggerChange(this.effects, value, (config, changeName) => {
         const changeValue = this.getField(changeName)?.value;
@@ -336,6 +343,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
   /** 根据initialValues和remoteValues初始化联动结果 */
   initReactionResult() {
+    if (this.modalOpenStatus === false) return;
     Object.keys(this.effects).forEach((effectName) => {
       const changeValue = this.getField(effectName)?.value;
       this.effects[effectName].forEach((config) => {

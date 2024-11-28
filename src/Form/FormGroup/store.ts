@@ -1,4 +1,5 @@
 import { makeObservable, observable } from 'mobx';
+import { uid } from 'radash';
 import type { PluginsType } from '../../plugins';
 import { BaseProps, BaseStore } from '../Base';
 import type { FormStore } from '../Form/store';
@@ -33,6 +34,10 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
 
     this.updateProps(props);
 
+    if (!this.name) {
+      this.name = uid(10);
+    }
+
     super.makeObservable();
     this.makeObservable();
   }
@@ -50,6 +55,7 @@ export class GroupStore<Values = any, P extends PluginsType = PluginsType>
       container: observable,
       containerProps: observable.deep,
       title: observable.ref,
+      name: observable.ref,
       // containerPlugin: computed,
     });
   }

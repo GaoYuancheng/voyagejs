@@ -69,6 +69,7 @@ export const useModalForm = <Values, P extends PluginsType = any>(
   const { formProps, remoteValues } = propsRef.current || {};
 
   useEffect(() => {
+    if (!isOpen) return;
     let timer: NodeJS.Timeout;
     timer = setTimeout(() => {
       // 表单打开后，才能渲染表单生成Form.Item实例，触发更新
@@ -103,17 +104,26 @@ export const useModalForm = <Values, P extends PluginsType = any>(
           return footerRender ? footerRender(getModalFormContext()) : footer;
         };
 
+        form.modalOpenStatus = true;
+
         return open({
           ...restParams,
           ...restModalProps,
-          // @ts-expect-error
-          children: items ? <FormGroup<Values, P> items={items} {...formGroupProps} /> : children,
+          children: items ? (
+            // @ts-expect-error
+            <FormGroup<Values, P> items={items} {...formGroupProps} key={isOpen.toString()} />
+          ) : (
+            children
+          ),
           modalProps: {
             footer: renderFooter(),
+            destroyOnClose: true,
             ...modalProps,
           },
           onCancel: (e) => {
             form.resetFields();
+            form.modalOpenStatus = false;
+            form.modalOpenStatus = false;
             return onCancel?.(e, getModalFormContext());
           },
           onOk: async (e) => {

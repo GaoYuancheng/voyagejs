@@ -37,7 +37,7 @@ export const FormGroup = observer(<Values, P extends PluginsType = PluginsType>(
     return () => {
       formStore.removeGroup(group.name);
     };
-  }, []);
+  }, [group.name]);
 
   useDeepCompareEffect(() => {
     // @ts-expect-error
