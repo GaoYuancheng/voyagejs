@@ -76,7 +76,7 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
     if (!type) return {};
     return DEFAULT_CHART_PLUGINS[type].defaultComponentProps({
       data,
-      ...(isFunction(options) ? options({ data }) : options),
+      ...(isFunction(options) ? options({ data, values: form.values }) : options),
     });
   };
 
