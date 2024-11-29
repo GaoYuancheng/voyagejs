@@ -1,4 +1,4 @@
-import { useDeepCompareEffect, useUpdate, useWhyDidYouUpdate } from 'ahooks';
+import { useDeepCompareEffect, useUpdate } from 'ahooks';
 import { Table as ATable } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
@@ -29,8 +29,6 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   const [modalForm, modalCtx] = useModalForm<P>();
 
   const { columns } = props;
-
-  useWhyDidYouUpdate('Table', props);
 
   useEffect(() => {
     if (requestOnMount === false) return;

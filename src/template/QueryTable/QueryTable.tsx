@@ -1,4 +1,3 @@
-import { useWhyDidYouUpdate } from 'ahooks';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Form, FormStore, type FormProps } from '../../form';
 import type { PluginsType } from '../../plugins';
@@ -39,8 +38,6 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
   const tableRef = useRef<TableInstance<RecordType>>();
 
   const [, update] = useState({});
-
-  useWhyDidYouUpdate('QueryTable', props);
 
   const forceUpdate = useCallback(() => {
     return update({});

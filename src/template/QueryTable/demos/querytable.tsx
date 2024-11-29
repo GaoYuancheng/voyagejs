@@ -24,55 +24,55 @@ const Demo = () => {
       rowSelection
       initialValues={initialValues}
       // actions={[]}
-      actions={{
-        left: [{ actionType: 'text', type: 'title', children: '标题', onClick: () => update({}) }],
-        right: [
-          {
-            actionType: 'button',
-            children: '新增',
-            type: 'primary',
-            onClick: (e, ctx) => {
-              console.log('新增~', ctx);
-              ctx.modal.open({
-                title: '新增',
-                children: <div>新增</div>,
-                onOk: () => {
-                  ctx.modal.close();
-                  message.success('新增成功');
-                  ctx.table.refresh();
-                },
-              });
-            },
-          },
-          {
-            type: 'primary',
-            disabled: () => ref.current?.table.selectedRows.length === 0,
-            children: '清空选中行',
-            onClick: (e, ctx) => {
-              console.log('选中行~', toJS(ctx.table.selectedRows));
-              ctx.table.selectedRows = [];
-              console.log('选中行清空~', toJS(ctx.table.selectedRows));
-            },
-          },
-          (ctx) => {
-            const { table } = ctx || {};
-            return <Tag color="green">自定义{table?.selectedRows.length}</Tag>;
-          },
-          {
-            actionType: 'dropdown',
-            children: <div>更多</div>,
-            items: [
-              {
-                children: '新增',
-                type: 'primary',
-                onClick: (e, ctx) => {
-                  console.log('ctx', ctx.table.selectedRows);
-                },
-              },
-            ],
-          },
-        ],
-      }}
+      // actions={{
+      //   left: [{ actionType: 'text', type: 'title', children: '标题', onClick: () => update({}) }],
+      //   right: [
+      //     {
+      //       actionType: 'button',
+      //       children: '新增',
+      //       type: 'primary',
+      //       onClick: (e, ctx) => {
+      //         console.log('新增~', ctx);
+      //         ctx.modal.open({
+      //           title: '新增',
+      //           children: <div>新增</div>,
+      //           onOk: () => {
+      //             ctx.modal.close();
+      //             message.success('新增成功');
+      //             ctx.table.refresh();
+      //           },
+      //         });
+      //       },
+      //     },
+      //     {
+      //       type: 'primary',
+      //       disabled: () => ref.current?.table.selectedRows.length === 0,
+      //       children: '清空选中行',
+      //       onClick: (e, ctx) => {
+      //         console.log('选中行~', toJS(ctx.table.selectedRows));
+      //         ctx.table.selectedRows = [];
+      //         console.log('选中行清空~', toJS(ctx.table.selectedRows));
+      //       },
+      //     },
+      //     (ctx) => {
+      //       const { table } = ctx || {};
+      //       return <Tag color="green">自定义{table?.selectedRows.length}</Tag>;
+      //     },
+      //     {
+      //       actionType: 'dropdown',
+      //       children: <div>更多</div>,
+      //       items: [
+      //         {
+      //           children: '新增',
+      //           type: 'primary',
+      //           onClick: (e, ctx) => {
+      //             console.log('ctx', ctx.table.selectedRows);
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // }}
       fields={[
         {
           name: 'name',

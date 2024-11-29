@@ -139,7 +139,7 @@ const IQueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values,
     return 0;
   }, [fields, isOpen, needCollapse, finalSpan]);
 
-  if (!fields?.length) return <div />;
+  if (!fields?.length) return <Form form={form} initialValues={initialValues} />;
 
   return (
     <div className={prefix}>

@@ -117,7 +117,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
     this.loading = true;
 
-    const { current, pageSize } = this.pagination as TablePaginationConfig;
+    const { current, pageSize } = (this.pagination as TablePaginationConfig) || {};
 
     return this.remoteDataSource(this.noPagination ? requestParams : { current, pageSize, ...requestParams })
       .then((res) => {

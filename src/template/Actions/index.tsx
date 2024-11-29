@@ -46,7 +46,7 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
     }
 
     // ===== 内置类型 =====
-    const element = (actions as ActionItem<Ctx>[]).map((action, idx) => {
+    const element = ((actions as ActionItem<Ctx>[]) || []).map((action, idx) => {
       // ===== action支持函数 =====
       if (isFunction(action)) {
         return <Fragment key={idx}>{action(getCtx())}</Fragment>;
@@ -77,6 +77,8 @@ export const Actions = <Ctx extends any = any>(props: ActionsProps<Ctx>) => {
 
     return <Space>{element}</Space>;
   };
+
+  if (!items) return <Fragment />;
 
   if (
     Array.isArray(items) &&
