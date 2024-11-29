@@ -11,6 +11,7 @@ import {
   RadioGroup,
   RangePicker,
   Select,
+  Slider,
   Switch,
   TimePicker,
 } from './all';
@@ -184,6 +185,10 @@ export const DEFAULT_COMPONENT_PLUGINS = {
         style: { width: '100%' },
       };
     },
+  },
+  slider: {
+    component: Slider,
+    defaultComponentProps: {},
   },
   switch: {
     component: Switch,

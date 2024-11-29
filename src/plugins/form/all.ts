@@ -6,5 +6,6 @@ export * from './QueryTableSelect';
 export * from './RadioGroup';
 export * from './RangePicker';
 export * from './Select';
+export * from './Slider';
 export * from './Switch';
 export * from './TimePicker';

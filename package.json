@@ -1,6 +1,6 @@
 {
   "name": "voyagejs",
-  "version": "0.0.1-alpha.22",
+  "version": "0.0.1-alpha.23",
   "description": "A react library developed with dumi",
   "license": "MIT",
   "module": "es/index.js",
