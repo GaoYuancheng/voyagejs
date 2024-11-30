@@ -107,6 +107,8 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
   modalOpenStatus: boolean = false;
 
+  inModal: boolean = false;
+
   // ===== 表单联动控制 =====
   /** 是否开启loading状态，如果有子容器，loading状态由子容器控制 */
   enableLoading: boolean = true;
@@ -267,7 +269,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
   };
 
   triggerReactions(value: Values, ignoreValueChange = false) {
-    if (this.modalOpenStatus === false) return;
+    if (this.inModal && this.modalOpenStatus === false) return;
     runInAction(() => {
       this.triggerChange(this.effects, value, (config, changeName) => {
         const changeValue = this.getField(changeName)?.value;
@@ -343,7 +345,7 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
   /** 根据initialValues和remoteValues初始化联动结果 */
   initReactionResult() {
-    if (this.modalOpenStatus === false) return;
+    if (this.inModal && this.modalOpenStatus === false) return;
     Object.keys(this.effects).forEach((effectName) => {
       const changeValue = this.getField(effectName)?.value;
       this.effects[effectName].forEach((config) => {

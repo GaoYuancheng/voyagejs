@@ -22,6 +22,7 @@ export const Form = observer(
     const [aForm] = useAForm();
 
     formStore.setFormInstance(aForm);
+    formStore.inModal = !!_inModal;
 
     useEffect(() => {
       formStore.init(props);
