@@ -284,11 +284,10 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
     if (isFunction(result)) {
       result({
-        selfValue: changeValue,
+        ...(!dependencies?.length ? { self: this.getField(changeName), selfValue: changeValue } : {}),
+        deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
         depValues: dependencies ? dependencies.map((depName) => this.getField(depName).value) : [],
         values: this.values,
-        self: this.getField(changeName),
-        deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
         target: this.getField(effectName),
       });
       return;
@@ -312,11 +311,10 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
 
       if (isFunction(result![key])) {
         resultValue = (result![key] as ReactionResultFunctionType<any>)({
-          selfValue: changeValue,
+          ...(!dependencies?.length ? { self: this.getField(changeName), selfValue: changeValue } : {}),
           depValues,
           values: this.values,
           deps: dependencies ? dependencies.map((depName) => this.getField(depName)) : [],
-          self: this.getField(changeName),
         });
         if (isPromise(resultValue)) {
           resultValue.then((data: any) => {

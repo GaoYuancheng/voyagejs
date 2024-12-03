@@ -8,9 +8,9 @@ export type ReactionResultKeyType = keyof Omit<FormItemProps, 'reactions' | 'dep
 
 export type ReactionResultFunctionPropsType = {
   /** 当前变化的表单 */
-  self: FieldStore;
+  self?: FieldStore;
   /** 当前变化的表单值 */
-  selfValue: any;
+  selfValue?: any;
   /** 目标表单实例 */
   target?: FieldStore;
   /** 依赖的表单 */

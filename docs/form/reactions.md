@@ -66,11 +66,11 @@ export type ReactionType =
 
 | 名称        | 描述                         |
 | ----------- | ---------------------------- |
-| `selfValue` | 当前变化的表单值             |
+| `self`      | 当前变化的表单项实例，仅在主动联动`effects`中生效 |
+| `selfValue` | 当前变化的表单值，仅在主动联动`effects`中生效       |
+| `deps`      | `dependencies`依赖项实例列表 |
 | `depValues` | `dependencies`依赖项值数组   |
 | `values`    | 全部表单值                   |
-| `deps`      | `dependencies`依赖项实例列表 |
-| `self`      | 当前变化的表单项实例         |
 
 <code src="./reactions-fn.tsx" ></code>
 

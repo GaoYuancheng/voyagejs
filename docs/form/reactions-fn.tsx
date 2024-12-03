@@ -23,6 +23,7 @@ const Demo = () => {
               dependencies: ['a'],
               result: {
                 value: (ctx) => {
+                  console.log('ctx', ctx);
                   return ctx.depValues[0];
                 },
               },
@@ -42,22 +43,21 @@ const Demo = () => {
                 },
               },
             },
+            {
+              effects: ['d'],
+              result: {
+                value: (ctx) => {
+                  console.log('ctx', ctx);
+                  return ctx.selfValue;
+                },
+              },
+            },
           ],
         },
         {
           name: 'd',
           label: 'd',
           fieldType: 'input',
-          reactions: [
-            {
-              dependencies: ['c'],
-              result: {
-                value: (ctx) => {
-                  return ctx.depValues[0];
-                },
-              },
-            },
-          ],
         },
       ]}
     />
