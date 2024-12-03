@@ -7,6 +7,7 @@ export const commonKeys = [
   // 'style',
   'bordered',
   'hidden',
+  'readOnly',
   'colon',
   'mode',
   'colProps',
@@ -30,6 +31,9 @@ export class BaseRootStore<Values = any> implements BaseProps<Values> {
   // ===== 状态属性 =====
   bordered?: BaseProps<Values>['bordered'];
   hidden?: BaseProps<Values>['hidden'];
+  readOnly?: BaseProps<Values>['readOnly'];
+  visible?: BaseProps<Values>['visible'];
+  disabled?: BaseProps<Values>['disabled'];
   colon?: BaseProps<Values>['colon'];
   mode?: BaseProps<Values>['mode'];
   colProps?: BaseProps<Values>['colProps'];

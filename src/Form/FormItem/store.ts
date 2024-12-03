@@ -232,7 +232,6 @@ export class FieldStore<Values = any, P extends PluginsType = PluginsType>
       validateTrigger: this.validateTrigger,
       valuePropName: this.valuePropName,
       wrapperCol: this.wrapperCol,
-      // style: this.mode === FieldMode.VIEW ? { marginBottom: 0 } : this.style,
     });
   }
 

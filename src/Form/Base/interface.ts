@@ -28,6 +28,12 @@ export interface BaseProps<Values = any> {
   // variant?: AFormProps['variant'];
   /** 是否隐藏字段（依然会收集和校验字段） */
   hidden?: AFormProps<Values>['hidden'];
+  /** 是否查看状态 */
+  readOnly?: boolean;
+  /** 是否显示 */
+  visible?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 配合 label 属性使用，表示是否显示 label 后面的冒号 */
   colon?: AFormProps<Values>['colon'];
   /** 控件状态 */

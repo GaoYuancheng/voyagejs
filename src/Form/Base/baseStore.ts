@@ -2,7 +2,7 @@ import { computed, makeObservable, observable } from 'mobx';
 import type { PluginsType } from '../../plugins';
 import { FormStore } from '../Form';
 import { GroupStore } from '../FormGroup/store';
-import { BaseProps } from './interface';
+import { BaseProps, FieldMode } from './interface';
 
 export class BaseStore<Values = any, P extends PluginsType = PluginsType> implements BaseProps<Values> {
   commonProps: BaseProps<Values> = {};
@@ -35,12 +35,29 @@ export class BaseStore<Values = any, P extends PluginsType = PluginsType> implem
   get bordered() {
     return this.getVal('bordered');
   }
-
+  set visible(val) {
+    this.mode = !val ? FieldMode.NONE : undefined;
+  }
+  get visible() {
+    return this.mode !== FieldMode.NONE;
+  }
   set hidden(val) {
-    this.setVal('hidden', val);
+    this.mode = val ? FieldMode.HIDDEN : undefined;
   }
   get hidden() {
-    return this.getVal('hidden');
+    return this.mode === FieldMode.HIDDEN;
+  }
+  set readOnly(val) {
+    this.mode = val ? FieldMode.VIEW : undefined;
+  }
+  get readOnly() {
+    return this.mode === FieldMode.VIEW;
+  }
+  set disabled(val) {
+    this.mode = val ? FieldMode.DISABLED : undefined;
+  }
+  get disabled() {
+    return this.mode === FieldMode.DISABLED;
   }
   set colon(val) {
     this.setVal('colon', val);
