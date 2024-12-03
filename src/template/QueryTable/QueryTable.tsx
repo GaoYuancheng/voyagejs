@@ -11,7 +11,7 @@ export * from './QueryActions';
 const { useForm } = Form;
 
 export interface QueryTableProps<RecordType extends object = any, Values = any, P extends PluginsType = PluginsType>
-  extends Pick<TableProps<RecordType>, 'columns' | 'remoteDataSource' | 'initialFilters'> {
+  extends Pick<TableProps<RecordType>, 'rowKey' | 'columns' | 'remoteDataSource' | 'initialFilters'> {
   fields: QueryFormProps<Values, P>['items'];
   formProps?: Omit<QueryFormProps<Values, P>, 'form' | 'items' | 'initialValues'>;
   tableProps?: Omit<TableProps<RecordType>, 'columns' | 'remoteDataSource'>;
@@ -44,6 +44,7 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
   }, []);
 
   const {
+    rowKey,
     fields = [],
     columns = [],
     remoteDataSource,
@@ -110,6 +111,7 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
       />
       <Table<RecordType>
         {...tableProps}
+        rowKey={rowKey}
         pagination={pagination}
         columns={columns}
         remoteDataSource={remoteDataSource}

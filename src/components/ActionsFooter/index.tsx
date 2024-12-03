@@ -1,4 +1,4 @@
-import { Affix, Layout } from 'antd';
+import { Affix, AffixProps, Layout } from 'antd';
 import { isFunction } from 'radash';
 import React, { useState } from 'react';
 import { QueryActions, QueryActionsProps } from '../../template';
@@ -8,15 +8,17 @@ export interface ActionsFooterProps extends Omit<QueryActionsProps, 'style'> {
   contentStyle?: React.CSSProperties | ((affixed: boolean) => React.CSSProperties);
   footerStyle?: React.CSSProperties | ((affixed: boolean) => React.CSSProperties);
   style?: React.CSSProperties | ((affixed: boolean) => React.CSSProperties);
+  affixProps?: AffixProps;
 }
 
 export const ActionsFooter: React.FC<ActionsFooterProps> = (props) => {
-  const { children, contentStyle, footerStyle, style, ...restProps } = props;
+  const { children, contentStyle, footerStyle, style, affixProps, ...restProps } = props;
   const [affixed, setAffixed] = useState(false);
 
   return (
     <Affix
       offsetBottom={0}
+      {...affixProps}
       onChange={(t) => {
         setAffixed(t!);
       }}

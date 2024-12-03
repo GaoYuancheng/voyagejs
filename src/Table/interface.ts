@@ -92,7 +92,7 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = (
   }[keyof P['field']];
 
 export interface TableProps<RecordType = any, P extends PluginsType = PluginsType>
-  extends Omit<ATableProps<RecordType>, 'dataSource' | 'loading' | 'rowSelection' | 'columns'> {
+  extends Omit<ATableProps<RecordType>, 'loading' | 'rowSelection' | 'columns'> {
   /** 远程数据源 */
   remoteDataSource?: (params: RequestParams) => Promise<RequestResult<RecordType>>;
   /** 选中行配置 */
