@@ -47,7 +47,7 @@ export const QueryTableSelect = <RecordType extends object = any, Values = any, 
 
   const isSingleMode = rowSelectionType === 'radio';
 
-  const queryTableRef = useRef<QueryTableInstance<RecordType, Values, P>>();
+  const queryTableRef = useRef<QueryTableInstance<RecordType, Values, P>>(null);
 
   const finalRowSelection: TableRowSelection<RecordType> = useMemo(() => {
     return {
@@ -111,12 +111,6 @@ export const QueryTableSelect = <RecordType extends object = any, Values = any, 
   }, [isSingleMode, value]);
 
   return (
-    <QueryTable<RecordType, Values, P>
-      {...rest}
-      // @ts-expect-error
-      rowKey={rowKey}
-      rowSelection={finalRowSelection}
-      ref={queryTableRef}
-    />
+    <QueryTable<RecordType, Values, P> {...rest} rowKey={rowKey} rowSelection={finalRowSelection} ref={queryTableRef} />
   );
 };

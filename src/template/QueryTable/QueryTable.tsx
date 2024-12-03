@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Form, FormStore, type FormProps } from '../../form';
 import type { PluginsType } from '../../plugins';
 import { Table, TableInstance, TableSearchStatus, type TableProps } from '../../table';
@@ -125,4 +125,10 @@ const IQueryTable = <RecordType extends object = any, Values = any, P extends Pl
   );
 };
 
-export const QueryTable = forwardRef(IQueryTable) as typeof IQueryTable;
+export const QueryTable = React.forwardRef<QueryTableInstance, QueryTableProps>(IQueryTable) as <
+  RecordType extends object = any,
+  Values = any,
+  P extends PluginsType = PluginsType,
+>(
+  props: QueryTableProps<RecordType, Values, P> & { ref?: React.Ref<QueryTableInstance<RecordType, Values, P>> },
+) => React.ReactElement;
