@@ -14,7 +14,8 @@ export interface CellSelectProps<RecordType extends object> extends CellBaseProp
 export const CellSelect = <RecordType extends object>(props: CellSelectProps<RecordType>) => {
   const { value, options = [] } = props;
 
-  const { label, text, color, ...rest } = options.find((item) => item.value === value) || {};
+  // eslint-disable-next-line eqeqeq
+  const { label, text, color, ...rest } = options.find((item) => item.value == value) || {};
 
   return <div style={{ color }}>{label ?? text ?? value ?? '-'}</div>;
 };

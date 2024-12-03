@@ -15,7 +15,8 @@ export interface CellTagProps<RecordType extends object> extends CellBaseProps<R
 export const CellTag = <RecordType extends object>(props: CellTagProps<RecordType>) => {
   const { value, options = [] } = props;
 
-  const { label, text, ...rest } = options.find((item) => item.value === value) || {};
+  // eslint-disable-next-line eqeqeq
+  const { label, text, ...rest } = options.find((item) => item.value == value) || {};
 
   return <Tag {...rest}>{label ?? text ?? value}</Tag>;
 };
