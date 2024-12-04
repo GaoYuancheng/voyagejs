@@ -7,6 +7,7 @@ export const commonKeys = [
   // 'style',
   'bordered',
   'hidden',
+  'render',
   'readOnly',
   'colon',
   'mode',

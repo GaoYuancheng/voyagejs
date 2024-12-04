@@ -33,16 +33,16 @@ const Demo = () => {
         form={form}
         items={[
           {
-            name: 'hidden',
-            label: '隐藏',
-            hidden: true,
+            name: 'render',
+            label: '隐藏，不被校验',
+            render: false,
             rules: [{ required: true }],
             fieldType: 'input',
           },
           {
-            name: 'visible',
-            label: '显示',
-            visible: false,
+            name: 'hidden',
+            label: '隐藏，会被校验',
+            hidden: true,
             rules: [{ required: true }],
             fieldType: 'input',
           },
@@ -73,7 +73,7 @@ const Demo = () => {
           await form.validateFields();
         }}
       >
-        设置隐藏
+        校验
       </Button>
     </Fragment>
   );

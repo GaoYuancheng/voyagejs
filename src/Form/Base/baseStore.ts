@@ -35,10 +35,10 @@ export class BaseStore<Values = any, P extends PluginsType = PluginsType> implem
   get bordered() {
     return this.getVal('bordered');
   }
-  set visible(val) {
+  set render(val) {
     this.mode = !val ? FieldMode.NONE : undefined;
   }
-  get visible() {
+  get render() {
     return this.mode !== FieldMode.NONE;
   }
   set hidden(val) {

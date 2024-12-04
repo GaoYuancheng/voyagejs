@@ -30,7 +30,7 @@ order: 5
 | `hidden`   | 隐藏表单，同`mode`设置为`FieldMode.HIDDEN`                  |
 | `readOnly` | 只读，同`mode`设置为`FieldMode.VIEW`                        |
 | `disabled` | 禁用表单，同`mode`设置为`FieldMode.DISABLED`                |
-| `visible`  | 设置为`false`,不渲染表单项， 同`mode`设置为`FieldMode.NONE` |
+| `render`   | 设置为`false`,不渲染表单项， 同`mode`设置为`FieldMode.NONE` |
 
 <code src="./mode.tsx" ></code>
 

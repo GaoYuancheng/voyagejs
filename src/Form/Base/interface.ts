@@ -26,6 +26,8 @@ export interface BaseProps<Values = any> {
   bordered?: boolean;
   /** 表单内控件变体 */
   // variant?: AFormProps['variant'];
+  /** 是否渲染组件 */
+  render?: boolean;
   /** 是否隐藏字段（依然会收集和校验字段） */
   hidden?: AFormProps<Values>['hidden'];
   /** 是否查看状态 */

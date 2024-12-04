@@ -1,5 +1,6 @@
 import { useDebounceEffect, useDeepCompareEffect } from 'ahooks';
 import { Col, Form } from 'antd';
+import type { NamePath } from 'antd/lib/form/interface';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { omit } from 'radash';
@@ -103,7 +104,7 @@ export const FormItem = observer(
         {...omit(defaultFormItemProps, ['optionsPropName'])}
         {...restProps}
         {...field.fieldChildProps}
-        name={fullName}
+        name={fullName as NamePath}
       >
         {ele}
       </Item>
