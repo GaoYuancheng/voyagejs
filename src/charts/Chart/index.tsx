@@ -102,7 +102,7 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
       <Form<Values, P>
         layout="inline"
         onValuesChange={(_, values) => {
-          init(values);
+          init({ ...params, ...values });
         }}
         form={form}
         // @ts-expect-error
