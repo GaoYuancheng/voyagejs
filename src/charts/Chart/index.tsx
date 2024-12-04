@@ -123,7 +123,14 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
   const renderChildren = () => {
     return (
       <Spin spinning={loading}>
-        <div style={{ height, display: isEmpty(data) ? 'block' : 'none' }}>
+        <div
+          style={{
+            height,
+            display: isEmpty(data) ? 'flex' : 'none',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <Empty description={null} />
         </div>
         <div ref={domRef} style={{ width: '100%', height, display: isEmpty(data) ? 'none' : 'block' }}></div>
