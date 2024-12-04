@@ -102,11 +102,6 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
     this.pagination = this.initialPagination = {
       current: defaultCurrent ?? 1,
       pageSize: defaultPageSize ?? 10,
-      showQuickJumper: true,
-      showSizeChanger: true,
-      showTotal(total) {
-        return `共 ${total} 条`;
-      },
     };
   }
 
@@ -188,7 +183,14 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
   get tableProps(): ATableProps<RecordType> {
     return {
       dataSource: toJS(this.dataSource),
-      pagination: toJS(this.pagination),
+      pagination: toJS({
+        showQuickJumper: true,
+        showSizeChanger: true,
+        showTotal(total) {
+          return `共 ${total} 条`;
+        },
+        ...this.pagination,
+      }),
       loading: this.loading,
       rowSelection: this.rowSelection
         ? ({
