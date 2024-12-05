@@ -17,7 +17,7 @@ export default {
         value: {},
       },
       legend: {
-        position: 'top',
+        position: 'right',
         offsetX: 0,
         flipPage: false,
         itemWidth: 300,

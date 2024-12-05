@@ -10,6 +10,12 @@ import './index.less';
 
 const { useForm } = Form;
 
+const isEmptyData = (data: any) => {
+  if (isEmpty(data)) return true;
+  if (Array.isArray(data) && !data.some((item) => !isEmpty(item))) return true;
+  return false;
+};
+
 export interface ChartProps<Values, P extends PluginsType = PluginsType> {
   /** 图表标题 */
   title?: string;
@@ -126,14 +132,14 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
         <div
           style={{
             height,
-            display: isEmpty(data) ? 'flex' : 'none',
+            display: isEmptyData(data) ? 'flex' : 'none',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
           <Empty description={null} />
         </div>
-        <div ref={domRef} style={{ width: '100%', height, display: isEmpty(data) ? 'none' : 'block' }}></div>
+        <div ref={domRef} style={{ width: '100%', height, display: isEmptyData(data) ? 'none' : 'block' }}></div>
       </Spin>
     );
   };

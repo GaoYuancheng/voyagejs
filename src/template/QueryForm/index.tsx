@@ -50,7 +50,14 @@ const IQueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values,
   const [isOpen, setIsOpen] = useState(!defaultCollapse);
 
   const colLen = showFieldsLength + 1;
-  const fields = items.filter((i) => i.mode !== FieldMode.HIDDEN && i.hidden !== true && i.mode !== FieldMode.NONE);
+  const fields = items.filter(
+    (i) =>
+      i.mode !== FieldMode.HIDDEN &&
+      i.hidden !== true &&
+      i.mode !== FieldMode.NONE &&
+      i.render !== false &&
+      i.hidden !== true,
+  );
 
   const needCollapse = fields.length > showFieldsLength;
   const isSingleSearch = enableMainSearch && fields.length === 1;
@@ -101,7 +108,7 @@ const IQueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values,
             }),
           }}
           span={finalSpan}
-          mode={!isOpen && index > colLen - 2 ? FieldMode.HIDDEN : FieldMode.EDIT}
+          mode={!isOpen && index > colLen - 2 ? FieldMode.HIDDEN : field.mode || FieldMode.EDIT}
         >
           {children}
         </FormItem>
