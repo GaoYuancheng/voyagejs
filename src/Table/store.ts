@@ -183,14 +183,17 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
   get tableProps(): ATableProps<RecordType> {
     return {
       dataSource: toJS(this.dataSource),
-      pagination: toJS({
-        showQuickJumper: true,
-        showSizeChanger: true,
-        showTotal(total) {
-          return `共 ${total} 条`;
-        },
-        ...this.pagination,
-      }),
+      pagination:
+        this.pagination === false
+          ? false
+          : toJS({
+              showQuickJumper: true,
+              showSizeChanger: true,
+              showTotal(total) {
+                return `共 ${total} 条`;
+              },
+              ...this.pagination,
+            }),
       loading: this.loading,
       rowSelection: this.rowSelection
         ? ({
