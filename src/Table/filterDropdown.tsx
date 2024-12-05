@@ -19,14 +19,14 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 ) => {
   const { fieldType, fieldProps, ctx, table, dataIndex, children } = props;
 
-  const { clearFilters, close, confirm, filters, selectedKeys, setSelectedKeys, visible } = ctx;
+  const { clearFilters, close, confirm, filters, selectedKeys, setSelectedKeys, visible, options } = ctx;
 
   const plugins = pluginStore.getPlugins('field');
 
-  const { element } = parsePlugin(plugins, fieldType, fieldProps, { ...ctx, _filter: true });
+  const { element } = parsePlugin(plugins, fieldType, { ...fieldProps, options }, { ...ctx, _filter: true });
 
   return (
-    <div>
+    <div style={{ minWidth: 200 }}>
       <div style={{ padding: 8 }}>{children || element}</div>
       <Divider style={{ margin: 0 }} />
       <ButtonActions

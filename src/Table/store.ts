@@ -1,7 +1,7 @@
 import type { TableProps as ATableProps, TablePaginationConfig } from 'antd';
 import type { TableRowSelection } from 'antd/lib/table/interface';
 import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
-import { clone, isObject } from 'radash';
+import { clone, isEmpty, isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
 
 const INITIAL_FILTERS = {} as const;
@@ -22,7 +22,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   pagination: ATableProps<RecordType>['pagination'];
 
-  initialPagination: ATableProps<RecordType>['pagination'];
+  initialPagination: ATableProps<RecordType>['pagination'] = {};
 
   rowSelection?: TableProps<RecordType>['rowSelection'];
 
@@ -99,10 +99,11 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
     const { pagination = {} } = props;
     if (pagination === false) return;
     const { defaultCurrent, defaultPageSize } = pagination as TablePaginationConfig;
-    this.pagination = this.initialPagination = {
+    this.initialPagination = {
       current: defaultCurrent ?? 1,
       pageSize: defaultPageSize ?? 10,
     };
+    this.pagination = this.initialPagination;
   }
 
   refresh(params?: any): Promise<void> | undefined {
@@ -112,7 +113,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
     this.loading = true;
 
-    const { current, pageSize } = (this.pagination as TablePaginationConfig) || {};
+    const { current, pageSize } = (this.pagination as TablePaginationConfig) || this.initialPagination;
 
     return this.remoteDataSource(this.noPagination ? requestParams : { current, pageSize, ...requestParams })
       .then((res) => {
@@ -151,7 +152,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       if (this.filterConvert[cur]) {
         memo[cur] = this.filterConvert[cur](filters[cur]);
       } else {
-        memo[cur] = filters[cur];
+        memo[cur] = isEmpty(filters[cur]) ? undefined : filters[cur];
       }
       return memo;
     }, {} as any);
