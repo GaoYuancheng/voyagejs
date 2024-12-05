@@ -38,6 +38,7 @@ export const StatisticsCardGroup: React.FC<StatisticsCardGroupProps> = (props) =
           loading={loading}
           active={!!item.name && (labelInValue ? (value as StatisticsCardDataType)?.name : value) === item.name}
           onClick={(data, e) => {
+            item.onClick?.(data, e);
             onClick?.(data, e);
             if (!data.name) return;
             if (labelInValue) {
