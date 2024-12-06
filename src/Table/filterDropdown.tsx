@@ -23,7 +23,12 @@ export const FilterDropdown = <RecordType extends object = any, P extends Plugin
 
   const plugins = pluginStore.getPlugins('field');
 
-  const { element } = parsePlugin(plugins, fieldType, { ...fieldProps, options }, { ...ctx, _filter: true });
+  const { element } = parsePlugin(
+    plugins,
+    fieldType,
+    { ...fieldProps, ...(options ? { options } : {}) },
+    { ...ctx, _filter: true },
+  );
 
   return (
     <div style={{ minWidth: 200 }}>
