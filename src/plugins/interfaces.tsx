@@ -26,6 +26,7 @@ export type PluginPropsType<
 export interface FieldBaseProps {
   /** 禁用态 */
   readOnly?: boolean;
+  _filter?: boolean;
 }
 
 export interface CellBaseProps<RecordType extends object = any> extends TableInstance<RecordType> {

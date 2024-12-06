@@ -5,6 +5,7 @@ import { isObject, omit } from 'radash';
 import React from 'react';
 import { Text } from '../../../components';
 import type { FieldBaseProps } from '../../interfaces';
+import { optionBlock } from '../../utils/optionBlock';
 
 const { Group: ARadioGroup } = ARadio;
 
@@ -13,11 +14,13 @@ export interface RadioGroupProps extends Omit<ARadioGroupProps, 'onChange'>, Fie
 export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
   const { readOnly, value, options } = props;
 
+  const finalOptions = optionBlock(options, props);
+
   if (readOnly) {
     const target = options?.find((option) => (isObject(option) ? option.value === value : option === value)) || {};
 
     return <Text>{`${(target as any)?.label || '-'}`}</Text>;
   }
 
-  return <ARadioGroup {...omit(props, ['readOnly'])} />;
+  return <ARadioGroup {...omit(props, ['readOnly'])} options={finalOptions} />;
 };

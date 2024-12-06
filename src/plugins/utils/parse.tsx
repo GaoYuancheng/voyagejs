@@ -39,6 +39,7 @@ export const parsePlugin = (
         {...(isFunction(defaultComponentProps) ? defaultComponentProps(ctx) : (defaultComponentProps as any))}
         {...(_filter && defaultFilterProps ? defaultFilterProps(ctx) : {})}
         {...pluginProps}
+        _filter={_filter}
       />
     ),
     ...rest,
