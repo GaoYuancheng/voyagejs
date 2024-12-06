@@ -8,6 +8,10 @@ export default {
     return {
       ...restOptions,
       data,
+      maxColumnWidth: 50,
+      columnStyle: {
+        width: 30,
+      },
       geometryOptions: [
         {
           geometry: 'column',

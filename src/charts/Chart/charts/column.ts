@@ -10,6 +10,10 @@ export default {
       legend: {
         position: 'top',
       },
+      maxColumnWidth: 50,
+      columnStyle: {
+        width: 30,
+      },
       ...restOptions,
     };
   },
