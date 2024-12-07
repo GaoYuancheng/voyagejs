@@ -28,6 +28,32 @@ nav:
 
 ## API
 
+在[Antd Table](https://4x.ant.design/components/table-cn/#API)基础上扩展了如下属性：
+
+### TableProps
+
+| 参数               | 说明                               | 类型                                                |
+| ------------------ | ---------------------------------- | --------------------------------------------------- |
+| `remoteDataSource` | 远程数据源函数，返回数据和分页信息 | `(params: RequestParams) => Promise<RequestResult>` |
+| `rowSelection`     | 选中行配置                         | `true \| TableRowSelection`                         |
+| `requestOnMount`   | 初始是否发起一次请求，默认发起请求 | `boolean`                                           |
+| `columns`          | 列配置                             | `ColumnType[]`                                      |
+| `initialParams`    | 初始化请求参数                     | `any`                                               |
+| `initialFilters`   | 初始化筛选参数                     | `any`                                               |
+
+### RequestResult
+
+`remoteDataSource` 返回值格式
+
+```ts
+type RequestResult = {
+  data: RecordType[];
+  total: number;
+  current?: number;
+  pageSize?: number;
+};
+```
+
 ### columns
 
 [Antd Table Column](https://4x.ant.design/components/table-cn/#Column)
