@@ -19,7 +19,6 @@ const Demo = () => {
           min={0}
           max={100}
           tooltip={{
-            open: true,
             formatter: (value) => {
               if (value === 0) {
                 return '当天';
