@@ -24,7 +24,7 @@ const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
   // @ts-expect-error
   const table = useMemo(() => new TableStore<RecordType>(props, forceUpdate), []);
 
-  const { rowSelection, requestOnMount, ...restProps } = props;
+  const { rowSelection, requestOnMount, pagination, ...restProps } = props;
 
   const [modalForm, modalCtx] = useModalForm<P>();
 

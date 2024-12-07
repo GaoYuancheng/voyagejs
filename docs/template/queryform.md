@@ -1,7 +1,7 @@
 ---
 group: 模板
 nav:
-  order: 3
+  order: 4
 ---
 
 # QueryForm

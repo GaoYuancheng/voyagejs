@@ -103,7 +103,10 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
       current: defaultCurrent ?? 1,
       pageSize: defaultPageSize ?? 10,
     };
-    this.pagination = this.initialPagination;
+    this.pagination = {
+      ...this.initialPagination,
+      ...pagination,
+    };
   }
 
   refresh(params?: any): Promise<void> | undefined {
@@ -178,7 +181,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
   }
 
   get selectedRowKeys() {
-    return this.selectedRows.map((rowData) => rowData[this.rowKey as keyof RecordType]);
+    return toJS(this.selectedRows.map((rowData) => rowData[this.rowKey as keyof RecordType]));
   }
 
   get tableProps(): ATableProps<RecordType> {

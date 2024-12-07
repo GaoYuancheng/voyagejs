@@ -17,7 +17,7 @@ export const Form = observer(
   <Values, P extends PluginsType = PluginsType>(props: PropsWithChildren<FormProps<Values, P>>) => {
     const { children, form: formStore, onValuesChange, spinProps, items, formGroupProps, _inModal } = props;
 
-    const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps']);
+    const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps', '_inModal']);
 
     const [aForm] = useAForm();
 
