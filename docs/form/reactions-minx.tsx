@@ -1,3 +1,7 @@
+/**
+ * title: 同时使用
+ * description: b 状态受 a 控制，同时控制 c 状态
+ */
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
 

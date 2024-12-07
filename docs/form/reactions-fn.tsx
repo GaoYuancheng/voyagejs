@@ -1,7 +1,11 @@
+/**
+ * title: result函数格式
+ * description: `result`中每一项值为函数格式
+ */
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
 
-const { useForm, Item } = Form;
+const { useForm } = Form;
 
 const Demo = () => {
   const [form] = useForm();

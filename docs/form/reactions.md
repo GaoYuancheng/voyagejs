@@ -1,6 +1,8 @@
 ---
 group: 表单
 order: 6
+demo:
+  cols: 2
 ---
 
 # 联动
@@ -36,6 +38,12 @@ export type ReactionType =
       result: {
         [Key in ReactionResultKeyType]: ReactionResultType<Key>;
       };
+    }
+  | {
+      /** 事件联动 */
+      effects: NamePath[];
+      dependencies?: never;
+      result: (props: ReactionResultFunctionPropsType) => void;
     };
 ```
 
@@ -57,13 +65,8 @@ export type ReactionType =
 
 #### 示例
 
-主动联动：a 变化控制 b 状态，联动效果配置在 a 上
 <code src="./reactions-effects.tsx" ></code>
-
-被动联动：b 状态受 a 控制，联动效果配置在 b 上
 <code src="./reactions-dependencies.tsx" ></code>
-
-同时使用: b 状态受 a 控制，同时控制 c 状态
 <code src="./reactions-minx.tsx" ></code>
 
 ### 函数格式
@@ -78,7 +81,10 @@ export type ReactionType =
 | `depValues` | `dependencies`依赖项值数组                        |
 | `values`    | 全部表单值                                        |
 
-<code src="./reactions-fn.tsx" ></code>
+#### 示例
+
+<code src="./reactions-fn.tsx" >result 中每项值为函数格式</code>
+<code src="./reactions-fn2.tsx" >result 本身支持函数格式</code>
 
 ## Group 联动
 

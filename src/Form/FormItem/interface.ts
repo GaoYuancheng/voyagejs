@@ -69,4 +69,10 @@ export type ReactionType =
       result: {
         [Key in ReactionResultKeyType]: ReactionResultType<Key>;
       };
+    }
+  | {
+      /** 事件联动 */
+      effects: NamePath[];
+      dependencies?: never;
+      result: (props: ReactionResultFunctionPropsType) => void;
     };

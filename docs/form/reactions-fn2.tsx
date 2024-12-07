@@ -1,11 +1,11 @@
 /**
- * title: 主动联动
- * description: a 变化控制 b 状态，联动效果配置在 a 上
+ * title: result值函数模式
+ * description: `result`函数模式
  */
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
 
-const { useForm, Item } = Form;
+const { useForm } = Form;
 
 const Demo = () => {
   const [form] = useForm();
@@ -17,15 +17,6 @@ const Demo = () => {
           name: 'a',
           label: 'a',
           fieldType: 'input',
-          reactions: [
-            {
-              effects: ['b'],
-              result: {
-                value: `$self ? $self === '1' ? '1' : '2' : ''`,
-                required: `$self === '1'`,
-              },
-            },
-          ],
         },
         {
           name: 'b',
@@ -33,10 +24,12 @@ const Demo = () => {
           fieldType: 'input',
           reactions: [
             {
-              effects: ['c'],
-              result: {
-                value: `$self ? $self === '1' ? '1' : '2' : ''`,
-                required: `$self === '1'`,
+              dependencies: ['a'],
+              result: (ctx) => {
+                console.log('ctx', ctx);
+                const { deps, depValues, target } = ctx;
+                // 但这种方式不会触发循环联动
+                target.value = depValues[0];
               },
             },
           ],
@@ -47,10 +40,19 @@ const Demo = () => {
           fieldType: 'input',
           reactions: [
             {
+              dependencies: ['b'],
+              result: (ctx) => {
+                console.log('ctx', ctx);
+                const { deps, depValues, target } = ctx;
+                target.value = depValues[0];
+              },
+            },
+            {
               effects: ['d'],
-              result: {
-                value: `$self ? $self === '1' ? '1' : '2' : ''`,
-                required: `$self === '1'`,
+              result: (ctx) => {
+                console.log('ctx', ctx);
+                const { deps, depValues, target } = ctx;
+                target.value = depValues[0];
               },
             },
           ],

@@ -1,3 +1,7 @@
+/**
+ * title: 被动联动
+ * description: 被动联动：b 状态受 a 控制，联动效果配置在 b 上
+ */
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
 
