@@ -22,6 +22,10 @@ nav:
 
 <code src="./table-rowselection.tsx" ></code>
 
+<code src="./table-tooltip.tsx" ></code>
+
+<code src="./table-filters.tsx" ></code>
+
 ## API
 
 ### columns
@@ -37,7 +41,7 @@ nav:
 | tooltip          | 列头提示信息                                                       | `string \| ReactNode`                                  |
 | required         | 是否必填                                                           | `boolean`                                              |
 | visible          | 是否显示此列                                                       | `boolean`                                              |
-| render           | 自定义渲染，改写参数类型，并增加` table``modal `实例属性；支持插件 | `(ctx) => ReactNode`                                   |
+| render           | 自定义渲染，改写参数类型，并增加 `table` `modal`实例属性；支持插件 | `(ctx) => ReactNode`                                   |
 | filterFieldType  | 筛选框类型，支持插件或者自定义类型                                 | `string \| ((ctx: AFilterDropdownProps) => ReactNode)` |
 | filterFieldProps | 筛选框配置，透传给筛选框插件                                       | `any`                                                  |
 | options          | 列配置选项，支持透传给插件                                         | `{ text: string; value: any }[]`                       |

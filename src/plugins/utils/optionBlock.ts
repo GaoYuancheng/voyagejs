@@ -1,5 +1,5 @@
 export const optionBlock = (options?: any[], props?: any) => {
-  const { _filter } = props || {};
+  const { ['data-voyagejs-filter']: _filter } = props || {};
 
   if (!_filter) return options;
   if (!options) return options;
