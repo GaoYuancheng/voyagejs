@@ -52,7 +52,7 @@ export type PluginType = {
 | `values` | any  | 通过`form.values`直接获取表单值。<br> 也可以通过`form.values = newValue`方式设置表单值。 |
 
 也可以获得所有共有属性值；或通过`form.propName = propValue`方式更新值并触发表单更新。
-<embed src="./base.md"></embed>
+<embed src="./_base.md"></embed>
 
 #### 方法
 

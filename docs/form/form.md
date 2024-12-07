@@ -47,4 +47,4 @@ Form 组件在继承 antd [Form](https://4x.ant.design/components/form-cn/#Form)
 | remoteValues | () => Promise\<Values\>                                | -      | 远程表单值加载方法                              |
 | spinProps    | [SpinProps](https://4x.ant.design/components/spin-cn/) | -      | 加载中状态的 Spin 组件配置,不包含 spinning 属性 |
 
-<embed src="./base.md"></embed>
+<embed src="./_base.md"></embed>

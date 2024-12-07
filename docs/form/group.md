@@ -51,4 +51,4 @@ group: 表单
 | **containerProps** | `PluginPropsType<P, 'container', CN extends string ? CN : never>` | 可选，容器插件的属性。                      |
 | **reactions**      | [ReactionType[]](/form/reactions#reactions-联动)                  | 可选，定义表单项的联动关系。                |
 
-<embed src="./base.md"></embed>
+<embed src="./_base.md"></embed>

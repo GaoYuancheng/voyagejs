@@ -49,4 +49,4 @@ demo:
 | **viewFieldType**   | `string \| () => React.ReactNode`                | 可选，预览模式渲染控件类型。                             |
 | **viewFieldProps**  | `any`                                            | 可选，预览模式渲染控件属性。                             |
 
-<embed src="./base.md"></embed>
+<embed src="./_base.md"></embed>
