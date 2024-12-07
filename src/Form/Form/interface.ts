@@ -16,6 +16,8 @@ export interface FormProps<Values = any, P extends PluginsType = PluginsType>
   remoteValues?: () => Promise<Values>;
   /** Spin属性 */
   spinProps?: Omit<SpinProps, 'spinning'>;
+  /** Form内置FormGroup属性 */
+  formGroupProps?: FormGroupProps<Values, P>;
 
   // 内部使用
   _inModal?: { isOpen: boolean };

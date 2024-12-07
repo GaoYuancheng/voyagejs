@@ -15,7 +15,7 @@ export { ErrorList, Provider, useAForm };
 
 export const Form = observer(
   <Values, P extends PluginsType = PluginsType>(props: PropsWithChildren<FormProps<Values, P>>) => {
-    const { children, form: formStore, onValuesChange, spinProps, items, _inModal } = props;
+    const { children, form: formStore, onValuesChange, spinProps, items, formGroupProps, _inModal } = props;
 
     const restProps = omit(props, [...commonKeys, 'items', 'remoteValues', 'spinProps']);
 
@@ -39,7 +39,7 @@ export const Form = observer(
     const renderChildren = () => {
       if (items) {
         // 只作为分组使用，去除Group分组
-        return <FormGroup<Values, P> container={null} items={items} />;
+        return <FormGroup<Values, P> items={items} {...formGroupProps} />;
       }
       return children;
     };

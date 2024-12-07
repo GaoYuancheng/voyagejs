@@ -86,6 +86,8 @@ export type ReactionType =
 <code src="./reactions-fn.tsx" >result 中每项值为函数格式</code>
 <code src="./reactions-fn2.tsx" >result 本身支持函数格式</code>
 
+<code src="./reactions-fn3.tsx" >result 中使用 selfValue 模板字符</code>
+
 ## Group 联动
 
 <code src="./group-reactions.tsx" ></code>

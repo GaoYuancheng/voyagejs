@@ -42,11 +42,12 @@ nav:
 
 Form 组件在继承 antd [Form](https://4x.ant.design/components/form-cn/#Form) 全部属性的基础上,新增了以下属性:
 
-| 属性名       | 类型                                                   | 默认值 | 描述                                            |
-| ------------ | ------------------------------------------------------ | ------ | ----------------------------------------------- |
-| form         | [FormStore](/form/use-form#form)                       | -      | 必填，表单实例对象                              |
-| items        | [FormGroupProps](/form/group#formgroupprops)[]         | -      | 表单项配置数组,用于快速生成表单项               |
-| remoteValues | () => Promise\<Values\>                                | -      | 远程表单值加载方法                              |
-| spinProps    | [SpinProps](https://4x.ant.design/components/spin-cn/) | -      | 加载中状态的 Spin 组件配置,不包含 spinning 属性 |
+| 属性名         | 类型                                                   | 默认值 | 描述                                            |
+| -------------- | ------------------------------------------------------ | ------ | ----------------------------------------------- |
+| form           | [FormStore](/form/use-form#form)                       | -      | 必填，表单实例对象                              |
+| items          | [FormGroupProps](/form/group#formgroupprops)[]         | -      | 表单项配置数组,用于快速生成表单项               |
+| remoteValues   | () => Promise\<Values\>                                | -      | 远程表单值加载方法                              |
+| spinProps      | [SpinProps](https://4x.ant.design/components/spin-cn/) | -      | 加载中状态的 Spin 组件配置,不包含 spinning 属性 |
+| formGroupProps | [FormGroupProps](/form/group#formgroupprops)           | -      | 内置表单组属性                                  |
 
 <embed src="./_base.md"></embed>

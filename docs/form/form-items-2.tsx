@@ -14,6 +14,7 @@ const Demo = () => {
   return (
     <Form
       form={form}
+      formGroupProps={{ container: null }}
       items={[
         {
           title: '分组1',
