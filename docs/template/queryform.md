@@ -8,7 +8,7 @@ nav:
 
 用于数据查询场景的表单组件。
 
-<code src="./queryform.tsx" ></code>
+<code src="./queryform-base.tsx" ></code>
 <code src="./queryform-collapse.tsx" ></code>
 <code src="./queryform-single.tsx" ></code>
 
