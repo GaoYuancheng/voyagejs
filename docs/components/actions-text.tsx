@@ -1,8 +1,12 @@
-import { Card, Space, message } from 'antd';
+/**
+ * title: 文本按钮
+ * description: 单个文本按钮
+ */
+import { Space, message } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
 import type { TextActionProps } from 'voyagejs';
-import { TextAction, TextActions } from 'voyagejs';
+import { TextAction } from 'voyagejs';
 
 const Demo = () => {
   const textActions: TextActionProps['actions'] = [
@@ -59,17 +63,10 @@ const Demo = () => {
   ];
 
   return (
-    <Space style={{ display: 'flex' }} direction="vertical">
-      <Card title="按钮组 TextActions">
-        <TextActions actions={textActions} />
-      </Card>
-      <Card title="按钮 TextAction">
-        <Space>
-          {textActions.map((action, idx) => {
-            return <TextAction {...action} key={idx} />;
-          })}
-        </Space>
-      </Card>
+    <Space>
+      {textActions.map((action, idx) => {
+        return <TextAction {...action} key={idx} />;
+      })}
     </Space>
   );
 };

@@ -1,11 +1,12 @@
 /**
- * title: 单个按钮
+ * title: 按钮组
+ * description: 按钮组，适合表单、表格操作栏位置使用
  */
-import { Space, message } from 'antd';
+import { message } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
 import type { ButtonActionsProps } from 'voyagejs';
-import { ButtonAction } from 'voyagejs';
+import { ButtonActions } from 'voyagejs';
 
 const Demo = () => {
   const buttonActions: ButtonActionsProps['actions'] = [
@@ -61,13 +62,7 @@ const Demo = () => {
     },
   ];
 
-  return (
-    <Space>
-      {buttonActions.map((action, idx) => {
-        return <ButtonAction {...action} key={idx} />;
-      })}
-    </Space>
-  );
+  return <ButtonActions actions={buttonActions} />;
 };
 
 export default Demo;

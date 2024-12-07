@@ -1,38 +1,42 @@
 /**
- * title: 单个按钮
+ * title: 图标按钮组
  */
-import { Space, message } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { message } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
-import type { ButtonActionsProps } from 'voyagejs';
-import { ButtonAction } from 'voyagejs';
+import type { IconActionProps } from 'voyagejs';
+import { IconActions } from 'voyagejs';
 
 const Demo = () => {
-  const buttonActions: ButtonActionsProps['actions'] = [
+  const iconActions: IconActionProps['actions'] = [
     {
-      children: '新增',
+      tooltip: '新增',
       type: 'primary',
+      icon: <PlusOutlined />,
       onClick: () => {
         console.log('Action 1');
       },
     },
     {
-      children: '隐藏',
+      tooltip: '隐藏',
       render: false,
+      icon: <PlusOutlined />,
       onClick: () => {
         console.log('Action 1');
       },
     },
     {
       disabled: true,
-      children: '新增',
       tooltip: '设置disabled被禁用了~前面有个隐藏项',
+      icon: <PlusOutlined />,
       onClick: () => {
         console.log('Action 1');
       },
     },
     {
-      children: '编辑',
+      tooltip: '编辑',
+      icon: <EditOutlined />,
       onClick: async () => {
         console.log('Action 编辑');
         await sleep(2000);
@@ -40,9 +44,10 @@ const Demo = () => {
       },
     },
     {
-      children: '删除',
-      danger: true,
+      tooltip: '删除',
+      type: 'danger',
       confirm: '确认删除?',
+      icon: <DeleteOutlined />,
       onClick: async (e) => {
         console.log('Action 删除', e);
         await sleep(2000);
@@ -50,9 +55,10 @@ const Demo = () => {
       },
     },
     {
-      children: '二次弹框删除',
-      danger: true,
+      tooltip: '二次弹框删除',
+      type: 'danger',
       modalConfirm: '确认删除?',
+      icon: <DeleteOutlined />,
       onClick: async (e) => {
         console.log('Action 删除', e);
         await sleep(2000);
@@ -61,13 +67,7 @@ const Demo = () => {
     },
   ];
 
-  return (
-    <Space>
-      {buttonActions.map((action, idx) => {
-        return <ButtonAction {...action} key={idx} />;
-      })}
-    </Space>
-  );
+  return <IconActions actions={iconActions} />;
 };
 
 export default Demo;

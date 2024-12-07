@@ -1,14 +1,18 @@
+/**
+ * title: 图标按钮
+ * description: 单个图标按钮
+ */
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card, Space, message } from 'antd';
+import { Space, message } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
 import type { IconActionProps } from 'voyagejs';
-import { IconAction, IconActions } from 'voyagejs';
+import { IconAction } from 'voyagejs';
 
 const Demo = () => {
   const iconActions: IconActionProps['actions'] = [
     {
-      children: '新增',
+      tooltip: '新增',
       type: 'primary',
       icon: <PlusOutlined />,
       onClick: () => {
@@ -16,7 +20,7 @@ const Demo = () => {
       },
     },
     {
-      children: '隐藏',
+      tooltip: '隐藏',
       render: false,
       icon: <PlusOutlined />,
       onClick: () => {
@@ -25,7 +29,6 @@ const Demo = () => {
     },
     {
       disabled: true,
-      children: '新增',
       tooltip: '设置disabled被禁用了~前面有个隐藏项',
       icon: <PlusOutlined />,
       onClick: () => {
@@ -33,7 +36,7 @@ const Demo = () => {
       },
     },
     {
-      children: '编辑',
+      tooltip: '编辑',
       icon: <EditOutlined />,
       onClick: async () => {
         console.log('Action 编辑');
@@ -42,7 +45,7 @@ const Demo = () => {
       },
     },
     {
-      children: '删除',
+      tooltip: '删除',
       type: 'danger',
       confirm: '确认删除?',
       icon: <DeleteOutlined />,
@@ -53,7 +56,7 @@ const Demo = () => {
       },
     },
     {
-      children: '二次弹框删除',
+      tooltip: '二次弹框删除',
       type: 'danger',
       modalConfirm: '确认删除?',
       icon: <DeleteOutlined />,
@@ -66,17 +69,10 @@ const Demo = () => {
   ];
 
   return (
-    <Space style={{ display: 'flex' }} direction="vertical">
-      <Card title="按钮组 IconActions">
-        <IconActions actions={iconActions} />
-      </Card>
-      <Card title="按钮 IconAction">
-        <Space>
-          {iconActions.map((action, idx) => {
-            return <IconAction {...action} key={idx} />;
-          })}
-        </Space>
-      </Card>
+    <Space>
+      {iconActions.map((action, idx) => {
+        return <IconAction {...action} key={idx} />;
+      })}
     </Space>
   );
 };

@@ -1,14 +1,15 @@
 /**
- * title: 单个按钮
+ * title: 文本按钮组
+ * description: 适合表格操作列使用
  */
-import { Space, message } from 'antd';
+import { message } from 'antd';
 import { sleep } from 'radash';
 import React from 'react';
-import type { ButtonActionsProps } from 'voyagejs';
-import { ButtonAction } from 'voyagejs';
+import type { TextActionProps } from 'voyagejs';
+import { TextActions } from 'voyagejs';
 
 const Demo = () => {
-  const buttonActions: ButtonActionsProps['actions'] = [
+  const textActions: TextActionProps['actions'] = [
     {
       children: '新增',
       type: 'primary',
@@ -41,7 +42,7 @@ const Demo = () => {
     },
     {
       children: '删除',
-      danger: true,
+      type: 'danger',
       confirm: '确认删除?',
       onClick: async (e) => {
         console.log('Action 删除', e);
@@ -51,7 +52,7 @@ const Demo = () => {
     },
     {
       children: '二次弹框删除',
-      danger: true,
+      type: 'danger',
       modalConfirm: '确认删除?',
       onClick: async (e) => {
         console.log('Action 删除', e);
@@ -61,13 +62,7 @@ const Demo = () => {
     },
   ];
 
-  return (
-    <Space>
-      {buttonActions.map((action, idx) => {
-        return <ButtonAction {...action} key={idx} />;
-      })}
-    </Space>
-  );
+  return <TextActions actions={textActions} />;
 };
 
 export default Demo;

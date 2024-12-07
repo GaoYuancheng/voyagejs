@@ -1,7 +1,7 @@
 ---
 group: 组件
 demo:
-  cols: 2
+  cols: 20
 ---
 
 # ActionsFooter
