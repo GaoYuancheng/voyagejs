@@ -38,7 +38,8 @@ export const Form = observer(
 
     const renderChildren = () => {
       if (items) {
-        return <FormGroup<Values, P> items={items} />;
+        // 只作为分组使用，去除Group分组
+        return <FormGroup<Values, P> container={null} items={items} />;
       }
       return children;
     };

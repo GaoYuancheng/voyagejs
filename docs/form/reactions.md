@@ -7,7 +7,13 @@ order: 6
 
 ## dependencies 联动
 
-`Antd Form.Item`如果设置了`dependencies`，它所依赖的字段更新时，该字段会自动触发更新与校验。`voyajejs Form.Item`设置`dependencies`属性时，该表单项还会触发`remoteOptions`重新请求，并且将依赖项的值列表，作为`remoteOptions`的第一个参数。
+`Antd Form.Item`如果设置了`dependencies`，它所依赖的字段更新时，该字段会自动触发更新与校验。
+
+`voyajejs Form.Item`设置`dependencies`属性时，该表单项还会触发`remoteOptions`重新请求，并且将依赖项的值列表，作为`remoteOptions`的第一个参数。
+
+:::warning
+`voyagejs`中`dependencies`只推荐在数据源联动时使用，实现其他联动方式`dependencies`会增加代码复杂度
+:::
 
 <code src="./item-reactions-options.tsx" ></code>
 
@@ -64,13 +70,13 @@ export type ReactionType =
 
 `result`函数格式支持 3 个模板字符类型：
 
-| 名称        | 描述                         |
-| ----------- | ---------------------------- |
+| 名称        | 描述                                              |
+| ----------- | ------------------------------------------------- |
 | `self`      | 当前变化的表单项实例，仅在主动联动`effects`中生效 |
-| `selfValue` | 当前变化的表单值，仅在主动联动`effects`中生效       |
-| `deps`      | `dependencies`依赖项实例列表 |
-| `depValues` | `dependencies`依赖项值数组   |
-| `values`    | 全部表单值                   |
+| `selfValue` | 当前变化的表单值，仅在主动联动`effects`中生效     |
+| `deps`      | `dependencies`依赖项实例列表                      |
+| `depValues` | `dependencies`依赖项值数组                        |
+| `values`    | 全部表单值                                        |
 
 <code src="./reactions-fn.tsx" ></code>
 

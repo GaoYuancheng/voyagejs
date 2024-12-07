@@ -1,35 +1,15 @@
-import { Button, Radio } from 'antd';
-import { sleep } from 'radash';
-import React, { Fragment, useState } from 'react';
-import { DefaultPluginsType, FieldMode, Form } from 'voyagejs';
+import { Button } from 'antd';
+import React, { Fragment } from 'react';
+import { DefaultPluginsType, Form } from 'voyagejs';
 
 const { useForm } = Form;
 
 const Demo = () => {
   const [form] = useForm();
 
-  const [mode, setMode] = useState(FieldMode.EDIT);
-
   return (
     <Fragment>
-      <Radio.Group
-        value={mode}
-        optionType="button"
-        style={{ marginBottom: 16 }}
-        onChange={(e) => setMode(e.target.value)}
-      />
       <Form<any, DefaultPluginsType>
-        mode={mode}
-        remoteValues={async () => {
-          await sleep(2000);
-          return {
-            // hidden: '隐藏',
-            // edit: '编辑',
-            // view: '查看',
-            // disabled: '禁用',
-            // visible: '显示',
-          };
-        }}
         form={form}
         items={[
           {

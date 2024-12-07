@@ -43,14 +43,22 @@ export type PluginType = {
 
 ### form
 
-`form`拥有 [antd FormInstance](https://4x.ant.design/components/form-cn/#FormInstance) 的全部方法，并扩展了以下属性、方法：
+> `form`也就是`formStore`
 
-#### values
+#### 属性
 
-通过`form.values`直接获取表单值。
+| 属性名称 | 类型 | 描述                                                                                     |
+| -------- | ---- | ---------------------------------------------------------------------------------------- |
+| `values` | any  | 通过`form.values`直接获取表单值。<br> 也可以通过`form.values = newValue`方式设置表单值。 |
 
-也可以通过`form.values = newValue`方式设置表单值。
+也可以获得所有共有属性值；或通过`form.propName = propValue`方式更新值并触发表单更新。
+<embed src="./base.md"></embed>
 
-#### refresh()
+#### 方法
 
-重新请求远程表单值，刷新表单。
+`form`拥有 [antd FormInstance](https://4x.ant.design/components/form-cn/#FormInstance) 的全部方法，并扩展了一下方法：
+
+| 方法名称   | 类型                            | 描述                           |
+| ---------- | ------------------------------- | ------------------------------ |
+| `refresh`  | () => void                      | 重新请求远程表单值，刷新表单。 |
+| `getField` | (name: string) => FieldInstance | 获取表单项实例                 |

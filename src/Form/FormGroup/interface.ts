@@ -25,7 +25,7 @@ export type FormGroupProps<Values = any, P extends PluginsType = PluginsType> = 
 > &
   (
     | (FormGroupPropsType<Values, P> & {
-        container: React.ReactElement;
+        container: React.ReactElement | null;
         containerProps?: never;
       })
     | ({

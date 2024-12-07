@@ -1,4 +1,9 @@
+/**
+ * title: 弹框表单
+ * description: 1.使用 `useModalForm` 创建弹框表单，将表单代码以事件方式处理；<br> 2.`onOk`返回`Promise`，按钮自动loading
+ */
 import { Button } from 'antd';
+import { sleep } from 'radash';
 import React from 'react';
 import { DefaultPluginsType, useModalForm } from 'voyagejs';
 
@@ -20,13 +25,15 @@ const ModalForm = () => {
               {
                 name: 'name',
                 label: '姓名',
+                rules: [{ required: true, message: '请输入姓名' }],
                 fieldType: 'input',
               },
             ],
             onCancel: () => {
               console.log('onCancel');
             },
-            onOk: (e, ctx) => {
+            onOk: async (e, ctx) => {
+              await sleep(2000);
               console.log('onOk', e, ctx);
               close();
             },

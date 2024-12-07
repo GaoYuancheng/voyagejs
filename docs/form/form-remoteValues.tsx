@@ -1,6 +1,10 @@
+/**
+ * title: remoteValues
+ * description: 使用remoteValues赋予表单值，表单自动loading
+ */
 import { sleep } from 'radash';
 import React from 'react';
-import { Form, DefaultPluginsType } from 'voyagejs';
+import { DefaultPluginsType, Form } from 'voyagejs';
 
 const { useForm } = Form;
 

@@ -1,3 +1,7 @@
+/**
+ * title: 数据源联动
+ * description: 通过`dependencies`属性和`remoteOptions`属性实现数据源联动
+ */
 import { sleep } from 'radash';
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
