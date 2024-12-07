@@ -21,7 +21,7 @@ export interface QueryFormProps<Values = any, P extends PluginsType = PluginsTyp
   /** 点击查询时的回调函数 */
   onSearch?: (values: any) => Promise<void> | undefined;
   /** 点击重置时的回调函数 */
-  onReset?: () => void;
+  onReset?: (values?: any) => void;
   /** 只有一个字段时，单一展示 */
   enableMainSearch?: boolean;
   /** 重置按钮属性 */
@@ -65,7 +65,7 @@ const IQueryForm = <Values, P extends PluginsType>(props: QueryFormProps<Values,
   // ===== 重置 =====
   const handleReset = useCallback(async () => {
     form.resetFields();
-    return await onReset?.();
+    return await onReset?.(form.getFieldsValue());
   }, [form, onReset]);
 
   // ===== 查询 =====

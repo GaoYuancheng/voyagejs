@@ -1,5 +1,7 @@
 ---
 group: 表单
+nav:
+  order: 1
 ---
 
 # Form

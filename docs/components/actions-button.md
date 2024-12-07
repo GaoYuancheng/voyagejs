@@ -1,6 +1,8 @@
 ---
 group: 组件
 order: 1
+nav:
+  order: 2
 ---
 
 # ButtonAction
