@@ -3,7 +3,7 @@ import { message, Tag } from 'antd';
 import { toJS } from 'mobx';
 import React, { useEffect, useRef } from 'react';
 import { DEFAULT_PLUGINS, QueryFormInstance, QueryTable } from 'voyagejs';
-import { recipientName, remoteDataSource, status } from 'voyagejs/table/demos/config';
+import { recipientName, remoteDataSource, status } from 'voyagejs/Table/demos/config';
 
 const Demo = () => {
   const ref = useRef<QueryFormInstance>();

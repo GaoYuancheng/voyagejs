@@ -3,7 +3,7 @@
  */
 import React, { useState } from 'react';
 import { QueryTableSelect } from 'voyagejs';
-import { columns, RecordType, remoteDataSource } from 'voyagejs/table/demos/config';
+import { columns, RecordType, remoteDataSource } from 'voyagejs/Table/demos/config';
 
 const Demo = () => {
   const [value, setValue] = useState('1');

@@ -2,7 +2,7 @@ import { Card, CardProps, Empty, Spin } from 'antd';
 import { isEmpty, isFunction } from 'radash';
 import React, { useEffect, useRef, useState } from 'react';
 import { usePrefixCls } from '../../context';
-import { Form, FormItemProps } from '../../form';
+import { Form, FormItemProps } from '../../Form';
 import type { PluginsType } from '../../plugins';
 import { DEFAULT_CHART_PLUGINS } from './charts';
 

@@ -6,7 +6,7 @@ import type {
   TableRowSelection,
 } from 'antd/lib/table/interface';
 import type { ReactElement } from 'react';
-import type { ModalFormInstance } from '../form';
+import type { ModalFormInstance } from '../Form';
 import type { PluginPropsType, PluginsType } from '../plugins';
 
 /**

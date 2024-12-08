@@ -1,8 +1,6 @@
-import { message, Tag } from 'antd';
-import { toJS } from 'mobx';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { DEFAULT_PLUGINS, QueryFormInstance, QueryTable } from 'voyagejs';
-import { columns, remoteDataSource } from 'voyagejs/table/demos/config';
+import { columns, remoteDataSource } from 'voyagejs/Table/demos/config';
 
 const Demo = () => {
   const ref = useRef<QueryFormInstance>();

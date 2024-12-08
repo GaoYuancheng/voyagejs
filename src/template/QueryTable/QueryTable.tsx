@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { Form, FormStore, type FormProps } from '../../form';
+import { Form, FormStore, type FormProps } from '../../Form';
 import type { PluginsType } from '../../plugins';
-import { Table, TableInstance, TableSearchStatus, type TableProps } from '../../table';
+import { Table, TableInstance, TableSearchStatus, type TableProps } from '../../Table';
 import { type ActionsProps } from '../Actions';
 import { QueryForm, type QueryFormProps } from '../QueryForm';
 import { QueryActions, type QueryActionsProps } from './QueryActions';
