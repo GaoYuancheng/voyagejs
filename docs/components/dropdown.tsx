@@ -3,6 +3,8 @@ import { sleep } from 'radash';
 import React from 'react';
 import { Dropdown } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const Demo = () => {
   return (
     <Space>

@@ -8,6 +8,8 @@ import React from 'react';
 import type { ButtonActionsProps } from 'voyagejs';
 import { ButtonActions } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const Demo = () => {
   const buttonActions: ButtonActionsProps['actions'] = [
     {

@@ -7,6 +7,8 @@ import React from 'react';
 import type { ButtonActionsProps } from 'voyagejs';
 import { ButtonAction } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const Demo = () => {
   const buttonActions: ButtonActionsProps['actions'] = [
     {

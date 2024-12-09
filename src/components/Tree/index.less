@@ -1,0 +1,46 @@
+@import (reference) '../../styles/index.less';
+
+@tree-prefix-cls: ~'@{ant-prefix}-custom-tree';
+
+.@{tree-prefix-cls} {
+  &-treenode {
+    display: flex;
+    justify-content: space-between;
+
+    &-highlight-text {
+      color: @error-color;
+    }
+
+    &-operator {
+      margin-right: 8px;
+      margin-left: 16px;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+
+      &-show {
+        opacity: 1;
+      }
+    }
+
+    &:hover &-operator-showonhover {
+      opacity: 1;
+    }
+
+    &-title-description-inline {
+      display: flex;
+
+      & > div:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &-search {
+    display: flex;
+    margin-bottom: 8px;
+  }
+
+  &-extra {
+    margin-left: 8px;
+  }
+}

@@ -6,6 +6,8 @@ import React from 'react';
 import type { TextActionProps } from 'voyagejs';
 import { TextActions } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const Demo = () => {
   const textActions: TextActionProps['actions'] = [
     {

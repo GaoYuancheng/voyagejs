@@ -7,6 +7,8 @@ import React from 'react';
 import type { IconActionProps } from 'voyagejs';
 import { IconActions } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const Demo = () => {
   const iconActions: IconActionProps['actions'] = [
     {

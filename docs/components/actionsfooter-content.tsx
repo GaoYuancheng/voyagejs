@@ -2,7 +2,9 @@
  * background: '#f6f7f9'
  */
 import React from 'react';
-import { Form, ActionsFooter } from 'voyagejs';
+import { ActionsFooter, Form } from 'voyagejs';
+
+import 'antd/lib/style/themes/variable.less';
 
 const { useForm } = Form;
 

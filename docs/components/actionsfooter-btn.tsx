@@ -4,6 +4,8 @@
 import React from 'react';
 import { ActionsFooter } from 'voyagejs';
 
+import 'antd/lib/style/themes/variable.less';
+
 const PageFooterDemo = () => {
   return (
     <div style={{ background: '#f0f2f5', height: '100vh' }}>

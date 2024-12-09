@@ -26,7 +26,7 @@ export type PluginPropsType<
 export interface FieldBaseProps {
   /** 禁用态 */
   readOnly?: boolean;
-  'data-voyagejs-filter'?: boolean;
+  'data-voyagejs-filter'?: any;
 }
 
 export interface CellBaseProps<RecordType extends object = any> extends TableInstance<RecordType> {
