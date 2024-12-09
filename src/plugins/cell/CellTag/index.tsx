@@ -18,5 +18,7 @@ export const CellTag = <RecordType extends object>(props: CellTagProps<RecordTyp
   // eslint-disable-next-line eqeqeq
   const { label, text, ...rest } = options.find((item) => item.value == value) || {};
 
+  if (!value) return '-';
+
   return <Tag {...rest}>{label ?? text ?? value}</Tag>;
 };

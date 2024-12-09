@@ -17,5 +17,7 @@ export const CellBadge = <RecordType extends object>(props: CellBadgeProps<Recor
 
   const { label, text, ...rest } = options.find((item) => item.value === value) || {};
 
+  if (!value) return '-';
+
   return <Badge {...rest} text={label ?? text ?? value} />;
 };
