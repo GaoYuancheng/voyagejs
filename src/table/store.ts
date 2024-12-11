@@ -123,7 +123,12 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
         runInAction(() => {
           this.dataSource = res.data;
           if (!this.noPagination) {
-            this.pagination = { ...this.pagination, total: res.total };
+            this.pagination = {
+              ...this.pagination,
+              current: res.current ?? current,
+              pageSize: res.pageSize ?? pageSize,
+              total: res.total,
+            };
           }
           this.loading = false;
         });
