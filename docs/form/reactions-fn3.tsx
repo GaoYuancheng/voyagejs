@@ -1,6 +1,6 @@
 /**
  * title: 更改组件属性
- * description: 只更改组件的某一个属性
+ * description: 只更改组件属性的某一个值
  */
 import React from 'react';
 import { DefaultPluginsType, Form } from 'voyagejs';
@@ -12,7 +12,7 @@ const Demo = () => {
   return (
     <Form<any, DefaultPluginsType>
       form={form}
-      formGroupProps={{ rowProps: { gutter: 16 } }}
+      formGroupProps={{ rowProps: { gutter: 16 }, labelCol: { style: { width: 120 } } }}
       items={[
         {
           name: 'value',
@@ -38,6 +38,34 @@ const Demo = () => {
               result: (ctx) => {
                 const { target, selfValue } = ctx;
                 target.fieldProps.addonAfter = selfValue ? '%' : undefined;
+              },
+            },
+          ],
+        },
+
+        {
+          span: 8,
+          label: '是否同意',
+          name: 'agree',
+          rules: [{ required: true, message: '请选择是否同意' }],
+          fieldType: 'radio.group',
+          options: [
+            { label: '同意', value: true },
+            { label: '不同意', value: false },
+          ],
+        },
+        {
+          span: 24,
+          label: '意见',
+          name: 'opinion',
+          fieldType: 'input',
+          rules: [{ required: false, message: '请输入意见' }],
+          reactions: [
+            {
+              dependencies: ['agree'],
+              result: (ctx) => {
+                const { target, depValues } = ctx;
+                target!.rules = [{ required: depValues[0], message: '请输入意见' }];
               },
             },
           ],
