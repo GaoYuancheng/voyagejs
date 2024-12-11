@@ -1,6 +1,8 @@
 ---
 group: 组件
 order: 20
+demo:
+  cols: 2
 ---
 
 # ActionsFooter

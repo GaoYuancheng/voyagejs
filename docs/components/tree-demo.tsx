@@ -2,12 +2,12 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { sleep } from 'radash';
 import React, { Fragment } from 'react';
-import { ButtonAction, Dropdown, IconAction, Tree, useModalForm } from 'voyagejs';
+import { ButtonAction, DefaultPluginsType, Dropdown, IconAction, Tree, useModalForm } from 'voyagejs';
 
 import 'antd/lib/style/themes/variable.less';
 
 const Demo = () => {
-  const [modalForm, { open, close }] = useModalForm();
+  const [modalForm, { open, close }] = useModalForm<any, DefaultPluginsType>();
 
   return (
     <Fragment>
