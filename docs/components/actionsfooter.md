@@ -20,6 +20,7 @@ demo:
 
 <code src="./actionsfooter-btn.tsx" ></code>
 <code src="./actionsfooter-content.tsx" ></code>
+<code src="./actionsfooter-base.tsx" ></code>
 
 ## API
 
@@ -27,6 +28,7 @@ demo:
 
 | 参数         | 说明                  | 类型                                                     | 默认值 |
 | ------------ | --------------------- | -------------------------------------------------------- | ------ |
+| affix        | 是否固定在底部        | `boolean`                                                | `true` |
 | items        | 操作按钮配置项        | [ActionItem[]](/components/actions#按钮属性)             | -      |
 | children     | 内容区域              | `React.ReactNode`                                        | -      |
 | contentStyle | 内容区域样式          | `CSSProperties \| ((affixed: boolean) => CSSProperties)` | -      |
