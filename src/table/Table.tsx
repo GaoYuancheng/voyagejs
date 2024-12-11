@@ -15,7 +15,7 @@ export type TableInstance<RecordType extends object = any, Values = any, P exten
   modal: ModalFormInstance<Values, P>;
 };
 
-const ITable = <RecordType extends object, P extends PluginsType = PluginsType>(
+const ITable = <RecordType extends object = any, P extends PluginsType = PluginsType>(
   props: TableProps<RecordType, P>,
   ref: React.Ref<TableInstance<RecordType, P>>,
 ) => {

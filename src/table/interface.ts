@@ -5,7 +5,7 @@ import type {
   SorterResult,
   TableRowSelection,
 } from 'antd/lib/table/interface';
-import type { ReactElement } from 'react';
+import type { ReactNode } from 'react';
 import type { ModalFormInstance } from '../form';
 import type { PluginPropsType, PluginsType } from '../plugins';
 
@@ -49,11 +49,11 @@ export type RequestResult<RecordType = any> = {
   /** 数据源 **/
   data: RecordType[];
   /** 当前页 **/
-  current: number;
+  current?: number;
   /** 数据总条数 **/
-  total: number;
+  total?: number;
   /** 分页大小 **/
-  pageSize: number;
+  pageSize?: number;
 };
 
 export type ColumnType<RecordType, P extends PluginsType = PluginsType> = (
@@ -65,7 +65,7 @@ export type ColumnType<RecordType, P extends PluginsType = PluginsType> = (
             table: any;
             record: RecordType;
             modal: ModalFormInstance<any, PluginsType>;
-          }) => ReactElement)
+          }) => ReactNode)
         | string;
     }
   | {
