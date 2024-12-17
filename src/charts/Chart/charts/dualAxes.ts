@@ -17,6 +17,7 @@ export default {
           geometry: 'column',
           isGroup: true,
           seriesField: 'type',
+          maxColumnWidth: 50,
         },
         {
           geometry: 'line',
