@@ -1,7 +1,7 @@
 import type { TableProps as ATableProps, TablePaginationConfig } from 'antd';
 import type { TableRowSelection } from 'antd/lib/table/interface';
 import { computed, makeObservable, observable, runInAction, toJS } from 'mobx';
-import { clone, isEmpty, isObject } from 'radash';
+import { isEmpty, isObject } from 'radash';
 import type { SorterParams, TableProps } from './interface';
 
 const INITIAL_FILTERS = {} as const;
@@ -70,7 +70,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
       if (key === 'initialFilters') {
         this.filter = props[key] || {};
-        this.initialFilters = clone(props[key]);
+        this.initialFilters = { ...(props[key] || {}) };
       }
     });
   }
