@@ -133,8 +133,9 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
           this.loading = false;
         });
       })
-      .catch(() => {
+      .catch((e) => {
         this.loading = false;
+        console.error(`remoteDataSource`, e);
       })
       .finally(() => {
         this.searchStatus = TableSearchStatus.SEARCH;

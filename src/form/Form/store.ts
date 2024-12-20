@@ -393,8 +393,9 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
           this.initReactionResult();
           this.loading = false;
         })
-        .catch(() => {
+        .catch((e) => {
           this.loading = false;
+          console.error(`remoteValues`, e);
         });
     }
   }
