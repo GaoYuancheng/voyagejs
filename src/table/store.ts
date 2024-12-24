@@ -59,6 +59,10 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
 
   updateProps(props: TableProps<RecordType>, isInit = false) {
     Object.keys(props).forEach((key) => {
+      if (key === 'pagination') {
+        return;
+      }
+
       // @ts-ignore
       this[key] = props[key];
 
@@ -79,7 +83,7 @@ export class TableStore<RecordType extends object = any> implements TableProps<R
     makeObservable(this, {
       loading: observable.ref,
       dataSource: observable.deep,
-      pagination: observable,
+      pagination: observable.deep,
       sorter: observable,
       filter: observable,
       selectedRows: observable,
