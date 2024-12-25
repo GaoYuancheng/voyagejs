@@ -71,7 +71,7 @@ export const Chart = <Values, P extends PluginsType = PluginsType>(props: ChartP
     chartRef.current = new DEFAULT_CHART_PLUGINS[type].component(domRef.current, opts);
     chartRef.current.render(domRef.current);
 
-    chartRef.current.off('element:click');
+    chartRef.current.off('click');
 
     // chartRef.current.on('element:click', (e: any) => {
     //   onElementClick?.(e.data.data);
