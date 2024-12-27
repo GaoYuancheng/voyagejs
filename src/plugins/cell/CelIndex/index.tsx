@@ -9,6 +9,8 @@ export const CellIndex = <RecordType extends object>(props: CellIndexProps<Recor
 
   const { pagination } = table || {};
 
+  if (pagination === false) return index + 1;
+
   if (!pagination) return placeholder;
 
   const { current, pageSize } = pagination;
