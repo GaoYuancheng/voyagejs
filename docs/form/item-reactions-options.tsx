@@ -17,7 +17,16 @@ const address = [
 const Demo = () => {
   const [form] = useForm();
   return (
-    <Form form={form}>
+    <Form
+      form={form}
+      remoteValues={async () => {
+        await sleep(2000);
+        return {
+          province: '2',
+          city: '2-1',
+        };
+      }}
+    >
       <Item<any, DefaultPluginsType> name="province" label="省" fieldType="select" options={address} />
       <Item<any, DefaultPluginsType>
         name="city"

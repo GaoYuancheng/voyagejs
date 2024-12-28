@@ -350,6 +350,18 @@ export class FormStore<Values = any, P extends PluginsType = PluginsType>
         this.reactionResults(config, changeValue, effectName, true);
       });
     });
+
+    Object.keys(this.deps).forEach((depName) => {
+      this.deps[depName].forEach((effect) => {
+        const { name } = effect;
+        const { remoteOptions, dependencies } = this.getField(name) || {};
+        if (remoteOptions) {
+          remoteOptions(dependencies?.map((item) => this.getField(item)?.value)).then((opts) => {
+            this.getField(name).options = opts;
+          });
+        }
+      });
+    });
   }
 
   setFormInstance(form: FormInstance<Values>) {
